@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    class Katalog
+    public class Katalog
     {
         private string id;
         private string tytul;
