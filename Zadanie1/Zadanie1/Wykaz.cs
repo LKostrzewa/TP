@@ -8,5 +8,15 @@ namespace Zadanie1
 {
     public class Wykaz
     {
+        private string id;
+        private string imie;
+        private string nazwisko;
+
+        public Wykaz(string id, string imie, string nazwisko)
+        {
+            this.id = id;
+            this.imie = imie;
+            this.nazwisko = nazwisko;
+        }
     }
 }
