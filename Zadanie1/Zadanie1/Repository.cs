@@ -9,5 +9,12 @@ namespace Zadanie1
     public class Repository
     {
         private DataContext dane = new DataContext();
+        private IDataFiller filler;
+
+        public Repository(IDataFiller filler)
+        {
+            this.filler = filler;
+            filler.fill(dane);
+        }
     }
 }

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="DataContext.cs" />
+    <Compile Include="IDataFiller.cs" />
     <Compile Include="Katalog.cs" />
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Repository.cs" />
