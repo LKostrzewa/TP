@@ -46,7 +46,7 @@
     <Compile Include="IDataFiller.cs" />
     <Compile Include="Katalog.cs" />
     <Compile Include="OpisStanu.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="DataRepository.cs" />
     <Compile Include="Wykaz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zdarzenie.cs" />

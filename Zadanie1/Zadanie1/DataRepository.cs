@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    public class Repository
+    public class DataRepository
     {
         private DataContext dane = new DataContext();
         private IDataFiller filler;
 
-        public Repository(IDataFiller filler)
+        public DataRepository(IDataFiller filler)
         {
             this.filler = filler;
             filler.fill(dane);
