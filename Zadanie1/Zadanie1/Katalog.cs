@@ -8,7 +8,7 @@ namespace Zadanie1
 {
     public class Katalog
     {
-        private int id;
+        public int id { get;}
         private string tytul;
         private string gatunek;
         private int ilosc_str;
