@@ -9,11 +9,14 @@ namespace Zadanie1Tests
     {
 
         [TestMethod]
-        public void TestTest()
+        public void KatalogTest()
         {
             DataRepository repo = new DataRepository(new WypelnianieStalymi());
-            repo.GetKatalog(10);
-            //repo.GetKatalog(11);
+
+            Katalog katTest = new Katalog(10, "Android Studio w 24 godziny", "Podręcznik", 100);
+            Assert.AreEqual<Katalog>(repo.GetKatalog(10), katTest);
+
+            repo.DeleteKatalog(katTest);
 
         }
     }

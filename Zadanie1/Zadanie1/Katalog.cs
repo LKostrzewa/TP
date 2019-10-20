@@ -8,8 +8,8 @@ namespace Zadanie1
 {
     public class Katalog
     {
-        public int id { get;}
-        private string tytul;
+        public int id { get; private set; }
+        public string tytul { get; private set; }
         private string gatunek;
         private int ilosc_str;
 
@@ -19,6 +19,16 @@ namespace Zadanie1
             this.tytul = tytul;
             this.gatunek = gatunek;
             this.ilosc_str = ilosc_str;
+        }
+
+        public override bool Equals(object obj)
+        {
+            Katalog katalog = obj as Katalog;
+            return katalog != null &&
+                   id == katalog.id &&
+                   tytul == katalog.tytul &&
+                   gatunek == katalog.gatunek &&
+                   ilosc_str == katalog.ilosc_str;
         }
     }
 }

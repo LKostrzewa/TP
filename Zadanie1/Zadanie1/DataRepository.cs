@@ -9,11 +9,11 @@ namespace Zadanie1
     public class DataRepository
     {
         private DataContext dane = new DataContext();
-        private IDataFiller filler;
+        //private IDataFiller filler;
 
         public DataRepository(IDataFiller filler)
         {
-            this.filler = filler;
+            //this.filler = filler;
             filler.fill(dane);
         }
 
@@ -31,7 +31,11 @@ namespace Zadanie1
 
         public Katalog GetKatalog(int id)
         {
-            return dane.katalogi[id];
+            if (dane.katalogi.ContainsKey(id))
+            {
+                return dane.katalogi[id];
+            }
+            else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
         }
 
         public IEnumerable<Katalog> GetAllKatalog()
@@ -45,11 +49,16 @@ namespace Zadanie1
             {
                 dane.katalogi[id] = katalog;
             }
+            else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
         }
 
         public void DeleteKatalog(Katalog katalog)
         {
-
+            if(dane.opisyStanu.Exists(o => o.katalog.Equals(katalog)))
+            {
+                throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+            }
+            dane.katalogi.Remove(katalog.id);
         }
 
         public void AddOpisStanu(OpisStanu opis)
@@ -57,6 +66,20 @@ namespace Zadanie1
             dane.opisyStanu.Add(opis);
         }
 
+        public OpisStanu GetOpisStanu(int id)
+        {
+            //return dane.opisyStanu.Find(o => o.id == id);
+            return null;
+        }
 
+        public IEnumerable<OpisStanu> GetAllOpisStanu()
+        {
+            return dane.opisyStanu;
+        }
+
+        public void DeleteOpisStanu(OpisStanu opis)
+        {
+            
+        }
     }
 }

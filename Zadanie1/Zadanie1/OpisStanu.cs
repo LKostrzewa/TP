@@ -8,7 +8,7 @@ namespace Zadanie1
 {
     public class OpisStanu
     {
-        private Katalog katalog;
+        public Katalog katalog { get; private set; }
         private DateTime dataZakupu;
         private int ilosc;
         private int cena;
@@ -21,6 +21,17 @@ namespace Zadanie1
             this.ilosc = ilosc;
             this.cena = cena;
             this.podatek = podatek;
+        }
+
+        public override bool Equals(object obj)
+        {
+            OpisStanu stanu = obj as OpisStanu;
+            return stanu != null &&
+                   EqualityComparer<Katalog>.Default.Equals(katalog, stanu.katalog) &&
+                   dataZakupu == stanu.dataZakupu &&
+                   ilosc == stanu.ilosc &&
+                   cena == stanu.cena &&
+                   podatek == stanu.podatek;
         }
     }
 }
