@@ -31,11 +31,11 @@ namespace Zadanie1
 
         public Katalog GetKatalog(int id)
         {
-            if (dane.katalogi.ContainsKey(id))
-            {
+            //if (dane.katalogi.ContainsKey(id))
+            //{
                 return dane.katalogi[id];
-            }
-            else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
+            //}
+           // else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
         }
 
         public IEnumerable<Katalog> GetAllKatalog()
@@ -43,13 +43,21 @@ namespace Zadanie1
             return dane.katalogi.Values;
         }
 
+        //moze bedzie potrzebne moze nie 
+        public IEnumerable<int> GetAllKatalogId()
+        {
+            return dane.katalogi.Keys;
+        }
+
         public void UpdateKatalog(int id, Katalog katalog)
         {
-            if (dane.katalogi.ContainsKey(id))
-            {
-                dane.katalogi[id] = katalog;
-            }
-            else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
+            //if (dane.katalogi.ContainsKey(id))
+            //{
+                dane.katalogi.Remove(id);
+                dane.katalogi.Add(katalog.id, katalog);
+            //}
+            //else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
+            //sprawdzanie poprawnosci danych zostanie przeniesione w przyszlosci do DataService
         }
 
         public void DeleteKatalog(Katalog katalog)
@@ -68,8 +76,7 @@ namespace Zadanie1
 
         public OpisStanu GetOpisStanu(int id)
         {
-            //return dane.opisyStanu.Find(o => o.id == id);
-            return null;
+            return dane.opisyStanu.Find(o => o.id == id);
         }
 
         public IEnumerable<OpisStanu> GetAllOpisStanu()
@@ -77,9 +84,37 @@ namespace Zadanie1
             return dane.opisyStanu;
         }
 
+        //analogicznie do Katalog
+        public IEnumerable<int> GetAllOpisStanuId()
+        {
+            List<int> list = new List<int>();
+            foreach(OpisStanu o in dane.opisyStanu)
+            {
+                list.Add(o.id);
+            }
+            return list;
+        }
+
+        public void UpdateOpisStanu(int id, OpisStanu opis)
+        {
+            int index = dane.opisyStanu.FindIndex(o => o.id == id);
+            if (index >= 0)
+            {
+                dane.opisyStanu[index] = opis;
+            }
+            else throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
+        }
+
         public void DeleteOpisStanu(OpisStanu opis)
         {
-            
+            foreach(Zdarzenie z in dane.zdarzenia)
+            {
+                if (z.opis.Equals(opis))
+                {
+                    throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
+                }
+            }
+            dane.opisyStanu.Remove(opis);
         }
     }
 }

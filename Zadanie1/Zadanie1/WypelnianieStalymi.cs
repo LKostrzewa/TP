@@ -18,8 +18,8 @@ namespace Zadanie1
             context.katalogi.Add(20, new Katalog(20, "Docker. Praktyczne zastosowania", "Podręcznik", 450));
             context.katalogi.Add(30, new Katalog(30, "Harry Potter", "Przygodowa", 360));
             context.katalogi.Add(40, new Katalog(40, "K-Pax", "Fantastyka", 20));
-            context.opisyStanu.Add(new OpisStanu(context.katalogi[10], new DateTime(2019, 10, 5), 10, 29, 5));
-            context.opisyStanu.Add(new OpisStanu(context.katalogi[30], new DateTime(2019, 10, 13), 500, 60, 10));
+            context.opisyStanu.Add(new OpisStanu(0, context.katalogi[10], new DateTime(2019, 10, 5), 10, 29, 5));
+            context.opisyStanu.Add(new OpisStanu(1, context.katalogi[30], new DateTime(2019, 10, 13), 500, 60, 10));
             context.zdarzenia.Add(new Zdarzenie(context.wykazy[0], context.opisyStanu[0], DateTime.Now.AddDays(90)));
             context.zdarzenia.Add(new Zdarzenie(context.wykazy[2], context.opisyStanu[1], DateTime.Now.AddDays(180)));
         }
