@@ -8,10 +8,10 @@ namespace Zadanie1
 {
     public class Zdarzenie
     {
-        private Wykaz wykaz;
+        public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
         private DateTime dataWypozyczenia;
-        private DateTime czasWypozyczenia;
+        public DateTime czasWypozyczenia { get; }
 
         public Zdarzenie(Wykaz wykaz, OpisStanu opis, DateTime czasWypozyczenia)
         {
@@ -26,6 +26,16 @@ namespace Zadanie1
             {
                 this.czasWypozyczenia = czasWypozyczenia;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            Zdarzenie zdarzenie = obj as Zdarzenie;
+            return zdarzenie != null &&
+                   EqualityComparer<Wykaz>.Default.Equals(wykaz, zdarzenie.wykaz) &&
+                   EqualityComparer<OpisStanu>.Default.Equals(opis, zdarzenie.opis) &&
+                   dataWypozyczenia.Date == zdarzenie.dataWypozyczenia.Date &&
+                   czasWypozyczenia.Date == zdarzenie.czasWypozyczenia.Date;
         }
     }
 }

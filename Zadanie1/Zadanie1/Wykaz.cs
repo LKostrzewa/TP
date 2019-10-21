@@ -8,15 +8,24 @@ namespace Zadanie1
 {
     public class Wykaz
     {
-        private string id;
+        public int id { get; private set; }
         private string imie;
         private string nazwisko;
 
-        public Wykaz(string id, string imie, string nazwisko)
+        public Wykaz(int id, string imie, string nazwisko)
         {
             this.id = id;
             this.imie = imie;
             this.nazwisko = nazwisko;
+        }
+
+        public override bool Equals(object obj)
+        {
+            Wykaz wykaz = obj as Wykaz;
+            return wykaz != null &&
+                   id == wykaz.id &&
+                   imie == wykaz.imie &&
+                   nazwisko == wykaz.nazwisko;
         }
     }
 }
