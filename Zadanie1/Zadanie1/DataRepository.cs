@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,9 @@ namespace Zadanie1
     public class DataRepository
     {
         private DataContext dane = new DataContext();
-        //private IDataFiller filler;
 
         public DataRepository(IDataFiller filler)
         {
-            //this.filler = filler;
             filler.fill(dane);
         }
 
@@ -22,7 +21,40 @@ namespace Zadanie1
             dane.wykazy.Add(wykaz);
         }
 
-        //dalsze crud do wykazu tutaj
+        public Wykaz GetWykaz(int id)
+        {
+            foreach (Wykaz w in dane.wykazy)
+            {
+                if (w.id.Equals(id))
+                {
+                    return w;
+                }
+            }
+            throw new KeyNotFoundException("Nie ma wykazu o id" + id);
+        }
+
+        public IEnumerable<Wykaz> GetAllWykaz()
+        {
+            return dane.wykazy;
+        }
+
+        public void UpdateWykaz(int id, Wykaz wykaz)
+        {
+            dane.wykazy.RemoveAll(p => p.id == id);
+            dane.wykazy.Add(wykaz);
+        }
+
+        public void DeleteWykaz(Wykaz wykaz)
+        {
+            foreach (Zdarzenie z in dane.zdarzenia)
+            {
+                if (z.wykaz.Equals(wykaz))
+                {
+                    throw new InvalidOperationException("Dany Wykaz jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
+                }
+            }
+            dane.wykazy.Remove(wykaz);
+        }
 
         public void AddKatalog(Katalog katalog)
         {
@@ -31,11 +63,7 @@ namespace Zadanie1
 
         public Katalog GetKatalog(int id)
         {
-            //if (dane.katalogi.ContainsKey(id))
-            //{
-                return dane.katalogi[id];
-            //}
-           // else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
+            return dane.katalogi[id];
         }
 
         public IEnumerable<Katalog> GetAllKatalog()
@@ -53,8 +81,8 @@ namespace Zadanie1
         {
             //if (dane.katalogi.ContainsKey(id))
             //{
-                dane.katalogi.Remove(id);
-                dane.katalogi.Add(katalog.id, katalog);
+            dane.katalogi.Remove(id);
+            dane.katalogi.Add(katalog.id, katalog);
             //}
             //else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
             //sprawdzanie poprawnosci danych zostanie przeniesione w przyszlosci do DataService
@@ -115,6 +143,48 @@ namespace Zadanie1
                 }
             }
             dane.opisyStanu.Remove(opis);
+        }
+
+        public void AddZdarzenie(Zdarzenie zdarzenie)
+        {
+            dane.zdarzenia.Add(zdarzenie);
+        }
+
+        public Zdarzenie GetZdarzenie(Wykaz wykaz, OpisStanu opisStanu)
+        {
+            foreach(Zdarzenie z in dane.zdarzenia)
+            {
+                if(z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
+                {
+                    return z;
+                }
+            }
+            throw new InvalidOperationException("Zdarzenie miedzy takim Wykazem i OpisemStanu nie istnieje");
+        }
+
+
+        public IEnumerable<Zdarzenie> GetAllZdarzenie()
+        {
+            return dane.zdarzenia;
+        }
+
+        public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
+        {
+            foreach (Zdarzenie z in dane.zdarzenia)
+            {
+                if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
+                {
+                    dane.zdarzenia.Remove(z);
+                    dane.zdarzenia.Add(zdarzenie);
+                    return;
+                }
+            }
+            throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
+        }
+
+        public void DeleteZdarzenie(Zdarzenie zdarzenie)
+        {
+            dane.zdarzenia.Remove(zdarzenie);
         }
     }
 }
