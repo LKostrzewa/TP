@@ -10,22 +10,22 @@ namespace Zadanie1
     {
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
-        private DateTime dataWypozyczenia;
-        public DateTime czasWypozyczenia { get; }
+        private DateTime data;
+        //public DateTime czasWypozyczenia { get; }
 
-        public Zdarzenie(Wykaz wykaz, OpisStanu opis, DateTime czasWypozyczenia)
+        public Zdarzenie(Wykaz wykaz, OpisStanu opis)
         {
             this.wykaz = wykaz;
             this.opis = opis;
-            this.dataWypozyczenia = DateTime.Now;
-            if(czasWypozyczenia == null)
-            {
-                this.czasWypozyczenia = DateTime.Now.AddDays(30);
-            }
-            else
-            {
-                this.czasWypozyczenia = czasWypozyczenia;
-            }
+            this.data = DateTime.Now;
+            //if(czasWypozyczenia == null)
+            //{
+            //    this.czasWypozyczenia = DateTime.Now.AddDays(30);
+            //}
+            //else
+            //{
+            //    this.czasWypozyczenia = czasWypozyczenia;
+            //}
         }
 
         public override bool Equals(object obj)
@@ -34,8 +34,9 @@ namespace Zadanie1
             return zdarzenie != null &&
                    EqualityComparer<Wykaz>.Default.Equals(wykaz, zdarzenie.wykaz) &&
                    EqualityComparer<OpisStanu>.Default.Equals(opis, zdarzenie.opis) &&
-                   dataWypozyczenia.Date == zdarzenie.dataWypozyczenia.Date &&
-                   czasWypozyczenia.Date == zdarzenie.czasWypozyczenia.Date;
+                   data.Date == zdarzenie.data.Date;
+                   //dataWypozyczenia.Date == zdarzenie.dataWypozyczenia.Date &&
+                   //czasWypozyczenia.Date == zdarzenie.czasWypozyczenia.Date;
         }
     }
 }

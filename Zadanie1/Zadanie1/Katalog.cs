@@ -9,9 +9,9 @@ namespace Zadanie1
     public class Katalog
     {
         public int id { get; private set; }
-        public string tytul { get; private set; }
-        private string gatunek;
-        private int ilosc_str;
+        public string tytul { get; set; }
+        public string gatunek { get; set; }
+        public int ilosc_str { get; set; }
 
         public Katalog(int id, string tytul, string gatunek, int ilosc_str)
         {

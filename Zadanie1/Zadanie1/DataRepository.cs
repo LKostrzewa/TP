@@ -18,6 +18,13 @@ namespace Zadanie1
 
         public void AddWykaz(Wykaz wykaz)
         {
+            foreach (Wykaz w in dane.wykazy)
+            {
+                if (w.id.Equals(wykaz.id))
+                {
+                    throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
+                }
+            }
             dane.wykazy.Add(wykaz);
         }
 
@@ -38,10 +45,18 @@ namespace Zadanie1
             return dane.wykazy;
         }
 
-        public void UpdateWykaz(int id, Wykaz wykaz)
+        public void UpdateWykaz(Wykaz wykaz)
         {
-            dane.wykazy.RemoveAll(p => p.id == id);
-            dane.wykazy.Add(wykaz);
+            foreach (Wykaz w in dane.wykazy)
+            {
+                if (w.id.Equals(wykaz.id))
+                {
+                    w.imie = wykaz.imie;
+                    w.nazwisko = wykaz.nazwisko;
+                    return;
+                }
+            }
+            throw new KeyNotFoundException("Nie znaleziono wykazu o id " + wykaz.id + " do zaktualizowania!");
         }
 
         public void DeleteWykaz(Wykaz wykaz)
@@ -77,34 +92,55 @@ namespace Zadanie1
             return dane.katalogi.Keys;
         }
 
-        public void UpdateKatalog(int id, Katalog katalog)
+        public void UpdateKatalog(Katalog katalog)
         {
-            //if (dane.katalogi.ContainsKey(id))
-            //{
-            dane.katalogi.Remove(id);
-            dane.katalogi.Add(katalog.id, katalog);
-            //}
-            //else throw new KeyNotFoundException("W repozytorium nie ma zadanego obiektu");
-            //sprawdzanie poprawnosci danych zostanie przeniesione w przyszlosci do DataService
+            foreach (Katalog k in dane.katalogi.Values)
+            {
+                if (k.id.Equals(katalog.id))
+                {
+                    k.tytul = katalog.tytul;
+                    k.ilosc_str = katalog.ilosc_str;
+                    k.gatunek = katalog.gatunek;
+                    return;
+                }
+            }
+            throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
         }
 
         public void DeleteKatalog(Katalog katalog)
         {
-            if(dane.opisyStanu.Exists(o => o.katalog.Equals(katalog)))
+            foreach (OpisStanu opis in dane.opisyStanu)
             {
-                throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+                if (opis.katalog.Equals(katalog))
+                {
+                    throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+                }
             }
             dane.katalogi.Remove(katalog.id);
         }
 
         public void AddOpisStanu(OpisStanu opis)
         {
+            foreach (OpisStanu o in dane.opisyStanu)
+            {
+                if (o.id.Equals(opis.id))
+                {
+                    throw new InvalidOperationException("Istnieje juz opis o takim identyfikatorze!");
+                }
+            }
             dane.opisyStanu.Add(opis);
         }
 
         public OpisStanu GetOpisStanu(int id)
         {
-            return dane.opisyStanu.Find(o => o.id == id);
+            foreach (OpisStanu o in dane.opisyStanu)
+            {
+                if (o.id.Equals(id))
+                {
+                    return o;
+                }
+            }
+            throw new KeyNotFoundException("Nie ma opisu stanu o id" + id);
         }
 
         public IEnumerable<OpisStanu> GetAllOpisStanu()
@@ -112,25 +148,19 @@ namespace Zadanie1
             return dane.opisyStanu;
         }
 
-        //analogicznie do Katalog
-        public IEnumerable<int> GetAllOpisStanuId()
+        //Nie wiem czy zostawic czy usunac
+        public void UpdateOpisStanu(OpisStanu opis)
         {
-            List<int> list = new List<int>();
             foreach(OpisStanu o in dane.opisyStanu)
             {
-                list.Add(o.id);
+                if (o.id.Equals(opis.id))
+                {
+                    o.katalog = opis.katalog;
+                    o.dataZakupu = opis.dataZakupu;
+                    return;
+                }
             }
-            return list;
-        }
-
-        public void UpdateOpisStanu(int id, OpisStanu opis)
-        {
-            int index = dane.opisyStanu.FindIndex(o => o.id == id);
-            if (index >= 0)
-            {
-                dane.opisyStanu[index] = opis;
-            }
-            else throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
+            throw new KeyNotFoundException("Nie znaleziono opisu stanu o id " + opis.id + " do zaktualizowania!");
         }
 
         public void DeleteOpisStanu(OpisStanu opis)
@@ -150,6 +180,7 @@ namespace Zadanie1
             dane.zdarzenia.Add(zdarzenie);
         }
 
+        //Nie identyfikuje nam jednoznacznie zdarzenia - moze byc duzo zdarzen o tym samym wykazie i opisie stanu
         public Zdarzenie GetZdarzenie(Wykaz wykaz, OpisStanu opisStanu)
         {
             foreach(Zdarzenie z in dane.zdarzenia)
@@ -168,19 +199,20 @@ namespace Zadanie1
             return dane.zdarzenia;
         }
 
-        public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
-        {
-            foreach (Zdarzenie z in dane.zdarzenia)
-            {
-                if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
-                {
-                    dane.zdarzenia.Remove(z);
-                    dane.zdarzenia.Add(zdarzenie);
-                    return;
-                }
-            }
-            throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
-        }
+        //Tutaj to wgl niepotrzebne
+        //public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
+        //{
+        //    foreach (Zdarzenie z in dane.zdarzenia)
+        //    {
+        //        if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
+        //        {
+        //            dane.zdarzenia.Remove(z);
+        //            dane.zdarzenia.Add(zdarzenie);
+        //            return;
+        //        }
+        //    }
+        //    throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
+        //}
 
         public void DeleteZdarzenie(Zdarzenie zdarzenie)
         {

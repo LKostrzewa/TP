@@ -9,8 +9,8 @@ namespace Zadanie1
     public class Wykaz
     {
         public int id { get; private set; }
-        private string imie;
-        private string nazwisko;
+        public string imie { get; set; }
+        public string nazwisko { get; set; }
 
         public Wykaz(int id, string imie, string nazwisko)
         {
