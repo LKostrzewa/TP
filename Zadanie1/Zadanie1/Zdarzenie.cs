@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    public class Zdarzenie
+    public class Zdarzenie : IComparable<Zdarzenie>
     {
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
@@ -28,6 +28,13 @@ namespace Zadanie1
             //}
         }
 
+        public Zdarzenie(Wykaz wykaz, OpisStanu opis, DateTime date)
+        {
+            this.wykaz = wykaz;
+            this.opis = opis;
+            this.data = date;
+        }
+
         public override bool Equals(object obj)
         {
             Zdarzenie zdarzenie = obj as Zdarzenie;
@@ -37,6 +44,13 @@ namespace Zadanie1
                    data.Date == zdarzenie.data.Date;
                    //dataWypozyczenia.Date == zdarzenie.dataWypozyczenia.Date &&
                    //czasWypozyczenia.Date == zdarzenie.czasWypozyczenia.Date;
+        }
+
+        public int CompareTo(Zdarzenie other)
+        {
+            if (data > other.data) return 1;
+            else if (data == other.data) return 0;
+            else return -1;
         }
     }
 }

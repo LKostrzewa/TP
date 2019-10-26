@@ -45,18 +45,18 @@ namespace Zadanie1
             return dane.wykazy;
         }
 
-        public void UpdateWykaz(Wykaz wykaz)
+        public void UpdateWykaz(int id, string imie, string nazwisko)
         {
             foreach (Wykaz w in dane.wykazy)
             {
-                if (w.id.Equals(wykaz.id))
+                if (w.id.Equals(id))
                 {
-                    w.imie = wykaz.imie;
-                    w.nazwisko = wykaz.nazwisko;
+                    w.imie = imie;
+                    w.nazwisko = nazwisko;
                     return;
                 }
             }
-            throw new KeyNotFoundException("Nie znaleziono wykazu o id " + wykaz.id + " do zaktualizowania!");
+            throw new KeyNotFoundException("Nie znaleziono wykazu o id " + id + " do zaktualizowania!");
         }
 
         public void DeleteWykaz(Wykaz wykaz)
@@ -86,12 +86,6 @@ namespace Zadanie1
             return dane.katalogi.Values;
         }
 
-        //moze bedzie potrzebne moze nie 
-        public IEnumerable<int> GetAllKatalogId()
-        {
-            return dane.katalogi.Keys;
-        }
-
         public void UpdateKatalog(Katalog katalog)
         {
             foreach (Katalog k in dane.katalogi.Values)
@@ -107,16 +101,16 @@ namespace Zadanie1
             throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
         }
 
-        public void DeleteKatalog(Katalog katalog)
+        public void DeleteKatalog(int id)
         {
             foreach (OpisStanu opis in dane.opisyStanu)
             {
-                if (opis.katalog.Equals(katalog))
+                if (opis.katalog.Equals(GetKatalog(id)))
                 {
                     throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
                 }
             }
-            dane.katalogi.Remove(katalog.id);
+            dane.katalogi.Remove(id);
         }
 
         public void AddOpisStanu(OpisStanu opis)
