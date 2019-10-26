@@ -34,10 +34,28 @@ namespace Zadanie1
         public void WypozyczKsiazke(int idK, int idW, int idO)
         {
             OpisStanu opis = new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now);
-            WszystkieWydarzeniaDlaKsiazki(idK);
-            repository.AddZdarzenie(new Wypozyczenie(repository.GetWykaz(idW), opis));
+            List<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idK);
+            Zdarzenie z = list[list.Count - 1];
+            if(z is Wypozyczenie)
+            {
+                throw new InvalidOperationException("Ta ksiazka jest aktualnie niedostepna");
+            }
+            else repository.AddZdarzenie(new Wypozyczenie(repository.GetWykaz(idW), opis));
         }
 
+        public void OddajKsiazke(int idO, int idW)
+        {
+           
+            List<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(repository.GetOpisStanu(idO).id);
+            Zdarzenie z = list[list.Count - 1];
+            if (z is Wypozyczenie)
+            {
+                repository.AddZdarzenie(new Oddanie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
+            }
+            else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
+        }
+
+        //tu jest list bo chcialem testowac cos na kocu moze byc IEnumerable
         public List<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idK)
         {
             List<Zdarzenie> test = new List<Zdarzenie>();
@@ -46,6 +64,26 @@ namespace Zadanie1
                 if (z.opis.katalog.id == idK) test.Add(z);
             }
             test.Sort();
+            return test;
+        }
+
+        public IEnumerable<Zdarzenie> WszystkieZdarzeniaDlaKlienta(int idW)
+        {
+            List<Zdarzenie> test = new List<Zdarzenie>();
+            foreach(Zdarzenie z in repository.GetAllZdarzenie())
+            {
+                if (z.wykaz.id == idW) test.Add(z);
+            }
+            return test;
+        }
+
+        public IEnumerable<Zdarzenie> WszystkieZdarzeniaWCzasie(DateTime start, DateTime end)
+        {
+            List<Zdarzenie> test = new List<Zdarzenie>();
+            foreach(Zdarzenie z in repository.GetAllZdarzenie())
+            {
+                if (z.data <= end && z.data >= start) test.Add(z); 
+            }
             return test;
         }
 

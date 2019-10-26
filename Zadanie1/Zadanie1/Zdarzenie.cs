@@ -10,7 +10,7 @@ namespace Zadanie1
     {
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
-        private DateTime data;
+        public DateTime data { get; private set; };
         //public DateTime czasWypozyczenia { get; }
 
         public Zdarzenie(Wykaz wykaz, OpisStanu opis)

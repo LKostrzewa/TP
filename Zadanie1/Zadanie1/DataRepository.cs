@@ -99,6 +99,9 @@ namespace Zadanie1
                 }
             }
             throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
+            //zastanawiam sie czy to jest potrzebne bo moze po prostu wszystkie tego typu operacje robic przez DataService przez managera 
+            //wtedy jak GetKatalog (na przyklad) nie znajdzie tego obiektu to rzuci wyjatek wiec w update nie trzeba bedzie tego sprawdzac
+            //Ze wiesz w DataService zrobimy ZmienDaneKatalogu(costam) i tam bd kt = repo.GetKatalog 
         }
 
         public void DeleteKatalog(int id)
