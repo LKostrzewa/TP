@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -119,6 +120,22 @@ namespace Zadanie1
                 }
             }
             return tmp;
+        }
+
+        private static void ZdarzenieChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    //tutaj printowanie na ekran - lol może tak ma być, że ta klasa może printować?
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    // tutaj to samo?
+                    break;
+                default:
+                    //nw co tu
+                    break;
+            }
         }
 
     }
