@@ -31,7 +31,7 @@ namespace Zadanie1Tests
             //Assert.ThrowsException<KeyNotFoundException>(() => repo.GetKatalog(50));
             Assert.AreEqual(repo.GetKatalog(50), katTest2);
 
-            repo.DeleteKatalog(katTest2);
+            repo.DeleteKatalog(50);
             Assert.ThrowsException<KeyNotFoundException>(() => repo.GetKatalog(50));
             Assert.AreEqual<int>(repo.GetAllKatalog().Count(), 4);
         }
@@ -81,7 +81,7 @@ namespace Zadanie1Tests
 
             wykTest2.nazwisko = "Morgenstern";
 
-            repo.UpdateWykaz(wykTest2);
+            repo.UpdateWykaz(4, "Simon", "Morgenstern");
             Assert.AreEqual(repo.GetWykaz(4), wykTest2);
             Assert.AreEqual<int>(repo.GetAllWykaz().Count(), 4);
 
