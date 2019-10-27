@@ -19,35 +19,48 @@ namespace Zadanie1
             this.repository = repository;
         }
 
-        public void DodajKsiazkeDoBiblioteki(int id, string tytul, string gatunek, int ilosc_stron)
+        public void DodajKsiazkeDoBiblioteki(string tytul, string gatunek, int ilosc_stron)
         {
-            repository.AddKatalog(new Katalog(id, tytul, gatunek, ilosc_stron));
-            //prototyp
+            foreach(Katalog k in repository.GetAllKatalog())
+            {
+                if (k.tytul.Equals(tytul) && k.gatunek.Equals(gatunek) && k.ilosc_str.Equals(ilosc_stron))
+                {
+                    repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, k, DateTime.Now));
+                    return;
+                }
+            }
+            repository.AddKatalog(new Katalog(repository.GetAllKatalog().Count() + 1, tytul, gatunek, ilosc_stron));
+            repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, repository.GetKatalog(repository.GetAllKatalog().Count()), DateTime.Now));
         }
 
-        public void DodajKlientaDoBiblioteki(int id, string imie, string nazwisko)
+        public void DodajKlientaDoBiblioteki(string imie, string nazwisko)
         {
-            repository.AddWykaz(new Wykaz(id, imie, nazwisko));
-            //rowniez prototyp
+            foreach(Wykaz w in repository.GetAllWykaz())
+            {
+                if(w.imie.Equals(imie) && w.nazwisko.Equals(nazwisko))
+                {
+                    throw new InvalidOperationException("Klient o imienu " + imie + " " + nazwisko + " znajduje juz sie w bazie klientow");
+                }
+            }
+            repository.AddWykaz(new Wykaz(repository.GetAllWykaz().Count(), imie, nazwisko));
         }
 
-        public void WypozyczKsiazke(int idK, int idW, int idO)
+        public void WypozyczKsiazke(int idW, int idO)
         {
-            OpisStanu opis = new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now);
-            List<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idK);
-            Zdarzenie z = list[list.Count - 1];
+            //OpisStanu opis = new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now);
+            IEnumerable<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idO);
+            Zdarzenie z = list.Last();
             if(z is Wypozyczenie)
             {
                 throw new InvalidOperationException("Ta ksiazka jest aktualnie niedostepna");
             }
-            else repository.AddZdarzenie(new Wypozyczenie(repository.GetWykaz(idW), opis));
+            else repository.AddZdarzenie(new Wypozyczenie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
         }
 
-        public void OddajKsiazke(int idO, int idW)
+        public void OddajKsiazke(int idW, int idO)
         {
-           
-            List<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(repository.GetOpisStanu(idO).id);
-            Zdarzenie z = list[list.Count - 1];
+            IEnumerable<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idO);
+            Zdarzenie z = list.Last();
             if (z is Wypozyczenie)
             {
                 repository.AddZdarzenie(new Oddanie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
@@ -55,13 +68,12 @@ namespace Zadanie1
             else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
         }
 
-        //tu jest list bo chcialem testowac cos na kocu moze byc IEnumerable
-        public List<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idK)
+        public IEnumerable<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idO)
         {
             List<Zdarzenie> test = new List<Zdarzenie>();
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
             {
-                if (z.opis.katalog.id == idK) test.Add(z);
+                if (z.opis.id == idO) test.Add(z);
             }
             test.Sort();
             return test;
@@ -85,6 +97,28 @@ namespace Zadanie1
                 if (z.data <= end && z.data >= start) test.Add(z); 
             }
             return test;
+        }
+
+        //To padaka jest nie patrz nawet xd
+        public String WszystkieDaneDlaKlientow(IEnumerable<Wykaz> listaWykaz)
+        {
+            String tmp = "";
+            foreach(Wykaz w in listaWykaz)
+            {
+                tmp += w.ToString() + "/n";
+                foreach(Zdarzenie z in WszystkieZdarzeniaDlaKlienta(w.id))
+                {
+                    tmp += "/t" + z.ToString() + "/n";
+                    foreach(Katalog k in repository.GetAllKatalog())
+                    {
+                        if (k.id.Equals(z.opis.katalog.id))
+                        {
+                            tmp += "/t/t" + k.ToString() + "/n";
+                        }
+                    }
+                }
+            }
+            return tmp;
         }
 
     }

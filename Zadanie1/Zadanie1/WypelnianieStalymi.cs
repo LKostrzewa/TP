@@ -25,10 +25,10 @@ namespace Zadanie1
             //context.opisyStanu.Add(new OpisStanu(1, context.katalogi[30], new DateTime(2019, 10, 13), 500, 60, 10));           
             context.opisyStanu.Add(new OpisStanu(0, context.katalogi[10], new DateTime(2019, 10, 5)));
             context.opisyStanu.Add(new OpisStanu(1, context.katalogi[10], new DateTime(2019, 10, 13)));
-            context.opisyStanu.Add(new OpisStanu(2, context.katalogi[10], new DateTime(2019, 10, 13)));
+            //context.opisyStanu.Add(new OpisStanu(2, context.katalogi[10], new DateTime(2019, 10, 13)));
             context.zdarzenia.Add(new Zdarzenie(context.wykazy[0], context.opisyStanu[0]));
             context.zdarzenia.Add(new Zdarzenie(context.wykazy[2], context.opisyStanu[1], DateTime.Now.AddDays(31)));
-            context.zdarzenia.Add(new Zdarzenie(context.wykazy[1], context.opisyStanu[2], DateTime.Now.AddDays(10)));            
+            //context.zdarzenia.Add(new Zdarzenie(context.wykazy[1], context.opisyStanu[2], DateTime.Now.AddDays(10)));            
         }
     }
 }

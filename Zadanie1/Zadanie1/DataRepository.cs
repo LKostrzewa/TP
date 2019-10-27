@@ -18,14 +18,16 @@ namespace Zadanie1
 
         public void AddWykaz(Wykaz wykaz)
         {
-            foreach (Wykaz w in dane.wykazy)
-            {
-                if (w.id.Equals(wykaz.id))
-                {
-                    throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
-                }
-            }
             dane.wykazy.Add(wykaz);
+
+            //foreach (Wykaz w in dane.wykazy)
+            //{
+            //    if (w.id.Equals(wykaz.id))
+            //    {
+            //        throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
+            //    }
+            //}
+            //dane.wykazy.Add(wykaz);
         }
 
         public Wykaz GetWykaz(int id)
@@ -137,7 +139,7 @@ namespace Zadanie1
                     return o;
                 }
             }
-            throw new KeyNotFoundException("Nie ma opisu stanu o id" + id);
+            throw new KeyNotFoundException("Nie ma takiego opisu stanu");
         }
 
         public IEnumerable<OpisStanu> GetAllOpisStanu()
