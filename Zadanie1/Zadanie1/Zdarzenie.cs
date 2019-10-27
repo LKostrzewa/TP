@@ -10,7 +10,7 @@ namespace Zadanie1
     {
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
-        public DateTime data { get; private set; };
+        public DateTime data { get; private set; }
         //public DateTime czasWypozyczenia { get; }
 
         public Zdarzenie(Wykaz wykaz, OpisStanu opis)
@@ -18,14 +18,6 @@ namespace Zadanie1
             this.wykaz = wykaz;
             this.opis = opis;
             this.data = DateTime.Now;
-            //if(czasWypozyczenia == null)
-            //{
-            //    this.czasWypozyczenia = DateTime.Now.AddDays(30);
-            //}
-            //else
-            //{
-            //    this.czasWypozyczenia = czasWypozyczenia;
-            //}
         }
 
         public Zdarzenie(Wykaz wykaz, OpisStanu opis, DateTime date)

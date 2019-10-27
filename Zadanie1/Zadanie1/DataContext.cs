@@ -13,6 +13,5 @@ namespace Zadanie1
         public Dictionary<int, Katalog> katalogi = new Dictionary<int, Katalog>();
         public ObservableCollection<Zdarzenie> zdarzenia = new ObservableCollection<Zdarzenie>();
         public List<OpisStanu> opisyStanu = new List<OpisStanu>();
-
     }
 }

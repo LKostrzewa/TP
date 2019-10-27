@@ -11,18 +11,12 @@ namespace Zadanie1
         public int id { get; private set; }
         public Katalog katalog { get; set; }
         public DateTime dataZakupu { get; set; }
-        //private int ilosc;
-        //private float cena;
-        //private float podatek;
 
         public OpisStanu(int id, Katalog katalog, DateTime dataZakupu)
         {
             this.id = id;
             this.katalog = katalog;
             this.dataZakupu = dataZakupu;
-            //this.ilosc = ilosc;
-            //this.cena = cena;
-            //this.podatek = podatek;
         }
 
         public override bool Equals(object obj)
