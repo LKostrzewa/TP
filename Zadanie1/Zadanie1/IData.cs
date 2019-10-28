@@ -17,12 +17,14 @@ namespace Zadanie1
         void AddKatalog(Katalog katalog);
         Katalog GetKatalog(int id);
         IEnumerable<Katalog> GetAllKatalog();
+        IEnumerable<int> GetAllKatalogId();
         void UpdateKatalog(Katalog katalog);
         void DeleteKatalog(int id);
 
         void AddOpisStanu(OpisStanu opis);
         OpisStanu GetOpisStanu(int id);
         IEnumerable<OpisStanu> GetAllOpisStanu();
+        IEnumerable<int> GetAllOpisStanuId()
         void DeleteOpisStanu(OpisStanu opis);
 
         void AddZdarzenie(Zdarzenie zdarzenie);

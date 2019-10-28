@@ -89,6 +89,11 @@ namespace Zadanie1
             return dane.katalogi.Values;
         }
 
+        public IEnumerable<int> GetAllKatalogId()
+        {
+            return dane.katalogi.Keys;
+        }
+
         public void UpdateKatalog(Katalog katalog)
         {
             foreach (Katalog k in dane.katalogi.Values)
@@ -146,6 +151,16 @@ namespace Zadanie1
         public IEnumerable<OpisStanu> GetAllOpisStanu()
         {
             return dane.opisyStanu;
+        }
+
+        public IEnumerable<int> GetAllOpisStanuId()
+        {
+            List<int> tmp = new List<int>();
+            foreach(OpisStanu o in dane.opisyStanu)
+            {
+                tmp.Add(o.id);
+            }
+            return tmp;
         }
 
         //Nie wiem czy zostawic czy usunac

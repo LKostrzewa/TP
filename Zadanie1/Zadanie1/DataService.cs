@@ -19,16 +19,46 @@ namespace Zadanie1
 
         public void DodajKsiazkeDoBiblioteki(string tytul, string gatunek, int ilosc_stron)
         {
+            //Tutaj probowalem jakos to normalnie zrobic bez metod GetAllId() w repozytorium i bez .Contains() z LINQ ale nie umiem
+            //to co jest tutaj zakomentowane raczej nie działa ale zostawiłem jkbc
+            /*int id = 0;
+            if (repository.GetAllKatalog().Any()){
+                while (true)
+                {
+                    int idPom = 0;
+                    foreach (Katalog k in repository.GetAllKatalog())
+                    {
+                        idPom = k.id;
+                        if (id == idPom) break;
+                    }
+                    if (id != idPom)
+                    {
+                        id = idPom;
+                        break;
+                    }
+                    else id++;
+                }
+            }*/
+            int idK = 0;
+            int idO = 0;
+            while (repository.GetAllKatalogId().Contains(idK))
+            {
+                idK++;
+            }
+            while (repository.GetAllOpisStanuId().Contains(idO))
+            {
+                idO++;
+            }
             foreach(Katalog k in repository.GetAllKatalog())
             {
                 if (k.tytul.Equals(tytul) && k.gatunek.Equals(gatunek) && k.ilosc_str.Equals(ilosc_stron))
                 {
-                    repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, k, DateTime.Now));
+                    repository.AddOpisStanu(new OpisStanu(idO, k, DateTime.Now));
                     return;
                 }
             }
-            repository.AddKatalog(new Katalog(repository.GetAllKatalog().Count() + 1, tytul, gatunek, ilosc_stron));
-            repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, repository.GetKatalog(repository.GetAllKatalog().Count()), DateTime.Now));
+            repository.AddKatalog(new Katalog(idK, tytul, gatunek, ilosc_stron));
+            repository.AddOpisStanu(new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now));
         }
 
         public void UsunEgzemplarzZBiblioteki(int idO)
