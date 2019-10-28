@@ -30,5 +30,13 @@ namespace Zadanie1
                    gatunek == katalog.gatunek &&
                    ilosc_str == katalog.ilosc_str;
         }
+
+        public override string ToString()
+        {
+            return "Tytul - " + tytul
+                    + " Gatunek - " + gatunek
+                    + " ilosc stron - " + ilosc_str
+                    + " ID - " + id;
+        }
     }
 }

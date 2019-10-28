@@ -27,5 +27,10 @@ namespace Zadanie1
                    imie == wykaz.imie &&
                    nazwisko == wykaz.nazwisko;
         }
+
+        public override string ToString()
+        {
+            return "Klient: " + imie + " " + nazwisko + " - ID= " + id ;
+        }
     }
 }

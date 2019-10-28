@@ -18,29 +18,25 @@ namespace Zadanie1
 
         public void AddWykaz(Wykaz wykaz)
         {
-            dane.wykazy.Add(wykaz);
-
-            /*foreach (Wykaz w in dane.wykazy)
+            foreach (Wykaz w in dane.wykazy)
             {
                 if (w.id.Equals(wykaz.id))
                 {
-                    throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
+                    throw new InvalidOperationException("Istnieje juz wykaz id = " + w.id);
                 }
-            }*/
+            }
         }
 
         public Wykaz GetWykaz(int id)
         {
-            return dane.wykazy[0];
-
-            /*foreach (Wykaz w in dane.wykazy)
+            foreach (Wykaz w in dane.wykazy)
             {
                 if (w.id.Equals(id))
                 {
                     return w;
                 }
             }
-            throw new KeyNotFoundException("Nie ma wykazu o id" + id);*/
+            throw new KeyNotFoundException("Nie ma wykazu o id = " + id);
         }
 
         public IEnumerable<Wykaz> GetAllWykaz()
@@ -59,7 +55,7 @@ namespace Zadanie1
                     return;
                 }
             }
-            throw new KeyNotFoundException("Nie znaleziono wykazu o id " + id + " do zaktualizowania!");
+            throw new KeyNotFoundException("Nie znaleziono wykazu o id = " + id + " do zaktualizowania!");
         }
 
         public void DeleteWykaz(Wykaz wykaz)
@@ -106,10 +102,11 @@ namespace Zadanie1
                     return;
                 }
             }
-            throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
+            //throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
             //zastanawiam sie czy to jest potrzebne bo moze po prostu wszystkie tego typu operacje robic przez DataService przez managera 
             //wtedy jak GetKatalog (na przyklad) nie znajdzie tego obiektu to rzuci wyjatek wiec w update nie trzeba bedzie tego sprawdzac
             //Ze wiesz w DataService zrobimy ZmienDaneKatalogu(costam) i tam bd kt = repo.GetKatalog 
+            // masz racje - zakomentowałem - do usuniecia
         }
 
         public void DeleteKatalog(int id)
@@ -121,19 +118,20 @@ namespace Zadanie1
                     throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
                 }
             }*/
+            // do usuniecia bo to ma byc w daataService
             dane.katalogi.Remove(id);
         }
 
         public void AddOpisStanu(OpisStanu opis)
         {
-            /*foreach (OpisStanu o in dane.opisyStanu)
+            foreach (OpisStanu o in dane.opisyStanu)
             {
                 if (o.id.Equals(opis.id))
                 {
-                    throw new InvalidOperationException("Istnieje juz opis o takim identyfikatorze!");
+                    throw new InvalidOperationException("Istnieje juz opis stanu o id = " + o.id);
                 }
-            }*/
-            dane.opisyStanu.Add(opis);
+            }
+            //dane.opisyStanu.Add(opis);
         }
 
         public OpisStanu GetOpisStanu(int id)
@@ -145,7 +143,7 @@ namespace Zadanie1
                     return o;
                 }
             }
-            throw new KeyNotFoundException("Nie ma takiego opisu stanu");
+            throw new KeyNotFoundException("Nie ma opisu stanu o id = " + id);
         }
 
         public IEnumerable<OpisStanu> GetAllOpisStanu()
@@ -153,6 +151,7 @@ namespace Zadanie1
             return dane.opisyStanu;
         }
 
+        //Potrzebna jest ta metoda? Dla wykaz jej nie ma
         public IEnumerable<int> GetAllOpisStanuId()
         {
             List<int> tmp = new List<int>();

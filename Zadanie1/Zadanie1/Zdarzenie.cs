@@ -44,5 +44,10 @@ namespace Zadanie1
             else if (data == other.data) return 0;
             else return -1;
         }
+
+        public override string ToString()
+        {
+            return "Zdarzenie pomiędzy " + wykaz + "/na/n" + opis;
+        }
     }
 }
