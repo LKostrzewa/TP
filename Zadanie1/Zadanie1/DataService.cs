@@ -10,29 +10,85 @@ namespace Zadanie1
 {
     public class DataService
     {
+        private IData repository;
 
-        //tutaj bedzie interfejs na zasadzie DI ale po finalnym ustaleniu postaci DataRepository
-
-        private DataRepository repository;
-
-        public DataService(DataRepository repository)
+        public DataService(IData repository)
         {
             this.repository = repository;
         }
 
         public void DodajKsiazkeDoBiblioteki(string tytul, string gatunek, int ilosc_stron)
         {
+            //Tutaj probowalem jakos to normalnie zrobic bez metod GetAllId() w repozytorium i bez .Contains() z LINQ ale nie umiem
+            //to co jest tutaj zakomentowane raczej nie działa ale zostawiłem jkbc
+            /*int id = 0;
+            if (repository.GetAllKatalog().Any()){
+                while (true)
+                {
+                    int idPom = 0;
+                    foreach (Katalog k in repository.GetAllKatalog())
+                    {
+                        idPom = k.id;
+                        if (id == idPom) break;
+                    }
+                    if (id != idPom)
+                    {
+                        id = idPom;
+                        break;
+                    }
+                    else id++;
+                }
+            }*/
+            int idK = 0;
+            int idO = 0;
+            while (repository.GetAllKatalogId().Contains(idK))
+            {
+                idK++;
+            }
+            while (repository.GetAllOpisStanuId().Contains(idO))
+            {
+                idO++;
+            }
             foreach(Katalog k in repository.GetAllKatalog())
             {
                 if (k.tytul.Equals(tytul) && k.gatunek.Equals(gatunek) && k.ilosc_str.Equals(ilosc_stron))
                 {
-                    repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, k, DateTime.Now));
+                    repository.AddOpisStanu(new OpisStanu(idO, k, DateTime.Now));
                     return;
                 }
             }
-            repository.AddKatalog(new Katalog(repository.GetAllKatalog().Count() + 1, tytul, gatunek, ilosc_stron));
-            repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, repository.GetKatalog(repository.GetAllKatalog().Count()), DateTime.Now));
+            repository.AddKatalog(new Katalog(idK, tytul, gatunek, ilosc_stron));
+            repository.AddOpisStanu(new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now));
         }
+
+        public void UsunEgzemplarzZBiblioteki(int idO)
+        {
+            //prototyp xd
+            OpisStanu o = repository.GetOpisStanu(idO);
+            foreach(Zdarzenie z in repository.GetAllZdarzenie())
+            {
+                if (z.opis.Equals(o))
+                {
+                    throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
+                }
+            }
+            repository.DeleteOpisStanu(o);
+        }
+
+        public void UsunKsiazkeZBiblioteki(int id)
+        {
+            //rowniez prototyp
+            Katalog k = repository.GetKatalog(id);
+            foreach (OpisStanu opis in repository.GetAllOpisStanu())
+            {
+                if (opis.katalog.Equals(k))
+                {
+                    throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+                }
+            }
+            repository.DeleteKatalog(k.id);
+        }
+
 
         public void DodajKlientaDoBiblioteki(string imie, string nazwisko)
         {
@@ -44,6 +100,11 @@ namespace Zadanie1
                 }
             }
             repository.AddWykaz(new Wykaz(repository.GetAllWykaz().Count(), imie, nazwisko));
+        }
+
+        public void UsunKlientaZBiblioteki(int id)
+        {
+            //tutaj analogicznie ale nwm w koncu gdzie to robic mamy :/
         }
 
         public void WypozyczKsiazke(int idW, int idO)
@@ -67,6 +128,11 @@ namespace Zadanie1
                 repository.AddZdarzenie(new Oddanie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
             }
             else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
+        }
+
+        public void UsunZdarzenieZBiblioteki()
+        {
+
         }
 
         public IEnumerable<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idO)
