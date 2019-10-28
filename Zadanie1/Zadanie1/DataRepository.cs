@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie1
 {
-    public class DataRepository
+    public class DataRepository : IData
     {
         private DataContext dane = new DataContext();
 
@@ -20,26 +20,27 @@ namespace Zadanie1
         {
             dane.wykazy.Add(wykaz);
 
-            //foreach (Wykaz w in dane.wykazy)
-            //{
-            //    if (w.id.Equals(wykaz.id))
-            //    {
-            //        throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
-            //    }
-            //}
-            //dane.wykazy.Add(wykaz);
+            /*foreach (Wykaz w in dane.wykazy)
+            {
+                if (w.id.Equals(wykaz.id))
+                {
+                    throw new InvalidOperationException("Istnieje juz wykaz o takim identyfikatorze!");
+                }
+            }*/
         }
 
         public Wykaz GetWykaz(int id)
         {
-            foreach (Wykaz w in dane.wykazy)
+            return dane.wykazy[0];
+
+            /*foreach (Wykaz w in dane.wykazy)
             {
                 if (w.id.Equals(id))
                 {
                     return w;
                 }
             }
-            throw new KeyNotFoundException("Nie ma wykazu o id" + id);
+            throw new KeyNotFoundException("Nie ma wykazu o id" + id);*/
         }
 
         public IEnumerable<Wykaz> GetAllWykaz()
@@ -108,25 +109,25 @@ namespace Zadanie1
 
         public void DeleteKatalog(int id)
         {
-            foreach (OpisStanu opis in dane.opisyStanu)
+            /*foreach (OpisStanu opis in dane.opisyStanu)
             {
                 if (opis.katalog.Equals(GetKatalog(id)))
                 {
                     throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
                 }
-            }
+            }*/
             dane.katalogi.Remove(id);
         }
 
         public void AddOpisStanu(OpisStanu opis)
         {
-            foreach (OpisStanu o in dane.opisyStanu)
+            /*foreach (OpisStanu o in dane.opisyStanu)
             {
                 if (o.id.Equals(opis.id))
                 {
                     throw new InvalidOperationException("Istnieje juz opis o takim identyfikatorze!");
                 }
-            }
+            }*/
             dane.opisyStanu.Add(opis);
         }
 
@@ -148,7 +149,7 @@ namespace Zadanie1
         }
 
         //Nie wiem czy zostawic czy usunac
-        public void UpdateOpisStanu(OpisStanu opis)
+        /*public void UpdateOpisStanu(OpisStanu opis)
         {
             foreach(OpisStanu o in dane.opisyStanu)
             {
@@ -160,17 +161,17 @@ namespace Zadanie1
                 }
             }
             throw new KeyNotFoundException("Nie znaleziono opisu stanu o id " + opis.id + " do zaktualizowania!");
-        }
+        }*/
 
         public void DeleteOpisStanu(OpisStanu opis)
         {
-            foreach(Zdarzenie z in dane.zdarzenia)
+            /*foreach(Zdarzenie z in dane.zdarzenia)
             {
                 if (z.opis.Equals(opis))
                 {
                     throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
                 }
-            }
+            }*/
             dane.opisyStanu.Remove(opis);
         }
 
@@ -180,11 +181,11 @@ namespace Zadanie1
         }
 
         //Nie identyfikuje nam jednoznacznie zdarzenia - moze byc duzo zdarzen o tym samym wykazie i opisie stanu
-        public Zdarzenie GetZdarzenie(Wykaz wykaz, OpisStanu opisStanu)
+        public Zdarzenie GetZdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dateTime)
         {
             foreach(Zdarzenie z in dane.zdarzenia)
             {
-                if(z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
+                if(z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu) && z.data.Date == dateTime.Date)
                 {
                     return z;
                 }
@@ -199,19 +200,19 @@ namespace Zadanie1
         }
 
         //Tutaj to wgl niepotrzebne
-        //public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
-        //{
-        //    foreach (Zdarzenie z in dane.zdarzenia)
-        //    {
-        //        if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
-        //        {
-        //            dane.zdarzenia.Remove(z);
-        //            dane.zdarzenia.Add(zdarzenie);
-        //            return;
-        //        }
-        //    }
-        //    throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
-        //}
+        /*public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
+        {
+            foreach (Zdarzenie z in dane.zdarzenia)
+            {
+               if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
+               {
+                    dane.zdarzenia.Remove(z);
+                    dane.zdarzenia.Add(zdarzenie);
+                    return;
+                }
+            }
+            throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
+        }*/
 
         public void DeleteZdarzenie(Zdarzenie zdarzenie)
         {

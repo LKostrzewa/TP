@@ -10,12 +10,9 @@ namespace Zadanie1
 {
     public class DataService
     {
+        private IData repository;
 
-        //tutaj bedzie interfejs na zasadzie DI ale po finalnym ustaleniu postaci DataRepository
-
-        private DataRepository repository;
-
-        public DataService(DataRepository repository)
+        public DataService(IData repository)
         {
             this.repository = repository;
         }
@@ -34,6 +31,35 @@ namespace Zadanie1
             repository.AddOpisStanu(new OpisStanu(repository.GetAllOpisStanu().Count() + 1, repository.GetKatalog(repository.GetAllKatalog().Count()), DateTime.Now));
         }
 
+        public void UsunEgzemplarzZBiblioteki(int idO)
+        {
+            //prototyp xd
+            OpisStanu o = repository.GetOpisStanu(idO);
+            foreach(Zdarzenie z in repository.GetAllZdarzenie())
+            {
+                if (z.opis.Equals(o))
+                {
+                    throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
+                }
+            }
+            repository.DeleteOpisStanu(o);
+        }
+
+        public void UsunKsiazkeZBiblioteki(int id)
+        {
+            //rowniez prototyp
+            Katalog k = repository.GetKatalog(id);
+            foreach (OpisStanu opis in repository.GetAllOpisStanu())
+            {
+                if (opis.katalog.Equals(k))
+                {
+                    throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+                }
+            }
+            repository.DeleteKatalog(k.id);
+        }
+
+
         public void DodajKlientaDoBiblioteki(string imie, string nazwisko)
         {
             foreach(Wykaz w in repository.GetAllWykaz())
@@ -44,6 +70,11 @@ namespace Zadanie1
                 }
             }
             repository.AddWykaz(new Wykaz(repository.GetAllWykaz().Count(), imie, nazwisko));
+        }
+
+        public void UsunKlientaZBiblioteki(int id)
+        {
+            //tutaj analogicznie ale nwm w koncu gdzie to robic mamy :/
         }
 
         public void WypozyczKsiazke(int idW, int idO)
@@ -67,6 +98,11 @@ namespace Zadanie1
                 repository.AddZdarzenie(new Oddanie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
             }
             else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
+        }
+
+        public void UsunZdarzenieZBiblioteki()
+        {
+
         }
 
         public IEnumerable<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idO)
