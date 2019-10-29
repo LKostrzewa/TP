@@ -8,20 +8,23 @@ namespace Zadanie1
 {
     public class Zdarzenie : IComparable<Zdarzenie>
     {
+        public int id { get; private set; }
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
         public DateTime data { get; private set; }
         //public DateTime czasWypozyczenia { get; }
 
-        public Zdarzenie(Wykaz wykaz, OpisStanu opis)
+        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis)
         {
+            this.id = id;
             this.wykaz = wykaz;
             this.opis = opis;
             this.data = DateTime.Now;
         }
 
-        public Zdarzenie(Wykaz wykaz, OpisStanu opis, DateTime date)
+        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
         {
+            this.id = id;
             this.wykaz = wykaz;
             this.opis = opis;
             this.data = date;
@@ -31,11 +34,10 @@ namespace Zadanie1
         {
             Zdarzenie zdarzenie = obj as Zdarzenie;
             return zdarzenie != null &&
+                   id == zdarzenie.id &&
                    EqualityComparer<Wykaz>.Default.Equals(wykaz, zdarzenie.wykaz) &&
                    EqualityComparer<OpisStanu>.Default.Equals(opis, zdarzenie.opis) &&
                    data.Date == zdarzenie.data.Date;
-                   //dataWypozyczenia.Date == zdarzenie.dataWypozyczenia.Date &&
-                   //czasWypozyczenia.Date == zdarzenie.czasWypozyczenia.Date;
         }
 
         public int CompareTo(Zdarzenie other)
@@ -47,7 +49,7 @@ namespace Zadanie1
 
         public override string ToString()
         {
-            return "Zdarzenie pomiędzy " + wykaz + "/na/n" + opis;
+            return "Zdarzenie pomiędzy " + wykaz + "\na\n" + opis;
         }
     }
 }
