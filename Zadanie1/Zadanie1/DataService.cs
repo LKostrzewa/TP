@@ -64,6 +64,7 @@ namespace Zadanie1
         public void UsunEgzemplarzZBiblioteki(int idO)
         {
             //prototyp xd
+            // Moze dodamy usuwanie egzemplarza gdy nie jest wypozyczony?
             OpisStanu o = repository.GetOpisStanu(idO);
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
             {
@@ -78,6 +79,7 @@ namespace Zadanie1
         public void UsunKsiazkeZBiblioteki(int id)
         {
             //rowniez prototyp
+            // tutaj git - aby usunąć katalog musimy usunąć wszystkie opisyStanu, które znajdują się w bibliotece
             Katalog k = repository.GetKatalog(id);
             foreach (OpisStanu opis in repository.GetAllOpisStanu())
             {
@@ -105,6 +107,15 @@ namespace Zadanie1
         public void UsunKlientaZBiblioteki(int id)
         {
             //tutaj analogicznie ale nwm w koncu gdzie to robic mamy :/
+            // usuwanie klienta gdy nie ma wypozyczonej zadnej ksiazki
+            foreach(Zdarzenie z in repository.GetAllZdarzenie())
+            {
+                if (z.wykaz.id.Equals(id))
+                {
+                    throw new InvalidOperationException("Klient o imienu " + z.wykaz.imie + " " + z.wykaz.nazwisko + " ma wypozyczenia!");
+                }
+            }
+            repository.DeleteWykaz(repository.GetWykaz(id));
         }
 
         public void WypozyczKsiazke(int idW, int idO)
@@ -132,7 +143,7 @@ namespace Zadanie1
 
         public void UsunZdarzenieZBiblioteki()
         {
-
+            //Tutaj nie da sie jednoznacznie ustalic chyba zdarzenia to moze bez tego xd
         }
 
         public IEnumerable<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idO)
@@ -166,7 +177,46 @@ namespace Zadanie1
             return test;
         }
 
-        //To padaka jest nie patrz nawet xd
+        //to nw czy cos takiego ma byc + mozna ladniej ale nie chce mmi sie
+        public string WyswietlWykazy(IEnumerable<Wykaz> listaWykaz)
+        {
+            string tmp = "";
+            foreach (Wykaz w in listaWykaz)
+            {
+                tmp += w.ToString();
+            }
+            return tmp;
+        }
+
+        public string WyswietlKatalogi(IEnumerable<Katalog> listaKatalog)
+        {
+            string tmp = "";
+            foreach (Katalog k in listaKatalog)
+            {
+                tmp += k.ToString();
+            }
+            return tmp;
+        }
+
+        public string WyswietlOpisy(IEnumerable<OpisStanu> listaOpisStanu)
+        {
+            string tmp = "";
+            foreach (OpisStanu o in listaOpisStanu)
+            {
+                tmp += o.ToString();
+            }
+            return tmp;
+        }
+        public string WyswietlZdarzenia(IEnumerable<Zdarzenie> listaZdarzen)
+        {
+            string tmp = "";
+            foreach (Zdarzenie z in listaZdarzen)
+            {
+                tmp += z.ToString();
+            }
+            return tmp;
+        }
+
         public String WszystkieDaneDlaKlientow(IEnumerable<Wykaz> listaWykaz)
         {
             String tmp = "";
@@ -185,6 +235,9 @@ namespace Zadanie1
                     }
                 }
             }
+
+            //tmp += WyswietlWykazy(listaWykaz);
+            //tmp += WyswietlZdarzenia(WszystkieZdarzeniaDlaKlienta()) <- tu trzeba Id, a fajne by było cos na liste
             return tmp;
         }
 

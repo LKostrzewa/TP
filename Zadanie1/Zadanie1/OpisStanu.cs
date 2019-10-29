@@ -26,5 +26,10 @@ namespace Zadanie1
                    EqualityComparer<Katalog>.Default.Equals(katalog, stanu.katalog) &&
                    dataZakupu == stanu.dataZakupu;
         }
+
+        public override string ToString()
+        {
+            return "Katalog: (" + katalog + ") zakupiony - " + dataZakupu + " - ID - " + id;
+        }
     }
 }
