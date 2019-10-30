@@ -242,18 +242,8 @@ namespace Zadanie1
                 foreach(Zdarzenie z in WszystkieZdarzeniaDlaKlienta(w.id))
                 {
                     tmp += "\t" + z.ToString() + "\n";
-                    //foreach(Katalog k in repository.GetAllKatalog())
-                    //{
-                    //    if (k.id.Equals(z.opis.katalog.id))
-                    //    {
-                    //        tmp += "\t\t" + k.ToString() + "\n";
-                    //    }
-                    //}
                 }
             }
-
-            //tmp += WyswietlWykazy(listaWykaz);
-            //tmp += WyswietlZdarzenia(WszystkieZdarzeniaDlaKlienta()) <- tu trzeba Id, a fajne by było cos na liste
             return tmp;
         }
 
