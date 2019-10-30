@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1;
@@ -110,16 +109,6 @@ namespace Zadanie1Tests
             Assert.ThrowsException<InvalidOperationException>(() => ds.OddajKsiazke(3, 4));
             ds.OddajKsiazke(1, 0);
             Assert.AreEqual<int>(ds.WszystkieZdarzeniaDlaKsiazki(0).Count(), 2);
-        }
-
-        [TestMethod]
-        public void PokaTest()
-        {
-            //co z tym wariat
-            DataService ds = new DataService(new DataRepository(new WypelnianieStalymi()));
-
-            //Console.WriteLine(ds.WyswietlOpisy(ds.PobierzWszystkieEgzemplarze()));
-            //Console.WriteLine(ds.WyswietlZdarzenia(ds.PobierzWszystkieZdarzenia()));
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie1
 {
@@ -53,8 +50,6 @@ namespace Zadanie1
 
         public void UsunEgzemplarzZBiblioteki(int idO)
         {
-            //prototyp xd
-            // Moze dodamy usuwanie egzemplarza gdy nie jest wypozyczony?
             OpisStanu o = repository.GetOpisStanu(idO);
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
             {
@@ -67,9 +62,7 @@ namespace Zadanie1
         }
 
         public void UsunKsiazkeZBiblioteki(int id)
-        {
-            //rowniez prototyp
-            // tutaj git - aby usunąć katalog musimy usunąć wszystkie opisyStanu, które znajdują się w bibliotece
+        {            
             Katalog k = repository.GetKatalog(id);
             foreach (OpisStanu opis in repository.GetAllOpisStanu())
             {
@@ -103,7 +96,6 @@ namespace Zadanie1
 
         public void UsunKlientaZBiblioteki(int id)
         {
-            //tutaj analogicznie ale nwm w koncu gdzie to robic mamy :/
             // usuwanie klienta gdy nie ma wypozyczonej zadnej ksiazki
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
             {
@@ -127,7 +119,6 @@ namespace Zadanie1
 
         public void WypozyczKsiazke(int idW, int idO)
         {
-            //OpisStanu opis = new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now);
             int id = 0;
             while (repository.GetAllZdarzenieId().Contains(id))
             {
@@ -192,8 +183,7 @@ namespace Zadanie1
             }
             return test;
         }
-
-        //to nw czy cos takiego ma byc + mozna ladniej ale nie chce mmi sie
+        
         public string WyswietlWykazy(IEnumerable<Wykaz> listaWykaz)
         {
             string tmp = "";
@@ -247,21 +237,7 @@ namespace Zadanie1
             return tmp;
         }
 
-        private static void ZdarzenieChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    //tutaj printowanie na ekran - lol może tak ma być, że ta klasa może printować?
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    // tutaj to samo?
-                    break;
-                default:
-                    //nw co tu
-                    break;
-            }
-        }
+        
 
     }
 }

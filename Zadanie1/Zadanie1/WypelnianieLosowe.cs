@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie1
 {
@@ -18,7 +16,6 @@ namespace Zadanie1
             List<int> katalogiID = RandomIds(katalogi);
             List<int> opisyStanuID = RandomIds(opisyStanu);
             List<int> zdarzeniaID = RandomIds(zdarzenia);
-            List<Zdarzenie> zdarzeniaList;
             string pom = RandomString(10);
 
 
@@ -39,7 +36,6 @@ namespace Zadanie1
 
             for (int i = 0; i < zdarzenia; i++)
             {
-                //egz okresla nam ktorego egzemplarza bedzie dotyczyło zdarzenie - analogicznie czyt określa nam czytelnika
                 int egz = zdarzeniaID[i] % opisyStanu;
                 int czyt = zdarzeniaID[i] % wykazy;
 
@@ -68,7 +64,7 @@ namespace Zadanie1
             Random rand = new Random();
             int num = rand.Next();
             list.Add(num);
-            for (int i = 0; i < ile; i++)
+            for (int i = 0; i < ile - 1; i++)
             {
                 while (list.Contains(num))
                 {

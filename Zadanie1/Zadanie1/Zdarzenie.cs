@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie1
 {
@@ -12,7 +9,6 @@ namespace Zadanie1
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
         public DateTime data { get; private set; }
-        //public DateTime czasWypozyczenia { get; }
 
         public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis)
         {

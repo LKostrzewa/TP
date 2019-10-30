@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +15,11 @@ namespace Zadanie1
         public DataRepository(IDataFiller filler)
         {
             filler.fill(dane);
+            dane.zdarzenia.CollectionChanged += ZdarzenieChanged;
         }
 
         public void AddWykaz(Wykaz wykaz)
         {
-            /*foreach (Wykaz w in dane.wykazy)
-            {
-                if (w.id.Equals(wykaz.id))
-                {
-                    throw new InvalidOperationException("Istnieje juz wykaz id = " + w.id);
-                }
-            }*/
             dane.wykazy.Add(wykaz);
         }
 
@@ -71,15 +66,6 @@ namespace Zadanie1
 
         public void DeleteWykaz(Wykaz wykaz)
         {
-            /*foreach (Wykaz w in dane.wykazy)
-            {
-                if (w.id.Equals(wykaz.id))
-                {
-                    dane.wykazy.Remove(wykaz);
-                    return;
-                }
-            }
-            throw new KeyNotFoundException("Nie znaleziono wykazu " + wykaz + " do usuniecia!");*/
             dane.wykazy.Remove(wykaz);
         }
 
@@ -132,13 +118,6 @@ namespace Zadanie1
 
         public void AddOpisStanu(OpisStanu opis)
         {
-            /*foreach (OpisStanu o in dane.opisyStanu)
-            {
-                if (o.id.Equals(opis.id))
-                {
-                    throw new InvalidOperationException("Istnieje juz opis stanu o id = " + o.id);
-                }
-            }*/
             dane.opisyStanu.Add(opis);
         }
 
@@ -171,15 +150,6 @@ namespace Zadanie1
 
         public void DeleteOpisStanu(OpisStanu opis)
         {
-            /*foreach(OpisStanu o in dane.opisyStanu)
-            {
-                if (opis.id == o.id)
-                {
-                    dane.opisyStanu.Remove(opis);
-                    return;
-                }
-            }
-            throw new KeyNotFoundException("Nie znaleziono opisu stanu " + opis + " do usuniecia!");*/
             dane.opisyStanu.Remove(opis);
         }
 
@@ -218,6 +188,19 @@ namespace Zadanie1
         public void DeleteZdarzenie(Zdarzenie zdarzenie)
         {
             dane.zdarzenia.Remove(zdarzenie);
+        }
+
+        private void ZdarzenieChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Console.WriteLine("Added element");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Console.WriteLine("Removed element");
+                    break;
+            }
         }
     }
 }
