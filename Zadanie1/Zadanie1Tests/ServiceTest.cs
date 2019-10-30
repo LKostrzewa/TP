@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1;
@@ -114,6 +115,7 @@ namespace Zadanie1Tests
         [TestMethod]
         public void PokaTest()
         {
+            //co z tym wariat
             DataService ds = new DataService(new DataRepository(new WypelnianieStalymi()));
 
             //Console.WriteLine(ds.WyswietlOpisy(ds.PobierzWszystkieEgzemplarze()));
