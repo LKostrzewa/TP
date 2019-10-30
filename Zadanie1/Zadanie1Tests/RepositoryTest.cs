@@ -105,5 +105,32 @@ namespace Zadanie1Tests
             Assert.AreEqual(repo.GetAllZdarzenie().Count(), 2);
             Assert.ThrowsException<KeyNotFoundException>(() => repo.GetZdarzenie(2));
         }
+
+        [TestMethod]
+        public void LosoweWypelnianieTest()
+        {
+            DataRepository repo = new DataRepository(new WypelnianieLosowe());
+
+            Assert.IsTrue(IsUnique(repo.GetAllWykazId()));
+            Assert.IsTrue(IsUnique(repo.GetAllZdarzenieId()));
+            Assert.IsTrue(IsUnique(repo.GetAllKatalogId()));
+            Assert.IsTrue(IsUnique(repo.GetAllOpisStanuId()));
+
+            Assert.AreEqual<int>(repo.GetAllZdarzenie().Count(), 1000);
+            Assert.AreEqual<int>(repo.GetAllWykaz().Count(), 10);
+            Assert.AreEqual<int>(repo.GetAllKatalog().Count(), 10);
+            Assert.AreEqual<int>(repo.GetAllOpisStanu().Count(), 100);
+        }
+
+        private bool IsUnique(IEnumerable<int> list)
+        {
+            HashSet<int> set = new HashSet<int>();
+
+            foreach(int i in list)
+            {
+                if (!set.Add(i)) return false;
+            }
+            return true;
+        }
     }
 }
