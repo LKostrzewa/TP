@@ -18,6 +18,7 @@ namespace Zadanie1
             List<int> katalogiID = RandomIds(katalogi);
             List<int> opisyStanuID = RandomIds(opisyStanu);
             List<int> zdarzeniaID = RandomIds(zdarzenia);
+            List<Zdarzenie> zdarzeniaList;
             string pom = RandomString(10);
 
 
@@ -42,7 +43,21 @@ namespace Zadanie1
                 int egz = zdarzeniaID[i] % opisyStanu;
                 int czyt = zdarzeniaID[i] % wykazy;
 
-                context.zdarzenia.Contains()
+                List<Zdarzenie> test = new List<Zdarzenie>();
+                foreach (Zdarzenie z in context.zdarzenia)
+                {
+                    if (z.opis.id == context.opisyStanu[egz].id) test.Add(z);
+                }
+                test.Sort();
+                if(test.Any() && test.Last() is Wypozyczenie)
+                {
+                    context.zdarzenia.Add(new Oddanie(zdarzeniaID[i], test.Last().wykaz, context.opisyStanu[egz]));
+                }
+                else
+                {
+                    context.zdarzenia.Add(new Wypozyczenie(zdarzeniaID[i], context.wykazy[czyt], context.opisyStanu[egz]));
+                }
+                
             }
 
         }
