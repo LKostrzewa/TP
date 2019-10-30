@@ -110,15 +110,5 @@ namespace Zadanie1Tests
             ds.OddajKsiazke(1, 0);
             Assert.AreEqual<int>(ds.WszystkieZdarzeniaDlaKsiazki(0).Count(), 2);
         }
-
-        [TestMethod]
-        public void PokaTest()
-        {
-            //co z tym wariat
-            DataService ds = new DataService(new DataRepository(new WypelnianieStalymi()));
-
-            //Console.WriteLine(ds.WyswietlOpisy(ds.PobierzWszystkieEgzemplarze()));
-            //Console.WriteLine(ds.WyswietlZdarzenia(ds.PobierzWszystkieZdarzenia()));
-        }
     }
 }

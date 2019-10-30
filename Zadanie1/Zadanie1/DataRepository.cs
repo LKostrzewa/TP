@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Zadanie1
         public DataRepository(IDataFiller filler)
         {
             filler.fill(dane);
+            dane.zdarzenia.CollectionChanged += ZdarzenieChanged;
         }
 
         public void AddWykaz(Wykaz wykaz)
@@ -186,6 +188,19 @@ namespace Zadanie1
         public void DeleteZdarzenie(Zdarzenie zdarzenie)
         {
             dane.zdarzenia.Remove(zdarzenie);
+        }
+
+        private void ZdarzenieChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Console.WriteLine("Added element");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Console.WriteLine("Removed element");
+                    break;
+            }
         }
     }
 }

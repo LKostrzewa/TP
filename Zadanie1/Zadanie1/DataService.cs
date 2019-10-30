@@ -237,21 +237,7 @@ namespace Zadanie1
             return tmp;
         }
 
-        private static void ZdarzenieChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    //tutaj printowanie na ekran - lol może tak ma być, że ta klasa może printować?
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    // tutaj to samo?
-                    break;
-                default:
-                    //nw co tu
-                    break;
-            }
-        }
+        
 
     }
 }
