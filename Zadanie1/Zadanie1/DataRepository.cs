@@ -18,13 +18,14 @@ namespace Zadanie1
 
         public void AddWykaz(Wykaz wykaz)
         {
-            foreach (Wykaz w in dane.wykazy)
+            /*foreach (Wykaz w in dane.wykazy)
             {
                 if (w.id.Equals(wykaz.id))
                 {
                     throw new InvalidOperationException("Istnieje juz wykaz id = " + w.id);
                 }
-            }
+            }*/
+            dane.wykazy.Add(wykaz);
         }
 
         public Wykaz GetWykaz(int id)
@@ -44,6 +45,16 @@ namespace Zadanie1
             return dane.wykazy;
         }
 
+        public IEnumerable<int> GetAllWykazId()
+        {
+            List<int> tmp = new List<int>();
+            foreach (Wykaz w in dane.wykazy)
+            {
+                tmp.Add(w.id);
+            }
+            return tmp;
+        }
+
         public void UpdateWykaz(int id, string imie, string nazwisko)
         {
             foreach (Wykaz w in dane.wykazy)
@@ -60,13 +71,15 @@ namespace Zadanie1
 
         public void DeleteWykaz(Wykaz wykaz)
         {
-            foreach (Zdarzenie z in dane.zdarzenia)
+            /*foreach (Wykaz w in dane.wykazy)
             {
-                if (z.wykaz.Equals(wykaz))
+                if (w.id.Equals(wykaz.id))
                 {
-                    throw new InvalidOperationException("Dany Wykaz jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
+                    dane.wykazy.Remove(wykaz);
+                    return;
                 }
             }
+            throw new KeyNotFoundException("Nie znaleziono wykazu " + wykaz + " do usuniecia!");*/
             dane.wykazy.Remove(wykaz);
         }
 
@@ -90,48 +103,43 @@ namespace Zadanie1
             return dane.katalogi.Keys;
         }
 
-        public void UpdateKatalog(Katalog katalog)
+        public void UpdateKatalog(int id, string tytul, string gatunek)
         {
             foreach (Katalog k in dane.katalogi.Values)
             {
-                if (k.id.Equals(katalog.id))
+                if (k.id.Equals(id))
                 {
-                    k.tytul = katalog.tytul;
-                    k.ilosc_str = katalog.ilosc_str;
-                    k.gatunek = katalog.gatunek;
+                    k.tytul = tytul;
+                    k.gatunek = gatunek;
                     return;
                 }
             }
-            //throw new KeyNotFoundException("Nie znaleziono katalogu o id " + katalog.id + " do zaktualizowania!");
-            //zastanawiam sie czy to jest potrzebne bo moze po prostu wszystkie tego typu operacje robic przez DataService przez managera 
-            //wtedy jak GetKatalog (na przyklad) nie znajdzie tego obiektu to rzuci wyjatek wiec w update nie trzeba bedzie tego sprawdzac
-            //Ze wiesz w DataService zrobimy ZmienDaneKatalogu(costam) i tam bd kt = repo.GetKatalog 
-            // masz racje - zakomentowałem - do usuniecia
+            throw new KeyNotFoundException("Nie znaleziono katalogu o id " + id + " do zaktualizowania!");
         }
 
         public void DeleteKatalog(int id)
         {
-            /*foreach (OpisStanu opis in dane.opisyStanu)
+            foreach (Katalog k in dane.katalogi.Values)
             {
-                if (opis.katalog.Equals(GetKatalog(id)))
+                if (k.id.Equals(id))
                 {
-                    throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
+                    dane.katalogi.Remove(id);
+                    return;
                 }
-            }*/
-            // do usuniecia bo to ma byc w daataService
-            dane.katalogi.Remove(id);
+            }
+            throw new KeyNotFoundException("Nie znaleziono katalogu o id " + id + " do usuniecia!");
         }
 
         public void AddOpisStanu(OpisStanu opis)
         {
-            foreach (OpisStanu o in dane.opisyStanu)
+            /*foreach (OpisStanu o in dane.opisyStanu)
             {
                 if (o.id.Equals(opis.id))
                 {
                     throw new InvalidOperationException("Istnieje juz opis stanu o id = " + o.id);
                 }
-            }
-            //dane.opisyStanu.Add(opis);
+            }*/
+            dane.opisyStanu.Add(opis);
         }
 
         public OpisStanu GetOpisStanu(int id)
@@ -151,7 +159,6 @@ namespace Zadanie1
             return dane.opisyStanu;
         }
 
-        //Potrzebna jest ta metoda? Dla wykaz jej nie ma
         public IEnumerable<int> GetAllOpisStanuId()
         {
             List<int> tmp = new List<int>();
@@ -162,30 +169,17 @@ namespace Zadanie1
             return tmp;
         }
 
-        //Nie wiem czy zostawic czy usunac
-        /*public void UpdateOpisStanu(OpisStanu opis)
+        public void DeleteOpisStanu(OpisStanu opis)
         {
-            foreach(OpisStanu o in dane.opisyStanu)
+            /*foreach(OpisStanu o in dane.opisyStanu)
             {
-                if (o.id.Equals(opis.id))
+                if (opis.id == o.id)
                 {
-                    o.katalog = opis.katalog;
-                    o.dataZakupu = opis.dataZakupu;
+                    dane.opisyStanu.Remove(opis);
                     return;
                 }
             }
-            throw new KeyNotFoundException("Nie znaleziono opisu stanu o id " + opis.id + " do zaktualizowania!");
-        }*/
-
-        public void DeleteOpisStanu(OpisStanu opis)
-        {
-            /*foreach(Zdarzenie z in dane.zdarzenia)
-            {
-                if (z.opis.Equals(opis))
-                {
-                    throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
-                }
-            }*/
+            throw new KeyNotFoundException("Nie znaleziono opisu stanu " + opis + " do usuniecia!");*/
             dane.opisyStanu.Remove(opis);
         }
 
@@ -194,39 +188,32 @@ namespace Zadanie1
             dane.zdarzenia.Add(zdarzenie);
         }
 
-        //Nie identyfikuje nam jednoznacznie zdarzenia - moze byc duzo zdarzen o tym samym wykazie i opisie stanu
-        public Zdarzenie GetZdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dateTime)
+        public Zdarzenie GetZdarzenie(int id)
         {
             foreach(Zdarzenie z in dane.zdarzenia)
             {
-                if(z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu) && z.data.Date == dateTime.Date)
+                if(z.id == id)
                 {
                     return z;
                 }
             }
-            throw new InvalidOperationException("Zdarzenie miedzy takim Wykazem i OpisemStanu nie istnieje");
+            throw new KeyNotFoundException("Zdarzenie miedzy takim Wykazem i OpisemStanu nie istnieje");
         }
-
 
         public IEnumerable<Zdarzenie> GetAllZdarzenie()
         {
             return dane.zdarzenia;
         }
 
-        //Tutaj to wgl niepotrzebne
-        /*public void UpdateZdarzenie(Wykaz wykaz, OpisStanu opisStanu, Zdarzenie zdarzenie)
+        public IEnumerable<int> GetAllZdarzenieId()
         {
+            List<int> tmp = new List<int>();
             foreach (Zdarzenie z in dane.zdarzenia)
             {
-               if (z.wykaz.Equals(wykaz) && z.opis.Equals(opisStanu))
-               {
-                    dane.zdarzenia.Remove(z);
-                    dane.zdarzenia.Add(zdarzenie);
-                    return;
-                }
+                tmp.Add(z.id);
             }
-            throw new InvalidOperationException("Nie ma takiego obiektu w repozytorium");
-        }*/
+            return tmp;
+        }
 
         public void DeleteZdarzenie(Zdarzenie zdarzenie)
         {

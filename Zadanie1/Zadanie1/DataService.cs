@@ -19,26 +19,6 @@ namespace Zadanie1
 
         public void DodajKsiazkeDoBiblioteki(string tytul, string gatunek, int ilosc_stron)
         {
-            //Tutaj probowalem jakos to normalnie zrobic bez metod GetAllId() w repozytorium i bez .Contains() z LINQ ale nie umiem
-            //to co jest tutaj zakomentowane raczej nie działa ale zostawiłem jkbc
-            /*int id = 0;
-            if (repository.GetAllKatalog().Any()){
-                while (true)
-                {
-                    int idPom = 0;
-                    foreach (Katalog k in repository.GetAllKatalog())
-                    {
-                        idPom = k.id;
-                        if (id == idPom) break;
-                    }
-                    if (id != idPom)
-                    {
-                        id = idPom;
-                        break;
-                    }
-                    else id++;
-                }
-            }*/
             int idK = 0;
             int idO = 0;
             while (repository.GetAllKatalogId().Contains(idK))
@@ -61,6 +41,16 @@ namespace Zadanie1
             repository.AddOpisStanu(new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now));
         }
 
+        public Katalog PobierzKsiazke(int id)
+        {
+            return repository.GetKatalog(id);
+        }
+
+        public OpisStanu PobierzEgzemplarz(int id)
+        {
+            return repository.GetOpisStanu(id);
+        }
+
         public void UsunEgzemplarzZBiblioteki(int idO)
         {
             //prototyp xd
@@ -68,7 +58,7 @@ namespace Zadanie1
             OpisStanu o = repository.GetOpisStanu(idO);
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
             {
-                if (z.opis.Equals(o))
+                if (z.opis.id == idO)
                 {
                     throw new InvalidOperationException("Dany OpisStanu jest w użyciu przez Zdarzenie, wiec nie moze zostac usuniety");
                 }
@@ -83,7 +73,7 @@ namespace Zadanie1
             Katalog k = repository.GetKatalog(id);
             foreach (OpisStanu opis in repository.GetAllOpisStanu())
             {
-                if (opis.katalog.Equals(k))
+                if (opis.katalog.id == k.id)
                 {
                     throw new InvalidOperationException("Dany katalog jest w użyciu przez OpisStanu, wiec nie moze zostac usuniety");
                 }
@@ -91,17 +81,24 @@ namespace Zadanie1
             repository.DeleteKatalog(k.id);
         }
 
+        public IEnumerable<OpisStanu> PobierzWszystkieEgzemplarze()
+        {
+            return repository.GetAllOpisStanu();
+        }
+
+        public IEnumerable<Katalog> PobierzWszystkieKsiazki()
+        {
+            return repository.GetAllKatalog();
+        }
 
         public void DodajKlientaDoBiblioteki(string imie, string nazwisko)
         {
-            foreach(Wykaz w in repository.GetAllWykaz())
+            int id = 0;
+            while (repository.GetAllWykazId().Contains(id))
             {
-                if(w.imie.Equals(imie) && w.nazwisko.Equals(nazwisko))
-                {
-                    throw new InvalidOperationException("Klient o imienu " + imie + " " + nazwisko + " znajduje juz sie w bazie klientow");
-                }
+                id++;
             }
-            repository.AddWykaz(new Wykaz(repository.GetAllWykaz().Count(), imie, nazwisko));
+            repository.AddWykaz(new Wykaz(id, imie, nazwisko));
         }
 
         public void UsunKlientaZBiblioteki(int id)
@@ -118,35 +115,54 @@ namespace Zadanie1
             repository.DeleteWykaz(repository.GetWykaz(id));
         }
 
+        public IEnumerable<Wykaz> PobierzWszystkichKlientow()
+        {
+            return repository.GetAllWykaz();
+        }
+
+        public Wykaz PobierzKlienta(int id)
+        {
+            return repository.GetWykaz(id);
+        }
+
         public void WypozyczKsiazke(int idW, int idO)
         {
             //OpisStanu opis = new OpisStanu(idO, repository.GetKatalog(idK), DateTime.Now);
-            IEnumerable<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idO);
-            Zdarzenie z = list.Last();
-            if(z is Wypozyczenie)
+            int id = 0;
+            while (repository.GetAllZdarzenieId().Contains(id))
+            {
+                id++;
+            }
+            IEnumerable<Zdarzenie> list = WszystkieZdarzeniaDlaKsiazki(idO);
+            if (list.Any() && list.Last() is Wypozyczenie)
             {
                 throw new InvalidOperationException("Ta ksiazka jest aktualnie niedostepna");
             }
-            else repository.AddZdarzenie(new Wypozyczenie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
+            repository.AddZdarzenie(new Wypozyczenie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
         }
 
         public void OddajKsiazke(int idW, int idO)
         {
-            IEnumerable<Zdarzenie> list = WszystkieWydarzeniaDlaKsiazki(idO);
+            int id = 0;
+            while (repository.GetAllZdarzenieId().Contains(id))
+            {
+                id++;
+            }
+            IEnumerable<Zdarzenie> list = WszystkieZdarzeniaDlaKsiazki(idO);
             Zdarzenie z = list.Last();
             if (z is Wypozyczenie)
             {
-                repository.AddZdarzenie(new Oddanie(repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
+                repository.AddZdarzenie(new Oddanie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
             }
             else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
         }
 
-        public void UsunZdarzenieZBiblioteki()
+        public void UsunZdarzenieZBiblioteki(int id)
         {
-            //Tutaj nie da sie jednoznacznie ustalic chyba zdarzenia to moze bez tego xd
+            repository.DeleteZdarzenie(repository.GetZdarzenie(id));
         }
 
-        public IEnumerable<Zdarzenie> WszystkieWydarzeniaDlaKsiazki(int idO)
+        public IEnumerable<Zdarzenie> WszystkieZdarzeniaDlaKsiazki(int idO)
         {
             List<Zdarzenie> test = new List<Zdarzenie>();
             foreach(Zdarzenie z in repository.GetAllZdarzenie())
@@ -183,7 +199,7 @@ namespace Zadanie1
             string tmp = "";
             foreach (Wykaz w in listaWykaz)
             {
-                tmp += w.ToString();
+                tmp += w.ToString() + "\n";
             }
             return tmp;
         }
@@ -193,7 +209,7 @@ namespace Zadanie1
             string tmp = "";
             foreach (Katalog k in listaKatalog)
             {
-                tmp += k.ToString();
+                tmp += k.ToString() + "\n" ;
             }
             return tmp;
         }
@@ -203,7 +219,7 @@ namespace Zadanie1
             string tmp = "";
             foreach (OpisStanu o in listaOpisStanu)
             {
-                tmp += o.ToString();
+                tmp += o.ToString() + "\n";
             }
             return tmp;
         }
@@ -212,27 +228,27 @@ namespace Zadanie1
             string tmp = "";
             foreach (Zdarzenie z in listaZdarzen)
             {
-                tmp += z.ToString();
+                tmp += z.ToString() + "\n";
             }
             return tmp;
         }
 
-        public String WszystkieDaneDlaKlientow(IEnumerable<Wykaz> listaWykaz)
+        public string WyswietlDaneDlaKlientow(IEnumerable<Wykaz> listaWykaz)
         {
-            String tmp = "";
+            string tmp = "";
             foreach(Wykaz w in listaWykaz)
             {
-                tmp += w.ToString() + "/n";
+                tmp += w.ToString() + "\n";
                 foreach(Zdarzenie z in WszystkieZdarzeniaDlaKlienta(w.id))
                 {
-                    tmp += "/t" + z.ToString() + "/n";
-                    foreach(Katalog k in repository.GetAllKatalog())
-                    {
-                        if (k.id.Equals(z.opis.katalog.id))
-                        {
-                            tmp += "/t/t" + k.ToString() + "/n";
-                        }
-                    }
+                    tmp += "\t" + z.ToString() + "\n";
+                    //foreach(Katalog k in repository.GetAllKatalog())
+                    //{
+                    //    if (k.id.Equals(z.opis.katalog.id))
+                    //    {
+                    //        tmp += "\t\t" + k.ToString() + "\n";
+                    //    }
+                    //}
                 }
             }
 
