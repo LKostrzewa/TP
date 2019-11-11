@@ -44,8 +44,6 @@
     <Compile Include="DataService.cs" />
     <Compile Include="IData.cs" />
     <Compile Include="Oddanie.cs" />
-    <Compile Include="WypelnianieLosowe.cs" />
-    <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="IDataFiller.cs" />
     <Compile Include="Katalog.cs" />

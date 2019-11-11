@@ -1,6 +1,7 @@
 ﻿using System;
+using Zadanie1;
 
-namespace Zadanie1
+namespace Zadanie1Tests
 {
     public class WypelnianieStalymi : IDataFiller
     {
