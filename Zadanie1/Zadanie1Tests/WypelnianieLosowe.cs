@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zadanie1;
 
-namespace Zadanie1
+namespace Zadanie1Tests
 {
     public class WypelnianieLosowe : IDataFiller
     {

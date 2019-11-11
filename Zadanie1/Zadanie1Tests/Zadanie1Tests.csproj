@@ -52,6 +52,8 @@
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTest.cs" />
+    <Compile Include="WypelnianieLosowe.cs" />
+    <Compile Include="WypelnianieStalymi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
