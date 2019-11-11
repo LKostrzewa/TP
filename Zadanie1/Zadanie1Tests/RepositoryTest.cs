@@ -90,13 +90,13 @@ namespace Zadanie1Tests
             Wykaz wykTest = new Wykaz(1, "Adam", "Małysz");
             Katalog katTest = new Katalog(10, "Android Studio w 24 godziny", "Podręcznik", 100);
             OpisStanu opisTest = new OpisStanu(0, katTest, new DateTime(2019, 10, 5));
-            Zdarzenie zdarzTest = new Zdarzenie(0, wykTest, opisTest);
+            Zdarzenie zdarzTest = new Wypozyczenie(0, wykTest, opisTest);
 
             Assert.AreEqual<Zdarzenie>(repo.GetZdarzenie(0), zdarzTest);
 
             Katalog katTest2 = new Katalog(60, "Pan Tadeusz", "Poemat", 100);
             OpisStanu opisTest2 = new OpisStanu(2, katTest2, new DateTime(2019, 10, 20));
-            Zdarzenie zdarzTest2 = new Zdarzenie(2, wykTest, opisTest2);
+            Zdarzenie zdarzTest2 = new Wypozyczenie(2, wykTest, opisTest2);
             repo.AddZdarzenie(zdarzTest2);
             Assert.AreEqual<Zdarzenie>(zdarzTest2, repo.GetZdarzenie(2));
             Assert.AreEqual(repo.GetAllZdarzenie().Count(), 3);
