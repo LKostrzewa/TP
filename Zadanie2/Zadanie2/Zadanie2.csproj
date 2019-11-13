@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Serialize.cs" />
+    <Compile Include="Reading.cs" />
+    <Compile Include="Writing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Zadanie1\Zadanie1\Zadanie1.csproj">
+      <Project>{E4E29484-CCCA-4D46-99F5-014B88B9C954}</Project>
+      <Name>Zadanie1</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
