@@ -21,7 +21,7 @@ namespace Zadanie1
             OpisStanu stanu = obj as OpisStanu;
             return stanu != null &&
                    EqualityComparer<Katalog>.Default.Equals(katalog, stanu.katalog) &&
-                   dataZakupu == stanu.dataZakupu;
+                   dataZakupu.Date == stanu.dataZakupu.Date;
         }
 
         public override string ToString()
