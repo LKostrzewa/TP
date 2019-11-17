@@ -45,6 +45,22 @@ namespace Zadanie2
             }
         }
 
+        public static void WriteOpisStanuToJSON(OpisStanu opis, string path)
+        {
+            string output = JsonConvert.SerializeObject(opis);
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
 
+        public static void WriteZdarzenieToJSON(Zdarzenie zdarzenie, string path)
+        {
+            string output = JsonConvert.SerializeObject(zdarzenie);
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
     }
 }

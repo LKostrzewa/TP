@@ -36,5 +36,20 @@ namespace Zadanie2
             StreamReader reader = new StreamReader(path);
             return JsonConvert.DeserializeObject<Wykaz>(reader.ReadLine());
         }
+
+        public static OpisStanu ReadOpisStanuFromJSON(string path)
+        {
+            StreamReader reader = new StreamReader(path);
+            return JsonConvert.DeserializeObject<OpisStanu>(reader.ReadLine());
+        }
+
+        public static Zdarzenie ReadZdarzenieFromJSON(string path, bool type)
+        {
+            StreamReader reader = new StreamReader(path);
+            if(type)
+                return JsonConvert.DeserializeObject<Wypozyczenie>(reader.ReadLine());
+            else
+                return JsonConvert.DeserializeObject<Oddanie>(reader.ReadLine());
+        }
     }
 }
