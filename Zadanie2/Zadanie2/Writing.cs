@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,5 +19,48 @@ namespace Zadanie2
             }
         }
 
+        public static void WriteKatalogToJSON(Katalog katalog, string path)
+        {
+            string output = JsonConvert.SerializeObject(katalog);
+            using(TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
+
+        public static void WriteWykazToFile(Wykaz wykaz, string path)
+        {
+            using(TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(wykaz.id + ";" + wykaz.imie + ";" + wykaz.nazwisko);
+            }
+        }
+
+        public static void WriteWykazToJSON(Wykaz wykaz, string path)
+        {
+            string output = JsonConvert.SerializeObject(wykaz);
+            using(TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
+
+        public static void WriteOpisStanuToJSON(OpisStanu opis, string path)
+        {
+            string output = JsonConvert.SerializeObject(opis);
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
+
+        public static void WriteZdarzenieToJSON(Zdarzenie zdarzenie, string path)
+        {
+            string output = JsonConvert.SerializeObject(zdarzenie);
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
     }
 }
