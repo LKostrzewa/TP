@@ -1,8 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Zadanie1
 {
-    public class Katalog //: ISerializable
+    [Serializable]
+    public class Katalog : ISerializable
     {
         public int id { get; private set; }
         public string tytul { get; set; }
@@ -35,7 +38,8 @@ namespace Zadanie1
                     + " ID - " + id;
         }
 
-       /* public void GetObjectData(SerializationInfo info, StreamingContext context)
+        //[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("id", id);
             info.AddValue("tytul", tytul);
@@ -49,6 +53,6 @@ namespace Zadanie1
             tytul = info.GetString("tytul");
             gatunek = info.GetString("gatunek");
             ilosc_str = info.GetInt32("ilosc_str");
-        }*/
+        }
     }
 }

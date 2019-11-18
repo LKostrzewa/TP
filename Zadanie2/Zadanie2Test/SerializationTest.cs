@@ -170,5 +170,22 @@ namespace Zadanie2Test
 
             OpisStanu os = Reading.ReadObjectFromJSON<OpisStanu>("test11.json");
         }
+
+        [TestMethod]
+        public void CustomFormatterTest()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieStalymi());
+
+            FileStream ms = new FileStream("Elko_v2.csv", FileMode.Create);
+            var serializer = new CustomFormatter<OpisStanu>(';', true);
+            serializer.Serialize(ms, dr.GetAllOpisStanu());
+            ms.Close();
+
+            //Nie dziala:
+            /*var serializer2 = new CustomFormatter<OpisStanu>(';', true);
+            List<OpisStanu> result;
+            FileStream fs = new FileStream("Elko_v2.csv", FileMode.Open);
+            result = (List<OpisStanu>)serializer2.Deserialize(fs);*/
+        }
     }
 }
