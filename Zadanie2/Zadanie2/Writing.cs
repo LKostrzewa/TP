@@ -54,12 +54,33 @@ namespace Zadanie2
             }
         }
 
+        public static void WriteOpisStanuToFile(OpisStanu opis, string path)
+        {
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(opis.id + ";" + opis.dataZakupu.ToString() + ";" +
+                                opis.katalog.id + ";" + opis.katalog.tytul + ";" + opis.katalog.gatunek + ";" + opis.katalog.ilosc_str);
+            }
+        }
+
         public static void WriteZdarzenieToJSON(Zdarzenie zdarzenie, string path)
         {
             string output = JsonConvert.SerializeObject(zdarzenie);
             using (TextWriter tw = new StreamWriter(path))
             {
                 tw.WriteLine(output);
+            }
+        }
+
+        public static void WriteZdarzenieToFile(Zdarzenie zdarzenie, string path)
+        {
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(zdarzenie.id + ";" +
+                                zdarzenie.wykaz.id + ";" + zdarzenie.wykaz.imie + ";" + zdarzenie.wykaz.nazwisko +
+                                zdarzenie.opis.id + ";" + zdarzenie.opis.dataZakupu + ";" +
+                                    zdarzenie.opis.katalog.id + ";" + zdarzenie.opis.katalog.tytul + ";" + zdarzenie.opis.katalog.gatunek + ";" + zdarzenie.opis.katalog.ilosc_str
+                             + ";" + zdarzenie.data);
             }
         }
     }
