@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Zadanie1
 {
-    public class OpisStanu
+    public class OpisStanu //: ISerializable
     {
         public int id { get; private set; }
         public Katalog katalog { get; set; }
@@ -28,5 +29,19 @@ namespace Zadanie1
         {
             return "Katalog: (" + katalog + ") zakupiony - " + dataZakupu + " - ID - " + id;
         }
+
+       /* public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("id", id);
+            info.AddValue("katalog", katalog);
+            info.AddValue("dataZakupu", dataZakupu);
+        }
+
+        public OpisStanu(SerializationInfo info)
+        {
+            id = info.GetInt32("id");
+            dataZakupu = info.GetDateTime("dataZakupu");
+            katalog = (Katalog)info.GetValue("katalog", typeof(Katalog));
+        }*/
     }
 }

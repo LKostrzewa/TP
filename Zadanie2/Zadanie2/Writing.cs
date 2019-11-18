@@ -19,38 +19,11 @@ namespace Zadanie2
             }
         }
 
-        public static void WriteKatalogToJSON(Katalog katalog, string path)
-        {
-            string output = JsonConvert.SerializeObject(katalog);
-            using(TextWriter tw = new StreamWriter(path))
-            {
-                tw.WriteLine(output);
-            }
-        }
-
         public static void WriteWykazToFile(Wykaz wykaz, string path)
         {
             using(TextWriter tw = new StreamWriter(path))
             {
                 tw.WriteLine(wykaz.id + ";" + wykaz.imie + ";" + wykaz.nazwisko);
-            }
-        }
-
-        public static void WriteWykazToJSON(Wykaz wykaz, string path)
-        {
-            string output = JsonConvert.SerializeObject(wykaz);
-            using(TextWriter tw = new StreamWriter(path))
-            {
-                tw.WriteLine(output);
-            }
-        }
-
-        public static void WriteOpisStanuToJSON(OpisStanu opis, string path)
-        {
-            string output = JsonConvert.SerializeObject(opis);
-            using (TextWriter tw = new StreamWriter(path))
-            {
-                tw.WriteLine(output);
             }
         }
 
@@ -63,15 +36,6 @@ namespace Zadanie2
             }
         }
 
-        public static void WriteZdarzenieToJSON(Zdarzenie zdarzenie, string path)
-        {
-            string output = JsonConvert.SerializeObject(zdarzenie);
-            using (TextWriter tw = new StreamWriter(path))
-            {
-                tw.WriteLine(output);
-            }
-        }
-
         public static void WriteZdarzenieToFile(Zdarzenie zdarzenie, string path)
         {
             using (TextWriter tw = new StreamWriter(path))
@@ -81,6 +45,27 @@ namespace Zadanie2
                                 zdarzenie.opis.id + ";" + zdarzenie.opis.dataZakupu + ";" +
                                     zdarzenie.opis.katalog.id + ";" + zdarzenie.opis.katalog.tytul + ";" + zdarzenie.opis.katalog.gatunek + ";" + zdarzenie.opis.katalog.ilosc_str
                              + ";" + zdarzenie.data);
+            }
+        }
+
+        public static void WriteObjectToJSON(object obj, string path)
+        {
+            string output = JsonConvert.SerializeObject(obj);
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                tw.WriteLine(output);
+            }
+        }
+
+        public static void WriteCollectionToJSON<T>(IEnumerable<T> col, string path)
+        {
+            using (TextWriter tw = new StreamWriter(path))
+            {
+                foreach (T k in col)
+                {
+                    string output = JsonConvert.SerializeObject(k);
+                    tw.WriteLine(output);
+                }
             }
         }
     }

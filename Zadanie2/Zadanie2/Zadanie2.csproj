@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomFileFormatter.cs" />
+    <Compile Include="JsonFormatter.cs" />
     <Compile Include="Reading.cs" />
     <Compile Include="Writing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,7 +56,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

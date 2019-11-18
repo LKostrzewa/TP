@@ -1,6 +1,8 @@
-﻿namespace Zadanie1
+﻿using System.Runtime.Serialization;
+
+namespace Zadanie1
 {
-    public class Katalog
+    public class Katalog //: ISerializable
     {
         public int id { get; private set; }
         public string tytul { get; set; }
@@ -32,5 +34,21 @@
                     + " ilosc stron - " + ilosc_str
                     + " ID - " + id;
         }
+
+       /* public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("id", id);
+            info.AddValue("tytul", tytul);
+            info.AddValue("gatunek", gatunek);
+            info.AddValue("ilosc_str", ilosc_str);
+        }
+
+        public Katalog(SerializationInfo info, StreamingContext context)
+        {
+            id = info.GetInt32("id");
+            tytul = info.GetString("tytul");
+            gatunek = info.GetString("gatunek");
+            ilosc_str = info.GetInt32("ilosc_str");
+        }*/
     }
 }
