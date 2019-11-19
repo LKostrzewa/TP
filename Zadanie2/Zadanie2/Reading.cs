@@ -44,17 +44,12 @@ namespace Zadanie2
             return new Wykaz(Int32.Parse(parameters[0]), parameters[1], parameters[2]);
         }
 
-        public static OpisStanu ReadOpisStanuFromFile(string path)
+        public static OpisStanu ReadOpisStanuFromFile(string path, Dictionary<String, Katalog> kat)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
-            //return new Wykaz(Int32.Parse(parameters[0]), parameters[1], parameters[2]);
             return new OpisStanu(Int32.Parse(parameters[0]),
-                                 new Katalog(Int32.Parse(parameters[2]), 
-                                             parameters[3], 
-                                             parameters[4], 
-                                             Int32.Parse(parameters[5])),
-                                 DateTime.Parse(parameters[1]));
+                                kat[parameters[1]], DateTime.Parse(parameters[2]));
         }
 
         public static Zdarzenie ReadZdarzenieFromFile(string path, bool type)

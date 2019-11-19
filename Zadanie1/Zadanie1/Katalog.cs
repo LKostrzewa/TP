@@ -5,7 +5,7 @@ using System.Security.Permissions;
 namespace Zadanie1
 {
     [Serializable]
-    public class Katalog : ISerializable
+    public class Katalog// : ISerializable
     {
         public int id { get; private set; }
         public string tytul { get; set; }
@@ -39,7 +39,7 @@ namespace Zadanie1
         }
 
         //[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        /*public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("id", id);
             info.AddValue("tytul", tytul);
@@ -53,6 +53,6 @@ namespace Zadanie1
             tytul = info.GetString("tytul");
             gatunek = info.GetString("gatunek");
             ilosc_str = info.GetInt32("ilosc_str");
-        }
+        }*/
     }
 }

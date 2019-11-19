@@ -6,7 +6,7 @@ using System.Security.Permissions;
 namespace Zadanie1
 {
     [Serializable]
-    public class OpisStanu : ISerializable
+    public class OpisStanu
     {
         public int id { get; private set; }
         public Katalog katalog { get; set; }
@@ -40,11 +40,11 @@ namespace Zadanie1
             info.AddValue("dataZakupu", dataZakupu);
         }
 
-        public OpisStanu(SerializationInfo info)
+        /*public OpisStanu(SerializationInfo info)
         {
             id = info.GetInt32("id");
             dataZakupu = info.GetDateTime("dataZakupu");
             katalog = (Katalog)info.GetValue("katalog", typeof(Katalog));
-        }
+        }*/
     }
 }

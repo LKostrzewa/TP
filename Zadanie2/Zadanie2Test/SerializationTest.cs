@@ -15,13 +15,24 @@ namespace Zadanie2Test
         [TestMethod]
         public void WriteKatalogToFileTest()
         {
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
-            Writing.WriteKatalogToFile(kat, "test.txt");
+            Writing.WriteKatalogToFile(kat, "test.txt", iDGenerator);
 
             Katalog kat2 = Reading.ReadKatalogFromFile("test.txt");
 
             Console.WriteLine(kat2);
             Assert.AreEqual<Katalog>(kat, kat2);
+        }
+
+        [TestMethod]
+        public void WriteKatalogsToFileTest()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieStalymi());
+
+            //tutaj problem o ktorym mowilem ze streamami
+           // Writing.WriteKatalogsToFile(dr.GetAllKatalog(), "test1.txt", new ObjectIDGenerator());
         }
 
         [TestMethod]
@@ -39,8 +50,10 @@ namespace Zadanie2Test
         [TestMethod]
         public void WriteWykazToFileTest()
         {
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
-            Writing.WriteWykazToFile(wykaz, "test3.txt");
+            Writing.WriteWykazToFile(wykaz, "test3.txt", iDGenerator);
 
             Wykaz wyk2 = Reading.ReadWykazFromFile("test3.txt");
 
@@ -78,16 +91,18 @@ namespace Zadanie2Test
         [TestMethod]
         public void WriteOpisStanuToFileTest()
         {
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
-            Writing.WriteOpisStanuToFile(opis, "test6.json");
+            Writing.WriteOpisStanuToFile(opis, "test6.txt", iDGenerator);
 
-            OpisStanu opis2 = Reading.ReadOpisStanuFromFile("test6.json");
+            /*OpisStanu opis2 = Reading.ReadOpisStanuFromFile("test6.txt");
             Katalog kat2 = opis2.katalog;
 
             Console.WriteLine(opis2);
             Assert.AreEqual<OpisStanu>(opis, opis2);
-            Assert.AreEqual<Katalog>(kat, kat2);
+            Assert.AreEqual<Katalog>(kat, kat2);*/
         }
 
         [TestMethod]
@@ -118,9 +133,9 @@ namespace Zadanie2Test
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
             Wypozyczenie wyp = new Wypozyczenie(0, wykaz, opis);
-            Writing.WriteZdarzenieToFile(wyp, "test8.json");
+            Writing.WriteZdarzenieToFile(wyp, "test8.txt");
 
-            Wypozyczenie wyp2 = (Wypozyczenie)Reading.ReadZdarzenieFromFile("test8.json", true);
+            Wypozyczenie wyp2 = (Wypozyczenie)Reading.ReadZdarzenieFromFile("test8.txt", true);
             OpisStanu opis2 = wyp2.opis;
             Wykaz wykaz2 = wyp2.wykaz;
             Katalog kat2 = opis2.katalog;
@@ -140,9 +155,12 @@ namespace Zadanie2Test
             Writing.WriteCollectionToJSON<Katalog>(dr.GetAllKatalog(), "test9.json");
             Writing.WriteCollectionToJSON<OpisStanu>(dr.GetAllOpisStanu(), "test10.json");
 
-            IEnumerable<Katalog> test = Reading.ReadCollectionFromJSON<Katalog>("test9.json");
-            foreach(Katalog kat in test){
-                Console.WriteLine(kat);
+            Katalog[] proper = dr.GetAllKatalog().ToArray();
+            List<Katalog> test = (List<Katalog>)Reading.ReadCollectionFromJSON<Katalog>("test9.json");
+            for(int i = 0; i < test.Count; i++)
+            {
+                Assert.AreEqual<Katalog>(proper[i], test[i]);
+                //Console.WriteLine(test[i]);
             }
         }
 
@@ -181,8 +199,23 @@ namespace Zadanie2Test
             serializer.Serialize(ms, dr.GetAllOpisStanu());
             ms.Close();
 
+            FileStream fs = new FileStream("Test69.csv", FileMode.Create);
+            var serializer2 = new CustomFormatter<Wykaz>(';', true);
+            serializer2.Serialize(fs, dr.GetAllWykaz());
+            fs.Close();
+
+            FileStream fs2 = new FileStream("Elko_v2.csv", FileMode.Open);
+            var serialzier3 = new CustomFormatter<Wykaz>(';', true);
+            List<Wykaz> result = (List<Wykaz>)serialzier3.Deserialize(fs2);
+
+
+            foreach(var el in result){
+                Console.WriteLine(el);
+            }
+            
+
             //Nie dziala:
-            /*var serializer2 = new CustomFormatter<OpisStanu>(';', true);
+           /* var serializer2 = new CustomFormatter<OpisStanu>(';', true);
             List<OpisStanu> result;
             FileStream fs = new FileStream("Elko_v2.csv", FileMode.Open);
             result = (List<OpisStanu>)serializer2.Deserialize(fs);*/
