@@ -132,21 +132,26 @@ namespace Zadanie2Test
             Assert.AreEqual<Katalog>(kat, kat2);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void WriteOpisStanusToFileTest()
         {
             DataRepository dr = new DataRepository(new WypelnianieStalymi());
             Reading read = new Reading();
-            
-            Writing.WriteOpisStanusToFile(dr.GetAllOpisStanu(), "test113.txt", new ObjectIDGenerator());
-            OpisStanu[] proper = dr.GetAllOpisStanu().ToArray();
-            List<OpisStanu> test = (List<OpisStanu>)read.ReadOpisStanusFromFile("test113.txt");
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+
+            Writing.WriteKatalogsToFile(dr.GetAllKatalog(), "test111.txt", iDGenerator);
+            Writing.WriteOpisStanusToFile(dr.GetAllOpisStanu(), "test113.txt", iDGenerator);
+
+            Katalog[] proper = dr.GetAllKatalog().ToArray();
+            OpisStanu[] proper2 = dr.GetAllOpisStanu().ToArray();
+            List<Katalog> test = (List<Katalog>)read.ReadKatalogsFromFile("test111.txt");
+            List<OpisStanu> test2 = (List<OpisStanu>)read.ReadOpisStanusFromFile("test113.txt");
             for (int i = 0; i < test.Count; i++)
             {
-                Assert.AreEqual<OpisStanu>(proper[i], test[i]);
+                Assert.AreEqual<OpisStanu>(proper2[i], test2[i]);
                 //Console.WriteLine(test[i]);
             }
-        }*/
+        }
 
         [TestMethod]
         public void WriteZdarzenieToJSONTest()
@@ -186,7 +191,7 @@ namespace Zadanie2Test
             Katalog kat2 = reading.ReadKatalogFromFile("kat1.txt");
             OpisStanu opis2 = reading.ReadOpisStanuFromFile("opis1.txt");
             Wykaz wykaz2 = reading.ReadWykazFromFile("wykaz1.txt");
-            Wypozyczenie wyp2 = (Wypozyczenie)reading.ReadZdarzenieFromFile("wyp1.txt", true);
+            Zdarzenie wyp2 = reading.ReadZdarzenieFromFile("wyp1.txt");
 
             //Console.WriteLine(wyp2);
             Assert.AreEqual<Zdarzenie>(wyp, wyp2);
@@ -194,6 +199,43 @@ namespace Zadanie2Test
             Assert.AreEqual<Katalog>(kat, kat2);
             Assert.AreEqual<Wykaz>(wykaz, wykaz2);
         }
+
+        [TestMethod]
+        public void WriteZdarzeniesToFileTest()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieStalymi());
+            Reading reading = new Reading();
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+
+
+            Writing.WriteKatalogsToFile(dr.GetAllKatalog(), "listkat1.txt", iDGenerator);
+            Writing.WriteOpisStanusToFile(dr.GetAllOpisStanu(), "listopis1.txt", iDGenerator);
+            Writing.WriteWykazsToFile(dr.GetAllWykaz(), "listwykaz1.txt", iDGenerator);
+            Writing.WriteZdarzeniesToFile(dr.GetAllZdarzenie(), "listzdarz1.txt", iDGenerator);
+
+            Katalog[] katalogsOrginal = dr.GetAllKatalog().ToArray();
+            OpisStanu[] opisStanusOriginal = dr.GetAllOpisStanu().ToArray();
+            Wykaz[] wykazsOriginal = dr.GetAllWykaz().ToArray();
+            Zdarzenie[] zdarzeniesOriginal = dr.GetAllZdarzenie().ToArray();
+
+            List<Katalog> katalogs = (List<Katalog>)reading.ReadKatalogsFromFile("listkat1.txt");
+            List<OpisStanu> opisStanus = (List<OpisStanu>)reading.ReadOpisStanusFromFile("listopis1.txt");
+            List<Wykaz> wykazs = (List<Wykaz>)reading.ReadWykazsFromFile("listwykaz1.txt");
+            List<Zdarzenie> zdarzenies = (List<Zdarzenie>)reading.ReadZdarzeniesFromFile("listzdarz1.txt");
+
+
+            for (int i = 0; i < katalogs.Count; i++)
+            {
+                Assert.AreEqual<Katalog>(katalogs[i], katalogsOrginal[i]);
+            }
+
+            for (int i = 0; i < zdarzenies.Count; i++)
+            {
+                Assert.AreEqual<Zdarzenie>(zdarzenies[i], zdarzeniesOriginal[i]);
+                //Console.WriteLine(zdarzenies[i].GetType() + " - " + zdarzeniesOriginal[i].GetType());
+            }
+        }
+
 
         [TestMethod]
         public void WriteCollectionToJSONTest()

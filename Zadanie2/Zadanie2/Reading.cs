@@ -101,11 +101,11 @@ namespace Zadanie2
             return list;
         }
 
-        public Zdarzenie ReadZdarzenieFromFile(string path, bool type)
+        public Zdarzenie ReadZdarzenieFromFile(string path)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
-            if (type)
+            if (parameters[5] == "Zadanie1.Wypozyczenie")
                 return new Wypozyczenie(Int32.Parse(parameters[0]),
                                         allWykaz[parameters[1]],
                                         allOpis[parameters[2]]);
@@ -113,6 +113,25 @@ namespace Zadanie2
                 return new Oddanie(Int32.Parse(parameters[0]),
                                         allWykaz[parameters[1]],
                                         allOpis[parameters[2]]);
+        }
+
+        public List<Zdarzenie> ReadZdarzeniesFromFile(string path)
+        {
+            List<Zdarzenie> list = new List<Zdarzenie>();
+            int lineCount = File.ReadLines(path).Count();
+            for (int i = 0; i < lineCount; i++)
+            {
+                string[] parameters = File.ReadLines(path).Skip(i).Take(1).First().Split(';');
+                if (parameters[5] == "Zadanie1.Wypozyczenie")
+                    list.Add(new Wypozyczenie(Int32.Parse(parameters[0]),
+                                            allWykaz[parameters[1]],
+                                            allOpis[parameters[2]]));
+                else
+                    list.Add(new Oddanie(Int32.Parse(parameters[0]),
+                                        allWykaz[parameters[1]],
+                                        allOpis[parameters[2]]));
+            }
+            return list;
         }
     }
 }

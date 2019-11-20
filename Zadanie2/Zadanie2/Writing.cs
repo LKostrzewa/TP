@@ -68,7 +68,7 @@ namespace Zadanie2
             using (TextWriter tw = new StreamWriter(path, append))
             {
                 tw.WriteLine(zdarzenie.id + ";" + iDGenerator.GetId(zdarzenie.wykaz, out bool firstTime) + ";" + iDGenerator.GetId(zdarzenie.opis, out firstTime) + ";"
-                               + zdarzenie.data.ToString() + ";" + iDGenerator.GetId(zdarzenie, out firstTime) );
+                               + zdarzenie.data.ToString() + ";" + iDGenerator.GetId(zdarzenie, out firstTime) + ";" + zdarzenie.GetType());
             }
         }
 
