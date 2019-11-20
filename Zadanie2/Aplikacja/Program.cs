@@ -49,24 +49,26 @@ namespace Aplikacja
                         dr.SetDataContext(dc);
                         break;
                     case "3":
-                        Writing.WriteCollectionToJSON<Katalog>(dr.GetAllKatalog(), path + "1.json");
-                        Writing.WriteCollectionToJSON<OpisStanu>(dr.GetAllOpisStanu(), path + "2.json");
-                        Writing.WriteCollectionToJSON<Wykaz>(dr.GetAllWykaz(), path + "3.json");
-                        Writing.WriteCollectionToJSON<Zdarzenie>(dr.GetAllZdarzenie(), path + "4.json");
+                        //Writing.WriteCollectionToJSON<Katalog>(dr.GetAllKatalog(), path + "1.json");
+                        // Writing.WriteCollectionToJSON<OpisStanu>(dr.GetAllOpisStanu(), path + "2.json");
+                        //Writing.WriteCollectionToJSON<Wykaz>(dr.GetAllWykaz(), path + "3.json");
+                        //Writing.WriteCollectionToJSON<Zdarzenie>(dr.GetAllZdarzenie(), path + "4.json");
+                        Writing.WriteObjectToJSON(dr.GetDataContext(), path + ".json");
                         break;
                     case "4":
-                        List<Katalog> katalogsJSON = (List<Katalog>)Reading.ReadCollectionFromJSON<Katalog>(path + "1.json");
-                        List<OpisStanu> opisStanusJSON = (List<OpisStanu>)Reading.ReadCollectionFromJSON<OpisStanu>(path + "2.json");
-                        List<Wykaz> wykazsJSON = (List<Wykaz>)Reading.ReadCollectionFromJSON<Wykaz>(path + "3.json");
-                        List<Zdarzenie> zdarzeniesJSON = (List<Zdarzenie>)Reading.ReadCollectionFromJSON<Zdarzenie>(path + "4.json");
-                        DataContext dcJSON = new DataContext
-                        {
-                            opisyStanu = opisStanusJSON,
-                            wykazy = wykazsJSON,
-                            zdarzenia = new ObservableCollection<Zdarzenie>(zdarzeniesJSON),
-                            katalogi = katalogsJSON.ToDictionary(k => k.id, k => k)
-                        };
-                        dr.SetDataContext(dcJSON);
+                        //List<Katalog> katalogsJSON = (List<Katalog>)Reading.ReadCollectionFromJSON<Katalog>(path + "1.json");
+                        //List<OpisStanu> opisStanusJSON = (List<OpisStanu>)Reading.ReadCollectionFromJSON<OpisStanu>(path + "2.json");
+                        //List<Wykaz> wykazsJSON = (List<Wykaz>)Reading.ReadCollectionFromJSON<Wykaz>(path + "3.json");
+                        //List<Zdarzenie> zdarzeniesJSON = (List<Zdarzenie>)Reading.ReadCollectionFromJSON<Zdarzenie>(path + "4.json");
+                        //DataContext dcJSON = new DataContext
+                        //{
+                        //    opisyStanu = opisStanusJSON,
+                        //    wykazy = wykazsJSON,
+                        //    zdarzenia = new ObservableCollection<Zdarzenie>(zdarzeniesJSON),
+                        //    katalogi = katalogsJSON.ToDictionary(k => k.id, k => k)
+                        //};
+                        //dr.SetDataContext(dcJSON);
+                        dr.SetDataContext(Reading.ReadObjectFromJSON<DataContext>(path + ".json"));
                         break;
                 }
             }

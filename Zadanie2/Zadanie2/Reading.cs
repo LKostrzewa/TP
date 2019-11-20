@@ -17,11 +17,12 @@ namespace Zadanie2
 
 
         public static T ReadObjectFromJSON <T> (string path)
-        {   
-            using(StreamReader reader = new StreamReader(path))
-            {
-                return JsonConvert.DeserializeObject<T>(reader.ReadLine());
-            }
+        {
+            //using(StreamReader reader = new StreamReader(path))
+            //{
+            //    return JsonConvert.DeserializeObject<T>(reader.ReadLine());
+            //}
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
         }
 
         public static IEnumerable<T> ReadCollectionFromJSON <T> (string path)

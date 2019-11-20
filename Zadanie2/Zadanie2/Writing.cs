@@ -83,7 +83,7 @@ namespace Zadanie2
 
         public static void WriteObjectToJSON(object obj, string path)
         {
-            string output = JsonConvert.SerializeObject(obj, new JsonSerializerSettings{ PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            string output = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings{ PreserveReferencesHandling = PreserveReferencesHandling.Objects });
             using (TextWriter tw = new StreamWriter(path))
             {
                 tw.WriteLine(output);
@@ -94,7 +94,7 @@ namespace Zadanie2
         {
             using (TextWriter tw = new StreamWriter(path))
             {
-                string output = JsonConvert.SerializeObject(col, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+                string output = JsonConvert.SerializeObject(col, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects, TypeNameHandling = TypeNameHandling.All });
                 tw.WriteLine(output);
             }
         }

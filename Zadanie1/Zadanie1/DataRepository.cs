@@ -23,6 +23,11 @@ namespace Zadanie1
             dane = data;
         }
 
+        public DataContext GetDataContext()
+        {
+            return dane;
+        }
+
         public void AddWykaz(Wykaz wykaz)
         {
             dane.wykazy.Add(wykaz);
