@@ -3,20 +3,12 @@ using System.Collections.Generic;
 
 namespace Zadanie1
 {
-    public abstract class Zdarzenie : IComparable<Zdarzenie>
+    public class Zdarzenie : IComparable<Zdarzenie>
     {
         public int id { get; private set; }
         public Wykaz wykaz { get; private set; }
         public OpisStanu opis { get; private set; }
         public DateTime data { get; private set; }
-
-        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis)
-        {
-            this.id = id;
-            this.wykaz = wykaz;
-            this.opis = opis;
-            this.data = DateTime.Now;
-        }
 
         public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
         {

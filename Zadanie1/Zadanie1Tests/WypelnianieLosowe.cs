@@ -48,11 +48,11 @@ namespace Zadanie1Tests
                 test.Sort();
                 if(test.Any() && test.Last() is Wypozyczenie)
                 {
-                    context.zdarzenia.Add(new Oddanie(zdarzeniaID[i], test.Last().wykaz, context.opisyStanu[egz]));
+                    context.zdarzenia.Add(new Oddanie(zdarzeniaID[i], test.Last().wykaz, context.opisyStanu[egz], DateTime.Now));
                 }
                 else
                 {
-                    context.zdarzenia.Add(new Wypozyczenie(zdarzeniaID[i], context.wykazy[czyt], context.opisyStanu[egz]));
+                    context.zdarzenia.Add(new Wypozyczenie(zdarzeniaID[i], context.wykazy[czyt], context.opisyStanu[egz], DateTime.Now));
                 }
                 
             }

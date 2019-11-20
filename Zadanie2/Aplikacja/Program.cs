@@ -17,10 +17,10 @@ namespace Aplikacja
             DataRepository dr = new DataRepository(new WypelnianieStalymi());
             Reading reading = new Reading();
             ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+            string type;
             Console.WriteLine("Jaka czynnosc chcesz wykonac\n1) zapis do pliku (txt)\n2) odczyt z pliku (txt)\n3) zapis do pliku (json)\n4) odczyt z pliku (json)\n\nKazdy inny znak zakonczy dzialanie programu");
-            string type = Console.ReadLine();
-            Console.WriteLine(type);
-            while (type == "1" | type == "2" | type == "3" | type == "4")
+            type = Console.ReadLine();
+            do
             {
                 Console.WriteLine("Podaj nazwe pliku : ");
                 string path = Console.ReadLine();
@@ -71,8 +71,7 @@ namespace Aplikacja
                 }
                 Console.WriteLine("Jaka czynnosc chcesz wykonac\n1) zapis do pliku (txt)\n2) odczyt z pliku (txt)\n3) zapis do pliku (json)\n4) odczyt z pliku (json)\n\nKazdy inny znak zakonczy dzialanie programu");
                 type = Console.ReadLine();
-                Console.WriteLine(type);
-            }
+            } while (type == "1" | type == "2" | type == "3" | type == "4");
         }
     }
 }

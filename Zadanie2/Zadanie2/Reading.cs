@@ -112,11 +112,13 @@ namespace Zadanie2
             if (parameters[5] == "Zadanie1.Wypozyczenie")
                 return new Wypozyczenie(Int32.Parse(parameters[0]),
                                         allWykaz[parameters[1]],
-                                        allOpis[parameters[2]]);
+                                        allOpis[parameters[2]],
+                                        DateTime.Parse(parameters[3]));
             else
                 return new Oddanie(Int32.Parse(parameters[0]),
                                         allWykaz[parameters[1]],
-                                        allOpis[parameters[2]]);
+                                        allOpis[parameters[2]],
+                                        DateTime.Parse(parameters[3]));
         }
 
         public IEnumerable<Zdarzenie> ReadZdarzeniesFromFile(string path)
@@ -129,11 +131,13 @@ namespace Zadanie2
                 if (parameters[5] == "Zadanie1.Wypozyczenie")
                     list.Add(new Wypozyczenie(Int32.Parse(parameters[0]),
                                             allWykaz[parameters[1]],
-                                            allOpis[parameters[2]]));
+                                            allOpis[parameters[2]],
+                                            DateTime.Parse(parameters[3])));
                 else
                     list.Add(new Oddanie(Int32.Parse(parameters[0]),
                                         allWykaz[parameters[1]],
-                                        allOpis[parameters[2]]));
+                                        allOpis[parameters[2]],
+                                        DateTime.Parse(parameters[3])));
             }
             return list;
         }
