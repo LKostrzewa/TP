@@ -16,11 +16,12 @@ namespace Zadanie2Test
         public void WriteKatalogToFileTest()
         {
             ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+            Reading reading = new Reading();
 
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
             Writing.WriteKatalogToFile(kat, "test.txt", iDGenerator);
 
-            Katalog kat2 = Reading.ReadKatalogFromFile("test.txt");
+            Katalog kat2 = reading.ReadKatalogFromFile("test.txt");
 
             Console.WriteLine(kat2);
             Assert.AreEqual<Katalog>(kat, kat2);
@@ -51,11 +52,12 @@ namespace Zadanie2Test
         public void WriteWykazToFileTest()
         {
             ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
+            Reading reading = new Reading();
 
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
             Writing.WriteWykazToFile(wykaz, "test3.txt", iDGenerator);
 
-            Wykaz wyk2 = Reading.ReadWykazFromFile("test3.txt");
+            Wykaz wyk2 = reading.ReadWykazFromFile("test3.txt");
 
             Console.WriteLine(wyk2);
             Assert.AreEqual<Wykaz>(wykaz, wyk2);
@@ -95,14 +97,17 @@ namespace Zadanie2Test
 
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
+            Writing.WriteKatalogToFile(kat, "pliczek.txt", iDGenerator);
             Writing.WriteOpisStanuToFile(opis, "test6.txt", iDGenerator);
 
-            /*OpisStanu opis2 = Reading.ReadOpisStanuFromFile("test6.txt");
-            Katalog kat2 = opis2.katalog;
+            Dictionary<string, Katalog> helperKatalog = new Dictionary<string, Katalog>();
+            Reading reading = new Reading();
+            Katalog kat2 = reading.ReadKatalogFromFile("pliczek.txt");
+            OpisStanu opis2 = reading.ReadOpisStanuFromFile("test6.txt");
 
-            Console.WriteLine(opis2);
+            //Console.WriteLine(opis2);
             Assert.AreEqual<OpisStanu>(opis, opis2);
-            Assert.AreEqual<Katalog>(kat, kat2);*/
+            Assert.AreEqual<Katalog>(kat, kat2);
         }
 
         [TestMethod]
@@ -126,26 +131,31 @@ namespace Zadanie2Test
             Assert.AreEqual<Wykaz>(wykaz, wykaz2);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void WriteZdarzenieToFileTest()
         {
+            ObjectIDGenerator iDGenerator = new ObjectIDGenerator();
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
             Wypozyczenie wyp = new Wypozyczenie(0, wykaz, opis);
-            Writing.WriteZdarzenieToFile(wyp, "test8.txt");
+            Writing.WriteKatalogToFile(kat, "kat1.txt", iDGenerator);
+            Writing.WriteOpisStanuToFile(opis, "opis1.txt", iDGenerator);
+            Writing.WriteWykazToFile(wykaz, "wykaz1.txt", iDGenerator);
+            Writing.WriteZdarzenieToFile(wyp, "wyp1.txt", iDGenerator);
 
-            Wypozyczenie wyp2 = (Wypozyczenie)Reading.ReadZdarzenieFromFile("test8.txt", true);
-            OpisStanu opis2 = wyp2.opis;
-            Wykaz wykaz2 = wyp2.wykaz;
-            Katalog kat2 = opis2.katalog;
+            Reading reading = new Reading();
+            Katalog kat2 = reading.ReadKatalogFromFile("kat1.txt");
+            OpisStanu opis2 = reading.ReadOpisStanuFromFile("opis1.txt");
+            Wykaz wykaz2 = reading.ReadWykazFromFile("wykaz1.txt");
+            Wypozyczenie wyp2 = (Wypozyczenie)reading.ReadZdarzenieFromFile("wyp1.txt", true);
 
-            Console.WriteLine(wyp2);
+            //Console.WriteLine(wyp2);
             Assert.AreEqual<Zdarzenie>(wyp, wyp2);
             Assert.AreEqual<OpisStanu>(opis, opis2);
             Assert.AreEqual<Katalog>(kat, kat2);
             Assert.AreEqual<Wykaz>(wykaz, wykaz2);
-        }*/
+        }
 
         [TestMethod]
         public void WriteCollectionToJSONTest()

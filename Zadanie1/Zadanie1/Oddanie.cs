@@ -1,4 +1,5 @@
-﻿namespace Zadanie1
+﻿using System;
+namespace Zadanie1
 {
     public class Oddanie : Zdarzenie
     {

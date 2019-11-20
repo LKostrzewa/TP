@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Zadanie1
 {
+    [Serializable]
     public abstract class Zdarzenie : IComparable<Zdarzenie>
     {
         public int id { get; private set; }

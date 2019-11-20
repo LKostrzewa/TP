@@ -9,8 +9,13 @@ using Zadanie1;
 
 namespace Zadanie2
 {
-    public static class Reading
+    public class Reading
     {
+        private Dictionary<string, Katalog> allKatalog = new Dictionary<string, Katalog>();
+        private Dictionary<string, Wykaz> allWykaz = new Dictionary<string, Wykaz>();
+        private Dictionary<string, OpisStanu> allOpis = new Dictionary<string, OpisStanu>();
+
+
         public static T ReadObjectFromJSON <T> (string path)
         {   
             using(StreamReader reader = new StreamReader(path))
@@ -30,50 +35,43 @@ namespace Zadanie2
             return list;
         }
 
-        public static Katalog ReadKatalogFromFile(string path)
+        public Katalog ReadKatalogFromFile(string path)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
-            return new Katalog(Int32.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3]));
+            allKatalog.Add(parameters[4], new Katalog(int.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3])));
+            //return new Katalog(Int32.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3]));
+            return allKatalog[parameters[4]];
         }
 
-        public static Wykaz ReadWykazFromFile(string path)
+        public Wykaz ReadWykazFromFile(string path)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
-            return new Wykaz(Int32.Parse(parameters[0]), parameters[1], parameters[2]);
+            allWykaz.Add(parameters[3], new Wykaz(Int32.Parse(parameters[0]), parameters[1], parameters[2]));
+            return allWykaz[parameters[3]];
         }
 
-        public static OpisStanu ReadOpisStanuFromFile(string path, Dictionary<String, Katalog> kat)
+        public OpisStanu ReadOpisStanuFromFile(string path)//, Dictionary<String, Katalog> kat)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
-            return new OpisStanu(Int32.Parse(parameters[0]),
-                                kat[parameters[1]], DateTime.Parse(parameters[2]));
+            allOpis.Add(parameters[3], new OpisStanu(Int32.Parse(parameters[0]), allKatalog[parameters[1]], DateTime.Parse(parameters[2])));
+            return allOpis[parameters[3]];
         }
 
-        public static Zdarzenie ReadZdarzenieFromFile(string path, bool type)
+        public Zdarzenie ReadZdarzenieFromFile(string path, bool type)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
             if (type)
                 return new Wypozyczenie(Int32.Parse(parameters[0]),
-                                        new Wykaz(Int32.Parse(parameters[1]), parameters[2], parameters[3]),
-                                        new OpisStanu(Int32.Parse(parameters[4]),
-                                            new Katalog(Int32.Parse(parameters[6]),
-                                                        parameters[7],
-                                                        parameters[8],
-                                                        Int32.Parse(parameters[9])),
-                                            DateTime.Parse(parameters[5])));
+                                        allWykaz[parameters[1]],
+                                        allOpis[parameters[2]]);
             else
                 return new Oddanie(Int32.Parse(parameters[0]),
-                                        new Wykaz(Int32.Parse(parameters[1]), parameters[2], parameters[3]),
-                                        new OpisStanu(Int32.Parse(parameters[4]),
-                                            new Katalog(Int32.Parse(parameters[6]),
-                                                        parameters[7],
-                                                        parameters[8],
-                                                        Int32.Parse(parameters[9])),
-                                            DateTime.Parse(parameters[5])));
+                                        allWykaz[parameters[1]],
+                                        allOpis[parameters[2]]);
         }
     }
 }
