@@ -20,7 +20,7 @@ namespace Aplikacja
             string type;
             Console.WriteLine("Jaka czynnosc chcesz wykonac\n1) zapis do pliku (txt)\n2) odczyt z pliku (txt)\n3) zapis do pliku (json)\n4) odczyt z pliku (json)\n\nKazdy inny znak zakonczy dzialanie programu");
             type = Console.ReadLine();
-            do
+            while (type == "1" | type == "2" | type == "3" | type == "4")
             {
                 Console.WriteLine("Podaj nazwe pliku : ");
                 string path = Console.ReadLine();
@@ -71,7 +71,7 @@ namespace Aplikacja
                 }
                 Console.WriteLine("Jaka czynnosc chcesz wykonac\n1) zapis do pliku (txt)\n2) odczyt z pliku (txt)\n3) zapis do pliku (json)\n4) odczyt z pliku (json)\n\nKazdy inny znak zakonczy dzialanie programu");
                 type = Console.ReadLine();
-            } while (type == "1" | type == "2" | type == "3" | type == "4");
+            } 
         }
     }
 }
