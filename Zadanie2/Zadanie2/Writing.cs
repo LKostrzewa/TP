@@ -12,50 +12,72 @@ namespace Zadanie2
 {
     public static class Writing
     {
-        public static void WriteKatalogToFile(Katalog katalog, string path, ObjectIDGenerator iDGenerator)
+        public static void WriteKatalogToFile(Katalog katalog, string path, ObjectIDGenerator iDGenerator, bool append)
         {
-            using(TextWriter tw = new StreamWriter(path))
+            using(TextWriter tw = new StreamWriter(path, append))
             {
                 tw.WriteLine(katalog.id + ";" + katalog.tytul + ";" + katalog.gatunek + ";" + katalog.ilosc_str + ";" + iDGenerator.GetId(katalog, out bool firstTime));
             }
-            //tw.Close();
         }
 
         public static void WriteKatalogsToFile(IEnumerable<Katalog> katalogs, string path, ObjectIDGenerator iDGenerator)
         {
-            FileStream fs = new FileStream(path, FileMode.Append);
-            //fs.
-            using (TextWriter tw = new StreamWriter(path))
+            WriteKatalogToFile(katalogs.First(), path, iDGenerator, false);
+            foreach (Katalog kat in katalogs.Skip(1))
             {
-                foreach (Katalog kat in katalogs)
-                {
-                    //WriteKatalogToFile(kat, iDGenerator, tw);
-                }
+                WriteKatalogToFile(kat, path, iDGenerator, true);
             }
         }
 
-        public static void WriteWykazToFile(Wykaz wykaz, string path, ObjectIDGenerator iDGenerator)
+        public static void WriteWykazToFile(Wykaz wykaz, string path, ObjectIDGenerator iDGenerator, bool append)
         {
-            using(TextWriter tw = new StreamWriter(path))
+            using(TextWriter tw = new StreamWriter(path, append))
             {
                 tw.WriteLine(wykaz.id + ";" + wykaz.imie + ";" + wykaz.nazwisko + ";" + iDGenerator.GetId(wykaz, out bool firstTime));
             }
         }
 
-        public static void WriteOpisStanuToFile(OpisStanu opis, string path, ObjectIDGenerator iDGenerator)
+        public static void WriteWykazsToFile(IEnumerable<Wykaz> wykazs, string path, ObjectIDGenerator iDGenerator)
         {
-            using (TextWriter tw = new StreamWriter(path))
+            WriteWykazToFile(wykazs.First(), path, iDGenerator, false);
+            foreach (Wykaz w in wykazs.Skip(1))
+            {
+                WriteWykazToFile(w, path, iDGenerator, true);
+            }
+        }
+
+        public static void WriteOpisStanuToFile(OpisStanu opis, string path, ObjectIDGenerator iDGenerator, bool append)
+        {
+            using (TextWriter tw = new StreamWriter(path, append))
             {
                 tw.WriteLine(opis.id + ";" + iDGenerator.GetId(opis.katalog, out bool firstTime) + ";" + opis.dataZakupu.ToString() + ";" + iDGenerator.GetId(opis, out firstTime));
             }
         }
 
-        public static void WriteZdarzenieToFile(Zdarzenie zdarzenie, string path, ObjectIDGenerator iDGenerator)
+        public static void WriteOpisStanusToFile(IEnumerable<OpisStanu> opiss, string path, ObjectIDGenerator iDGenerator)
         {
-            using (TextWriter tw = new StreamWriter(path))
+            WriteOpisStanuToFile(opiss.First(), path, iDGenerator, false);
+            foreach (OpisStanu o in opiss.Skip(1))
+            {
+                WriteOpisStanuToFile(o, path, iDGenerator, true);
+            }
+        }
+
+        public static void WriteZdarzenieToFile(Zdarzenie zdarzenie, string path, ObjectIDGenerator iDGenerator, bool append)
+        {
+            using (TextWriter tw = new StreamWriter(path, append))
             {
                 tw.WriteLine(zdarzenie.id + ";" + iDGenerator.GetId(zdarzenie.wykaz, out bool firstTime) + ";" + iDGenerator.GetId(zdarzenie.opis, out firstTime) + ";"
                                + zdarzenie.data.ToString() + ";" + iDGenerator.GetId(zdarzenie, out firstTime) );
+            }
+        }
+
+        public static void WriteZdarzeniesToFile(IEnumerable<Zdarzenie> zdarzenies, string path, ObjectIDGenerator iDGenerator)
+        {
+            WriteZdarzenieToFile(zdarzenies.First(), path, iDGenerator, false);
+            foreach (Zdarzenie z in zdarzenies.Skip(1))
+            {
+                WriteZdarzenieToFile(z, path, iDGenerator, true);
             }
         }
 

@@ -2,7 +2,6 @@
 
 namespace Zadanie1
 {
-    [Serializable]
     public class Wykaz
     {
         public int id { get; private set; }

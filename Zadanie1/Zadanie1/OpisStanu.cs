@@ -5,7 +5,6 @@ using System.Security.Permissions;
 
 namespace Zadanie1
 {
-    [Serializable]
     public class OpisStanu
     {
         public int id { get; private set; }
@@ -31,20 +30,5 @@ namespace Zadanie1
         {
             return "Katalog: (" + katalog + ") zakupiony - " + dataZakupu + " - ID - " + id;
         }
-
-        //[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("id", id);
-            info.AddValue("katalog", katalog);
-            info.AddValue("dataZakupu", dataZakupu);
-        }
-
-        /*public OpisStanu(SerializationInfo info)
-        {
-            id = info.GetInt32("id");
-            dataZakupu = info.GetDateTime("dataZakupu");
-            katalog = (Katalog)info.GetValue("katalog", typeof(Katalog));
-        }*/
     }
 }

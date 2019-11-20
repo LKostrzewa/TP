@@ -37,11 +37,26 @@ namespace Zadanie2
 
         public Katalog ReadKatalogFromFile(string path)
         {
-            StreamReader reader = new StreamReader(path);
-            string[] parameters = reader.ReadLine().Split(';');
-            allKatalog.Add(parameters[4], new Katalog(int.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3])));
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string[] parameters = reader.ReadLine().Split(';');
+                allKatalog.Add(parameters[4], new Katalog(int.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3])));
+                return allKatalog[parameters[4]];
+            }
             //return new Katalog(Int32.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3]));
-            return allKatalog[parameters[4]];
+        }
+
+        public IEnumerable<Katalog> ReadKatalogsFromFile(string path)
+        {
+            List<Katalog> list = new List<Katalog>();
+            int lineCount = File.ReadLines(path).Count();
+            for (int i = 0; i < lineCount; i++)
+            {
+                string[] parameters = File.ReadLines(path).Skip(i).Take(1).First().Split(';');
+                allKatalog.Add(parameters[4], new Katalog(int.Parse(parameters[0]), parameters[1], parameters[2], Int32.Parse(parameters[3])));
+                list.Add(allKatalog[parameters[4]]);
+            }
+            return list;
         }
 
         public Wykaz ReadWykazFromFile(string path)
@@ -52,12 +67,38 @@ namespace Zadanie2
             return allWykaz[parameters[3]];
         }
 
-        public OpisStanu ReadOpisStanuFromFile(string path)//, Dictionary<String, Katalog> kat)
+        public IEnumerable<Wykaz> ReadWykazsFromFile(string path)
+        {
+            List<Wykaz> list = new List<Wykaz>();
+            int lineCount = File.ReadLines(path).Count();
+            for (int i = 0; i < lineCount; i++)
+            {
+                string[] parameters = File.ReadLines(path).Skip(i).Take(1).First().Split(';');
+                allWykaz.Add(parameters[3], new Wykaz(Int32.Parse(parameters[0]), parameters[1], parameters[2]));
+                list.Add(allWykaz[parameters[3]]);
+            }
+            return list;
+        }
+
+        public OpisStanu ReadOpisStanuFromFile(string path)
         {
             StreamReader reader = new StreamReader(path);
             string[] parameters = reader.ReadLine().Split(';');
             allOpis.Add(parameters[3], new OpisStanu(Int32.Parse(parameters[0]), allKatalog[parameters[1]], DateTime.Parse(parameters[2])));
             return allOpis[parameters[3]];
+        }
+
+        public IEnumerable<OpisStanu> ReadOpisStanusFromFile(string path)
+        {
+            List<OpisStanu> list = new List<OpisStanu>();
+            int lineCount = File.ReadLines(path).Count();
+            for (int i = 0; i < lineCount; i++)
+            {
+                string[] parameters = File.ReadLines(path).Skip(i).Take(1).First().Split(';');
+                allOpis.Add(parameters[3], new OpisStanu(Int32.Parse(parameters[0]), allKatalog[parameters[1]], DateTime.Parse(parameters[2])));
+                list.Add(allOpis[parameters[3]]);
+            }
+            return list;
         }
 
         public Zdarzenie ReadZdarzenieFromFile(string path, bool type)

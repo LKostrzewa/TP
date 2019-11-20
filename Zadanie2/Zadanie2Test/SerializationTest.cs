@@ -19,7 +19,7 @@ namespace Zadanie2Test
             Reading reading = new Reading();
 
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
-            Writing.WriteKatalogToFile(kat, "test.txt", iDGenerator);
+            Writing.WriteKatalogToFile(kat, "test.txt", iDGenerator, false);
 
             Katalog kat2 = reading.ReadKatalogFromFile("test.txt");
 
@@ -31,9 +31,16 @@ namespace Zadanie2Test
         public void WriteKatalogsToFileTest()
         {
             DataRepository dr = new DataRepository(new WypelnianieStalymi());
-
-            //tutaj problem o ktorym mowilem ze streamami
-           // Writing.WriteKatalogsToFile(dr.GetAllKatalog(), "test1.txt", new ObjectIDGenerator());
+            Reading read = new Reading();
+            
+            Writing.WriteKatalogsToFile(dr.GetAllKatalog(), "test111.txt", new ObjectIDGenerator());
+            Katalog[] proper = dr.GetAllKatalog().ToArray();
+            List<Katalog> test = (List<Katalog>)read.ReadKatalogsFromFile("test111.txt");
+            for (int i = 0; i < test.Count; i++)
+            {
+                Assert.AreEqual<Katalog>(proper[i], test[i]);
+                //Console.WriteLine(test[i]);
+            }
         }
 
         [TestMethod]
@@ -55,12 +62,28 @@ namespace Zadanie2Test
             Reading reading = new Reading();
 
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
-            Writing.WriteWykazToFile(wykaz, "test3.txt", iDGenerator);
+            Writing.WriteWykazToFile(wykaz, "test3.txt", iDGenerator, false);
 
             Wykaz wyk2 = reading.ReadWykazFromFile("test3.txt");
 
             Console.WriteLine(wyk2);
             Assert.AreEqual<Wykaz>(wykaz, wyk2);
+        }
+
+        [TestMethod]
+        public void WriteWykazsToFileTest()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieStalymi());
+            Reading read = new Reading();
+
+            Writing.WriteWykazsToFile(dr.GetAllWykaz(), "test112.txt", new ObjectIDGenerator());
+            Wykaz[] proper = dr.GetAllWykaz().ToArray();
+            List<Wykaz> test = (List<Wykaz>)read.ReadWykazsFromFile("test112.txt");
+            for (int i = 0; i < test.Count; i++)
+            {
+                Assert.AreEqual<Wykaz>(proper[i], test[i]);
+                //Console.WriteLine(test[i]);
+            }
         }
 
         [TestMethod]
@@ -97,10 +120,9 @@ namespace Zadanie2Test
 
             Katalog kat = new Katalog(0, "Programowanie c#", "Podrecznik", 520);
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
-            Writing.WriteKatalogToFile(kat, "pliczek.txt", iDGenerator);
-            Writing.WriteOpisStanuToFile(opis, "test6.txt", iDGenerator);
+            Writing.WriteKatalogToFile(kat, "pliczek.txt", iDGenerator, false);
+            Writing.WriteOpisStanuToFile(opis, "test6.txt", iDGenerator, false);
 
-            Dictionary<string, Katalog> helperKatalog = new Dictionary<string, Katalog>();
             Reading reading = new Reading();
             Katalog kat2 = reading.ReadKatalogFromFile("pliczek.txt");
             OpisStanu opis2 = reading.ReadOpisStanuFromFile("test6.txt");
@@ -109,6 +131,22 @@ namespace Zadanie2Test
             Assert.AreEqual<OpisStanu>(opis, opis2);
             Assert.AreEqual<Katalog>(kat, kat2);
         }
+
+        /*[TestMethod]
+        public void WriteOpisStanusToFileTest()
+        {
+            DataRepository dr = new DataRepository(new WypelnianieStalymi());
+            Reading read = new Reading();
+            
+            Writing.WriteOpisStanusToFile(dr.GetAllOpisStanu(), "test113.txt", new ObjectIDGenerator());
+            OpisStanu[] proper = dr.GetAllOpisStanu().ToArray();
+            List<OpisStanu> test = (List<OpisStanu>)read.ReadOpisStanusFromFile("test113.txt");
+            for (int i = 0; i < test.Count; i++)
+            {
+                Assert.AreEqual<OpisStanu>(proper[i], test[i]);
+                //Console.WriteLine(test[i]);
+            }
+        }*/
 
         [TestMethod]
         public void WriteZdarzenieToJSONTest()
@@ -139,10 +177,10 @@ namespace Zadanie2Test
             OpisStanu opis = new OpisStanu(1, kat, DateTime.Now);
             Wykaz wykaz = new Wykaz(0, "Adam", "Małysz");
             Wypozyczenie wyp = new Wypozyczenie(0, wykaz, opis);
-            Writing.WriteKatalogToFile(kat, "kat1.txt", iDGenerator);
-            Writing.WriteOpisStanuToFile(opis, "opis1.txt", iDGenerator);
-            Writing.WriteWykazToFile(wykaz, "wykaz1.txt", iDGenerator);
-            Writing.WriteZdarzenieToFile(wyp, "wyp1.txt", iDGenerator);
+            Writing.WriteKatalogToFile(kat, "kat1.txt", iDGenerator, false);
+            Writing.WriteOpisStanuToFile(opis, "opis1.txt", iDGenerator,false);
+            Writing.WriteWykazToFile(wykaz, "wykaz1.txt", iDGenerator, false);
+            Writing.WriteZdarzenieToFile(wyp, "wyp1.txt", iDGenerator, false);
 
             Reading reading = new Reading();
             Katalog kat2 = reading.ReadKatalogFromFile("kat1.txt");
@@ -199,7 +237,7 @@ namespace Zadanie2Test
             OpisStanu os = Reading.ReadObjectFromJSON<OpisStanu>("test11.json");
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void CustomFormatterTest()
         {
             DataRepository dr = new DataRepository(new WypelnianieStalymi());
@@ -222,13 +260,6 @@ namespace Zadanie2Test
             foreach(var el in result){
                 Console.WriteLine(el);
             }
-            
-
-            //Nie dziala:
-           /* var serializer2 = new CustomFormatter<OpisStanu>(';', true);
-            List<OpisStanu> result;
-            FileStream fs = new FileStream("Elko_v2.csv", FileMode.Open);
-            result = (List<OpisStanu>)serializer2.Deserialize(fs);*/
-        }
+        }*/
     }
 }
