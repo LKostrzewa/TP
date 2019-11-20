@@ -254,22 +254,6 @@ namespace Zadanie2Test
             }
         }
 
-        /*[TestMethod]
-        public void OwnSerializationJSONTest()
-        {
-            IFormatter jf = new JsonFormatter();
-
-
-            Katalog kat = new Katalog(0, "Solaris", "sci-fi", 420);
-            jf.Serialize(new FileStream("test10.json", FileMode.Create), kat);
-            OpisStanu opis = new OpisStanu(0, kat, DateTime.Now);
-            jf.Serialize(new FileStream("test11.json", FileMode.Create), opis);
-
-            object ob =  jf.Deserialize(new FileStream("test10.json", FileMode.Open));
-            //OpisStanu os = (OpisStanu) jf.Deserialize(new FileStream("test11.json", FileMode.Open));
-            //OpisStanu lol = (OpisStanu)os;
-        }*/
-
         [TestMethod]
         public void ObjectToJSONTest()
         {
@@ -278,30 +262,5 @@ namespace Zadanie2Test
 
             OpisStanu os = Reading.ReadObjectFromJSON<OpisStanu>("test11.json");
         }
-
-        /*[TestMethod]
-        public void CustomFormatterTest()
-        {
-            DataRepository dr = new DataRepository(new WypelnianieStalymi());
-
-            FileStream ms = new FileStream("Elko_v2.csv", FileMode.Create);
-            var serializer = new CustomFormatter<OpisStanu>(';', true);
-            serializer.Serialize(ms, dr.GetAllOpisStanu());
-            ms.Close();
-
-            FileStream fs = new FileStream("Test69.csv", FileMode.Create);
-            var serializer2 = new CustomFormatter<Wykaz>(';', true);
-            serializer2.Serialize(fs, dr.GetAllWykaz());
-            fs.Close();
-
-            FileStream fs2 = new FileStream("Elko_v2.csv", FileMode.Open);
-            var serialzier3 = new CustomFormatter<Wykaz>(';', true);
-            List<Wykaz> result = (List<Wykaz>)serialzier3.Deserialize(fs2);
-
-
-            foreach(var el in result){
-                Console.WriteLine(el);
-            }
-        }*/
     }
 }

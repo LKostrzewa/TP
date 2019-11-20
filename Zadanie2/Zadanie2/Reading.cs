@@ -115,7 +115,7 @@ namespace Zadanie2
                                         allOpis[parameters[2]]);
         }
 
-        public List<Zdarzenie> ReadZdarzeniesFromFile(string path)
+        public IEnumerable<Zdarzenie> ReadZdarzeniesFromFile(string path)
         {
             List<Zdarzenie> list = new List<Zdarzenie>();
             int lineCount = File.ReadLines(path).Count();

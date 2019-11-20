@@ -18,6 +18,11 @@ namespace Zadanie1
             dane.zdarzenia.CollectionChanged += ZdarzenieChanged;
         }
 
+        public void SetDataContext(DataContext data)
+        {
+            dane = data;
+        }
+
         public void AddWykaz(Wykaz wykaz)
         {
             dane.wykazy.Add(wykaz);
