@@ -26,12 +26,15 @@ namespace Zadanie2
 
         public static IEnumerable<T> ReadCollectionFromJSON <T> (string path)
         {
+            //List<T> list = new List<T>();
+            //int lineCount = File.ReadLines(path).Count();
+            //for(int i = 0; i < lineCount; i++)
+            //{ 
+            //    list.Add(JsonConvert.DeserializeObject<T>(File.ReadLines(path).Skip(i).Take(1).First()));
+            //}
             List<T> list = new List<T>();
-            int lineCount = File.ReadLines(path).Count();
-            for(int i = 0; i < lineCount; i++)
-            { 
-                list.Add(JsonConvert.DeserializeObject<T>(File.ReadLines(path).Skip(i).Take(1).First()));
-            }
+            string jsonToDeserilize = File.ReadAllText(path);
+            list = JsonConvert.DeserializeObject<List<T>>(jsonToDeserilize);
             return list;
         }
 

@@ -94,11 +94,8 @@ namespace Zadanie2
         {
             using (TextWriter tw = new StreamWriter(path))
             {
-                foreach (T k in col)
-                {
-                    string output = JsonConvert.SerializeObject(k, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-                    tw.WriteLine(output);
-                }
+                string output = JsonConvert.SerializeObject(col, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+                tw.WriteLine(output);
             }
         }
     }
