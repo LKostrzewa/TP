@@ -8,6 +8,9 @@ namespace Zadanie2
 {
     public class Class1
     {
+        private float num;
+        private DateTime date;
+        private string name;
         private Class2 obj;
     }
 }
