@@ -7,8 +7,15 @@ namespace Zadanie2Test
     public class SerializationTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void JsonFormatterTest()
         {
+
+        }
+
+        [TestMethod]
+        public void CustomFormatterTest()
+        {
+
         }
     }
 }

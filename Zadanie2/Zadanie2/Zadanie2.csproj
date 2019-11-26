@@ -47,8 +47,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Class3.cs" />
-    <Compile Include="JSONFormatter.cs" />
-    <Compile Include="OurFormatter.cs" />
+    <Compile Include="JsonFormatter.cs" />
+    <Compile Include="CustomFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

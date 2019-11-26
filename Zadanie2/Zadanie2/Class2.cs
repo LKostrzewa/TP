@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie2
 {
+    [Serializable]
     public class Class2
     {
         private float num;
