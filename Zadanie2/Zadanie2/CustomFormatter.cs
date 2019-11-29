@@ -10,88 +10,140 @@ using System.Threading.Tasks;
 
 namespace Zadanie2
 {
-    public class CustomFormatter <T> : IFormatter
+    public class CustomFormatter : Formatter
     {
-        private readonly char _delimiter;
-        private readonly bool _firstLineIsHeaders;
-        public CustomFormatter(char delimiter, bool firstLineIsHeaders = false)
+        public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override StreamingContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override object Deserialize(Stream serializationStream)
         {
-            _delimiter = delimiter;
-            _firstLineIsHeaders = firstLineIsHeaders;
+            throw new NotImplementedException();
         }
 
-        public ISurrogateSelector SurrogateSelector { get; set; }
-        public SerializationBinder Binder { get; set; }
-        public StreamingContext Context { get; set; }
-
-        public object Deserialize(Stream serializationStream)
+        public override bool Equals(object obj)
         {
-            IList list;
-            using (var sr = new StreamReader(serializationStream))
-            {
-                // Optional if reading headers! Example: UserId, FirstName, Title
-                if (_firstLineIsHeaders)
-                {
-                    string[] headers = GetHeader(sr);
-                }
-                var listType = typeof(List<>);
-                var constructedListType = listType.MakeGenericType(typeof(T));
-                list = (IList)Activator.CreateInstance(constructedListType);
-                while (sr.Peek() >= 0)
-                {
-                    var line = sr.ReadLine();
-                    var fieldData = line.Split(_delimiter);
-                    var obj = FormatterServices.GetUninitializedObject(typeof(T));
-                    var members = FormatterServices.GetSerializableMembers(obj.GetType(), Context);
-                    object[] data = new object[members.Length];
-                    for (int i = 0; i < members.Length; ++i)
-                    {
-                        FieldInfo fi = ((FieldInfo)members[i]);
-                        data[i] = Convert.ChangeType(fieldData.ElementAt(i), fi.FieldType);
-                    }
-                    list.Add((T)FormatterServices.PopulateObjectMembers(obj, members, data));
-                }
-            }
-            return list;
+            return base.Equals(obj);
         }
 
-        public void Serialize(Stream serializationStream, object graph)
+        public override int GetHashCode()
         {
-            if (!(graph is IEnumerable))
-                throw new Exception("This serialize will only work on IEnumerable.");
-            PropertyInfo[] headings = typeof(T).GetProperties();
-            IEnumerable<string> headerNames = headings.Select(e => e.Name.ToString());
-            foreach (string s in headerNames)
-            {
-                Console.WriteLine(s);
-            }
-            string headers = String.Join(new String(_delimiter, 1), headerNames);
-            Console.WriteLine(headers);
-            using (StreamWriter stream = new StreamWriter(serializationStream))
-            {
-                if (_firstLineIsHeaders)
-                {
-                    stream.WriteLine(headers);
-                    stream.Flush();
-                }
-                MemberInfo[] members = FormatterServices.GetSerializableMembers(typeof(T), Context);
-                foreach (object item in (IEnumerable)graph)
-                {
-                    object[] objs = FormatterServices.GetObjectData(item, members);
-                    IEnumerable<string> valueList = objs.Select(e => e.ToString());
-                    string values = String.Join(new String(_delimiter, 1), valueList);
-                    stream.WriteLine(values);
-                }
-                stream.Flush();
-            }
+            return base.GetHashCode();
         }
-        private string[] GetHeader(StreamReader sr)
+
+        public override void Serialize(Stream serializationStream, object graph)
         {
-            string line = sr.ReadLine();
-            return line.Split(_delimiter)
-                .ToList()
-                .Select(e => e.Trim())
-                .ToArray();
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        protected override object GetNext(out long objID)
+        {
+            return base.GetNext(out objID);
+        }
+
+        protected override long Schedule(object obj)
+        {
+            return base.Schedule(obj);
+        }
+
+        protected override void WriteArray(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteBoolean(bool val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteByte(byte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteChar(char val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDateTime(DateTime val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDecimal(decimal val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteDouble(double val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt16(short val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt32(int val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteInt64(long val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteMember(string memberName, object data)
+        {
+            base.WriteMember(memberName, data);
+        }
+
+        protected override void WriteObjectRef(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSByte(sbyte val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteSingle(float val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteTimeSpan(TimeSpan val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt16(ushort val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt32(uint val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteUInt64(ulong val, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void WriteValueType(object obj, string name, Type memberType)
+        {
+            throw new NotImplementedException();
         }
     }
 }
