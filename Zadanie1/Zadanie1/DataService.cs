@@ -129,7 +129,7 @@ namespace Zadanie1
             {
                 throw new InvalidOperationException("Ta ksiazka jest aktualnie niedostepna");
             }
-            repository.AddZdarzenie(new Wypozyczenie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
+            repository.AddZdarzenie(new Wypozyczenie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO), DateTime.Now));
         }
 
         public void OddajKsiazke(int idW, int idO)
@@ -143,7 +143,7 @@ namespace Zadanie1
             Zdarzenie z = list.Last();
             if (z is Wypozyczenie)
             {
-                repository.AddZdarzenie(new Oddanie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO)));
+                repository.AddZdarzenie(new Oddanie(id, repository.GetWykaz(idW), repository.GetOpisStanu(idO), DateTime.Now));
             }
             else throw new InvalidOperationException("Ta ksiazka nie jest aktualnie wypozyczona");
         }

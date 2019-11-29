@@ -10,21 +10,13 @@ namespace Zadanie1
         public OpisStanu opis { get; private set; }
         public DateTime data { get; private set; }
 
-        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis)
-        {
-            this.id = id;
-            this.wykaz = wykaz;
-            this.opis = opis;
-            this.data = DateTime.Now;
-        }
-
-        /*public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
+        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
         {
             this.id = id;
             this.wykaz = wykaz;
             this.opis = opis;
             this.data = date;
-        }*/
+        }
 
         public override bool Equals(object obj)
         {
