@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Zadanie1
 {
-    public abstract class Zdarzenie : IComparable<Zdarzenie>
+    public class Zdarzenie : IComparable<Zdarzenie>
     {
         public int id { get; private set; }
         public Wykaz wykaz { get; private set; }
@@ -18,13 +18,13 @@ namespace Zadanie1
             this.data = DateTime.Now;
         }
 
-        public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
+        /*public Zdarzenie(int id, Wykaz wykaz, OpisStanu opis, DateTime date)
         {
             this.id = id;
             this.wykaz = wykaz;
             this.opis = opis;
             this.data = date;
-        }
+        }*/
 
         public override bool Equals(object obj)
         {
