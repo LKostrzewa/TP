@@ -13,7 +13,18 @@ namespace Zadanie2
         public float num { get; set; }
         public DateTime date { get; set; }
         public string name { get; set; }
-        private Class3 obj { get; set; }
+        public Class3 obj { get; set; }
+
+        public Class2()
+        {
+        }
+
+        public Class2(float num, DateTime date, string name)
+        {
+            this.num = num;
+            this.date = date;
+            this.name = name;
+        }
 
         public override bool Equals(object obj)
         {
@@ -37,7 +48,18 @@ namespace Zadanie2
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotImplementedException();
+            info.AddValue(nameof(num), num, typeof(float));
+            info.AddValue(nameof(date), date, typeof(DateTime));
+            info.AddValue(nameof(name), name, typeof(string));
+            info.AddValue(nameof(obj), obj, typeof(Class3));
+        }
+
+        public Class2(SerializationInfo info, StreamingContext context)
+        {
+            num = info.GetSingle("num");
+            date = info.GetDateTime("date");
+            name = info.GetString("name");
+            obj = info.GetValue("obj", typeof(Class3)) as Class3;
         }
     }
 }

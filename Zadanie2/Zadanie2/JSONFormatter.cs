@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie2
 {
-    public class JsonFormatter : IFormatter
+    public class JsonFormatter
     {
         private readonly JsonSerializer _serializer;
 
@@ -23,20 +23,19 @@ namespace Zadanie2
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
-                ContractResolver = new DefaultContractResolver
-                {
-                    IgnoreSerializableAttribute = false,
-                    SerializeCompilerGeneratedMembers = true
-                },
-                PreserveReferencesHandling = PreserveReferencesHandling.All
+                TypeNameHandling = TypeNameHandling.Objects,
+                MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
             _serializer = JsonSerializer.Create(settings);
+            _serializer.Formatting = Formatting.Indented;
         }
 
-        public object Deserialize(Stream serializationStream)
+        public T Deserialize<T>(Stream serializationStream)
         {
             JsonTextReader reader = new JsonTextReader(new StreamReader(serializationStream));
-            return _serializer.Deserialize(reader);
+            return _serializer.Deserialize<T>(reader);
         }
 
         public void Serialize(Stream serializationStream, object graph)
