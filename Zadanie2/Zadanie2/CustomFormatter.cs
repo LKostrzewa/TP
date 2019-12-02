@@ -14,21 +14,20 @@ namespace Zadanie2
     {
         public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override StreamingContext Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override StreamingContext Context { get ; set ;}
+        public ObjectIDGenerator iDGenerator;
+
+        private string tmp = "";
+
+        public CustomFormatter()
+        {
+            Context = new StreamingContext(StreamingContextStates.File);
+            iDGenerator = new ObjectIDGenerator();
+        }
 
         public override object Deserialize(Stream serializationStream)
         {
             throw new NotImplementedException();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
 
         public override void Serialize(Stream serializationStream, object graph)
@@ -36,19 +35,31 @@ namespace Zadanie2
             throw new NotImplementedException();
         }
 
-        public override string ToString()
+        protected override void WriteDateTime(DateTime val, string name)
         {
-            return base.ToString();
+            tmp += name + ":" + val.ToString() + ";";
         }
 
-        protected override object GetNext(out long objID)
+        protected override void WriteSingle(float val, string name)
         {
-            return base.GetNext(out objID);
+            tmp += name + ":" + val.ToString() + ";";
         }
 
-        protected override long Schedule(object obj)
+        private void WriteString(string val, string name)
         {
-            return base.Schedule(obj);
+            tmp += name + ":" + val +";";
+        }
+
+        protected override void WriteObjectRef(object obj, string name, Type memberType)
+        {
+            if(obj is string)
+            {
+                WriteString((string)obj, name);
+            }
+            else
+            {
+                tmp += name + ":" + iDGenerator.GetId(obj, out bool FirstTime) + "\n";
+            }
         }
 
         protected override void WriteArray(object obj, string name, Type memberType)
@@ -67,11 +78,6 @@ namespace Zadanie2
         }
 
         protected override void WriteChar(char val, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void WriteDateTime(DateTime val, string name)
         {
             throw new NotImplementedException();
         }
@@ -106,17 +112,7 @@ namespace Zadanie2
             base.WriteMember(memberName, data);
         }
 
-        protected override void WriteObjectRef(object obj, string name, Type memberType)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void WriteSByte(sbyte val, string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void WriteSingle(float val, string name)
         {
             throw new NotImplementedException();
         }
