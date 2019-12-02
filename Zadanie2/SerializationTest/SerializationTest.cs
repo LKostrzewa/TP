@@ -45,7 +45,12 @@ namespace Zadanie2Test
             class3.obj = class1;
 
             CustomFormatter cs = new CustomFormatter();
-            cs.Serialize(new FileStream("plik1.txt", FileMode.Create), class1);
+            FileStream a = new FileStream("plik1.txt", FileMode.Create);
+            cs.Serialize(a, class1);
+            a.Flush();
+            a.Close();
+            Class1 class1prim = cs.Deserialize(new FileStream("plik1.txt", FileMode.Open)) as Class1;
+            //Console.Write(class1prim);
         }
     }
 }

@@ -28,7 +28,63 @@ namespace Zadanie2
 
         public override object Deserialize(Stream serializationStream)
         {
-            throw new NotImplementedException();
+            List<object> deserializedObjects = new List<object>();
+            List<Type> types = new List<Type>();
+            //Dictionary<String,String> data = new Dictionary<String, String>();
+            List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
+
+            List<string> dataFromFile = new StreamReader(serializationStream).ReadToEnd().Split('\n').ToList();
+
+            for(int i=0; i<dataFromFile.Count(); i++)
+            {
+                data.Add(new Dictionary<string, string>());
+                List<string> entity = dataFromFile[i].Split(';').ToList();
+                foreach (String e in entity)
+                {
+                    if (e.Length != 0)
+                    {
+                        List<String> pom = e.Split('|').ToList();
+                        data[i].Add(pom[0], pom[1]);
+                    }
+
+                }
+
+
+                Dictionary<string, string> tmpDictionary = data[i];
+                SerializationInfo info = new SerializationInfo(Type.GetType(tmpDictionary["objectType"]), new FormatterConverter());
+                foreach(string s in tmpDictionary.Keys)
+                {
+                    if(s != "objectType")
+                    {
+                        info.AddValue(s, tmpDictionary[s]);
+                    }
+                }
+                deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
+                types.Add(deserializedObjects[i].GetType());
+
+            }
+
+            for (int i = 0; i < deserializedObjects.Count - 1; i++)
+            {
+                foreach (PropertyInfo propertyInfo in deserializedObjects[i].GetType().GetProperties())
+                {
+                    if (propertyInfo.PropertyType == deserializedObjects[i + 1].GetType())
+                    {
+                        propertyInfo.SetValue(deserializedObjects[i], deserializedObjects[i + 1]);
+                    }
+                }
+            }
+
+
+            foreach (PropertyInfo propertyInfo in deserializedObjects[deserializedObjects.Count - 1].GetType().GetProperties())
+            {
+                if (propertyInfo.PropertyType == deserializedObjects[0].GetType())
+                {
+                    propertyInfo.SetValue(deserializedObjects[deserializedObjects.Count - 1], deserializedObjects[0]);
+                }
+            }
+
+            return deserializedObjects[0];
         }
 
         public override void Serialize(Stream serializationStream, object graph)
@@ -42,6 +98,7 @@ namespace Zadanie2
                 ISerializable data = (ISerializable)graph;
                 SerializationInfo info = new SerializationInfo(graph.GetType(), new FormatterConverter());
                 info.AddValue("id", iDGenerator.GetId(graph, out FirstTime));
+                info.AddValue("objectType", graph.GetType().ToString(), graph.GetType());
                 data.GetObjectData(info, Context);
                 foreach (SerializationEntry item in info)
                 {
@@ -50,6 +107,7 @@ namespace Zadanie2
                         WriteMember(item.Name, item.Value);
                         if (FirstTime == true)
                         {
+                            //tmp = tmp.Remove(tmp.Length - 1);
                             tmp += "\n";
                             Serialize(serializationStream, item.Value);
                         }
@@ -59,6 +117,7 @@ namespace Zadanie2
                         WriteMember(item.Name, item.Value);
                     }
                 }
+                //tmp = tmp.Remove(tmp.Length - 1);
                 byte[] content = Encoding.ASCII.GetBytes(tmp);
                 serializationStream.Write(content, 0, content.Length);
                 tmp = "";
@@ -75,22 +134,22 @@ namespace Zadanie2
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            tmp += name + ":" + val.ToString() + ";";
+            tmp += name + "|" + val.ToString() + ";";
         }
 
         protected override void WriteSingle(float val, string name)
         {
-            tmp += name + ":" + val.ToString() + ";";
+            tmp += name + "|" + val.ToString() + ";";
         }
 
         protected override void WriteInt64(long val, string name)
         {
-            tmp += name + ":" + val.ToString() + ";";
+            tmp += name + "|" + val.ToString() + ";";
         }
 
         private void WriteString(string val, string name)
         {
-            tmp += name + ":" + val + ";";
+            tmp += name + "|" + val + ";";
         }
 
         protected override void WriteObjectRef(object obj, string name, Type memberType)
@@ -101,7 +160,7 @@ namespace Zadanie2
             }
             else
             {
-                tmp += name + ":" + iDGenerator.GetId(obj, out FirstTime) + ";";
+                tmp += name + "|" + iDGenerator.GetId(obj, out FirstTime) + ";";
             }
         }
 
