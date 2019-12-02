@@ -45,6 +45,7 @@ namespace Zadanie2Test
             class3.obj = class1;
 
             CustomFormatter cs = new CustomFormatter();
+            cs.Serialize(new FileStream("plik1.txt", FileMode.Create), class1);
         }
     }
 }
