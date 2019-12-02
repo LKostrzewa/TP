@@ -59,7 +59,7 @@ namespace Zadanie2
             num = info.GetSingle("num");
             date = info.GetDateTime("date");
             name = info.GetString("name");
-            obj = info.GetValue("obj", typeof(Class3)) as Class3;
+            obj = (Class3) info.GetValue("obj", typeof(Class3));
         }
     }
 }

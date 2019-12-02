@@ -45,21 +45,21 @@ namespace Zadanie2
                     {
                         List<String> pom = e.Split('|').ToList();
                         data[i].Add(pom[0], pom[1]);
+                        Console.WriteLine(pom[0] + " " + pom[1]);
                     }
 
                 }
-
 
                 Dictionary<string, string> tmpDictionary = data[i];
                 SerializationInfo info = new SerializationInfo(Type.GetType(tmpDictionary["objectType"]), new FormatterConverter());
                 foreach(string s in tmpDictionary.Keys)
                 {
-                    if(s != "objectType")
+                    if(s != "objectType" && s != "id")
                     {
                         info.AddValue(s, tmpDictionary[s]);
                     }
                 }
-                deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
+                deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]),info, Context));
                 types.Add(deserializedObjects[i].GetType());
 
             }
@@ -98,7 +98,7 @@ namespace Zadanie2
                 ISerializable data = (ISerializable)graph;
                 SerializationInfo info = new SerializationInfo(graph.GetType(), new FormatterConverter());
                 info.AddValue("id", iDGenerator.GetId(graph, out FirstTime));
-                info.AddValue("objectType", graph.GetType().ToString(), graph.GetType());
+                info.AddValue("objectType", graph.GetType().FullName);
                 data.GetObjectData(info, Context);
                 foreach (SerializationEntry item in info)
                 {
@@ -107,7 +107,6 @@ namespace Zadanie2
                         WriteMember(item.Name, item.Value);
                         if (FirstTime == true)
                         {
-                            //tmp = tmp.Remove(tmp.Length - 1);
                             tmp += "\n";
                             Serialize(serializationStream, item.Value);
                         }
@@ -117,7 +116,6 @@ namespace Zadanie2
                         WriteMember(item.Name, item.Value);
                     }
                 }
-                //tmp = tmp.Remove(tmp.Length - 1);
                 byte[] content = Encoding.ASCII.GetBytes(tmp);
                 serializationStream.Write(content, 0, content.Length);
                 tmp = "";
