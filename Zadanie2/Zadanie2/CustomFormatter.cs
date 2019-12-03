@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -30,38 +31,39 @@ namespace Zadanie2
         {
             List<object> deserializedObjects = new List<object>();
             List<Type> types = new List<Type>();
+            Context = new StreamingContext(StreamingContextStates.File);
             //Dictionary<String,String> data = new Dictionary<String, String>();
             List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
 
             List<string> dataFromFile = new StreamReader(serializationStream).ReadToEnd().Split('\n').ToList();
 
-            for(int i=0; i<dataFromFile.Count(); i++)
+            for (int i = 0; i < dataFromFile.Count(); i++)
             {
                 data.Add(new Dictionary<string, string>());
                 List<string> entity = dataFromFile[i].Split(';').ToList();
-                foreach (String e in entity)
+                foreach (string e in entity)
                 {
                     if (e.Length != 0)
                     {
-                        List<String> pom = e.Split('|').ToList();
+                        List<string> pom = e.Split('=').ToList();
                         data[i].Add(pom[0], pom[1]);
-                        Console.WriteLine(pom[0] + " " + pom[1]);
+                       // Console.WriteLine(pom[0] + " " + pom[1]);
                     }
 
                 }
 
                 Dictionary<string, string> tmpDictionary = data[i];
                 SerializationInfo info = new SerializationInfo(Type.GetType(tmpDictionary["objectType"]), new FormatterConverter());
-                foreach(string s in tmpDictionary.Keys)
+                foreach (string s in tmpDictionary.Keys)
                 {
-                    if(s != "objectType" && s != "id")
+                    if (s != "objectType" && s != "id" && s!="obj")
                     {
                         info.AddValue(s, tmpDictionary[s]);
                     }
                 }
-                deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]),info, Context));
+                info.AddValue(tmpDictionary.Keys.ElementAt(tmpDictionary.Count - 1), null);
+                deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
                 types.Add(deserializedObjects[i].GetType());
-
             }
 
             for (int i = 0; i < deserializedObjects.Count - 1; i++)
@@ -89,7 +91,7 @@ namespace Zadanie2
 
         public override void Serialize(Stream serializationStream, object graph)
         {
-            if(!(graph is ISerializable))
+            if (!(graph is ISerializable))
             {
                 throw new Exception("Graph has to be ISerializable !");
             }
@@ -132,22 +134,22 @@ namespace Zadanie2
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            tmp += name + "|" + val.ToString() + ";";
+            tmp += name + "=" + val.ToString(DateTimeFormatInfo.InvariantInfo) + ";";
         }
 
         protected override void WriteSingle(float val, string name)
         {
-            tmp += name + "|" + val.ToString() + ";";
+            tmp += name + "=" + val.ToString(CultureInfo.InvariantCulture) + ";";
         }
 
         protected override void WriteInt64(long val, string name)
         {
-            tmp += name + "|" + val.ToString() + ";";
+            tmp += name + "=" + val.ToString() + ";";
         }
 
         private void WriteString(string val, string name)
         {
-            tmp += name + "|" + val + ";";
+            tmp += name + "=" + val + ";";
         }
 
         protected override void WriteObjectRef(object obj, string name, Type memberType)
@@ -158,7 +160,7 @@ namespace Zadanie2
             }
             else
             {
-                tmp += name + "|" + iDGenerator.GetId(obj, out FirstTime) + ";";
+                tmp += name + "=" + iDGenerator.GetId(obj, out FirstTime) + ";";
             }
         }
 

@@ -50,7 +50,16 @@ namespace Zadanie2Test
             a.Flush();
             a.Close();
             Class1 class1prim = cs.Deserialize(new FileStream("plik1.txt", FileMode.Open)) as Class1;
-            //Console.Write(class1prim);
+
+            Assert.AreEqual(class1.num, class1prim.num);
+            Assert.AreEqual(class1.date, class1prim.date);
+            Assert.AreEqual(class1.name, class1prim.name);
+            Assert.AreEqual(class1.obj.num, class1prim.obj.num);
+            Assert.AreEqual(class1.obj.date, class1prim.obj.date);
+            Assert.AreEqual(class1.obj.name, class1prim.obj.name);
+            Assert.AreEqual(class1.obj.obj.num, class1prim.obj.obj.num);
+            Assert.AreEqual(class1.obj.obj.date, class1prim.obj.obj.date);
+            Assert.AreEqual(class1.obj.obj.name, class1prim.obj.obj.name);
         }
     }
 }
