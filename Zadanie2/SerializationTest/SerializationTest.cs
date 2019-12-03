@@ -52,13 +52,22 @@ namespace Zadanie2Test
             Class1 class1prim = cs.Deserialize(new FileStream("plik1.txt", FileMode.Open)) as Class1;
 
             Assert.AreEqual(class1.num, class1prim.num);
-            Assert.AreEqual(class1.date, class1prim.date);
+            Assert.AreEqual(class1.date.Date, class1prim.date.Date);
+            Assert.AreEqual(class1.date.Hour, class1prim.date.Hour);
+            Assert.AreEqual(class1.date.Minute, class1prim.date.Minute);
+            Assert.AreEqual(class1.date.Second, class1prim.date.Second);
             Assert.AreEqual(class1.name, class1prim.name);
             Assert.AreEqual(class1.obj.num, class1prim.obj.num);
-            Assert.AreEqual(class1.obj.date, class1prim.obj.date);
+            Assert.AreEqual(class1.obj.date.Date, class1prim.obj.date.Date);
+            Assert.AreEqual(class1.obj.date.Hour, class1prim.obj.date.Hour);
+            Assert.AreEqual(class1.obj.date.Minute, class1prim.obj.date.Minute);
+            Assert.AreEqual(class1.obj.date.Second, class1prim.obj.date.Second);
             Assert.AreEqual(class1.obj.name, class1prim.obj.name);
             Assert.AreEqual(class1.obj.obj.num, class1prim.obj.obj.num);
-            Assert.AreEqual(class1.obj.obj.date, class1prim.obj.obj.date);
+            Assert.AreEqual(class1.obj.obj.date.Date, class1prim.obj.obj.date.Date);
+            Assert.AreEqual(class1.obj.obj.date.Hour, class1prim.obj.obj.date.Hour);
+            Assert.AreEqual(class1.obj.obj.date.Minute, class1prim.obj.obj.date.Minute);
+            Assert.AreEqual(class1.obj.obj.date.Second, class1prim.obj.obj.date.Second);
             Assert.AreEqual(class1.obj.obj.name, class1prim.obj.obj.name);
         }
     }
