@@ -30,7 +30,6 @@ namespace Zadanie2
         public override object Deserialize(Stream serializationStream)
         {
             List<object> deserializedObjects = new List<object>();
-            List<Type> types = new List<Type>();
             List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
 
             List<string> dataFromFile = new StreamReader(serializationStream).ReadToEnd().Split('\n').ToList();
@@ -56,16 +55,8 @@ namespace Zadanie2
                     string e = tmpDictionary.Keys.ElementAt(k);
                     info.AddValue(e, tmpDictionary[e]);
                 }
-                /*foreach (string s in tmpDictionary.Keys)
-                {
-                    if (s != "objectType" && s != "id" && s != "obj")
-                    {
-                        info.AddValue(s, tmpDictionary[s]);
-                    }
-                }*/
                 info.AddValue(tmpDictionary.Keys.ElementAt(tmpDictionary.Count - 1), null);
                 deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
-                types.Add(deserializedObjects[i].GetType());
             }
 
             for (int i = 0; i < deserializedObjects.Count - 1; i++)

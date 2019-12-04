@@ -48,10 +48,10 @@ namespace Zadanie2
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("num", num, typeof(float));
-            info.AddValue("date", date, typeof(DateTime));
-            info.AddValue("name", name, typeof(string));
-            info.AddValue("obj", obj, typeof(Class1));
+            info.AddValue(nameof(num), num, typeof(float));
+            info.AddValue(nameof(date), date, typeof(DateTime));
+            info.AddValue(nameof(name), name, typeof(string));
+            info.AddValue(nameof(obj), obj, typeof(Class1));
         }
 
         public Class3(SerializationInfo info, StreamingContext context)

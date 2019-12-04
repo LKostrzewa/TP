@@ -20,9 +20,7 @@ namespace Zadanie2Test
 
             JsonFormatter jsonFormatter = new JsonFormatter();
             jsonFormatter.Serialize(new FileStream("plik1.json", FileMode.Create), class1);
-            Class1 class1prim = new Class1();
-            class1prim = jsonFormatter.Deserialize<Class1>(new FileStream("plik1.json", FileMode.Open));
-            //Assert.AreEqual<Class1>(class1, class1prim);
+            Class1 class1prim = jsonFormatter.Deserialize<Class1>(new FileStream("plik1.json", FileMode.Open));
             Assert.AreEqual(class1.num, class1prim.num);
             Assert.AreEqual(class1.date, class1prim.date);
             Assert.AreEqual(class1.name, class1prim.name);
