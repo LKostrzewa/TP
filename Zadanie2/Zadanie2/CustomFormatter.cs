@@ -107,7 +107,7 @@ namespace Zadanie2
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            tmp += name + "=" + val.ToString(DateTimeFormatInfo.InvariantInfo) + ";";
+            tmp += name + "=" + val.ToUniversalTime().ToString(DateTimeFormatInfo.InvariantInfo) + ";";
         }
 
         protected override void WriteSingle(float val, string name)
