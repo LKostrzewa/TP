@@ -19,7 +19,7 @@ namespace Zadanie2
         public ObjectIDGenerator iDGenerator;
 
         private string tmp = "";
-        private bool FirstTime;
+        //private bool FirstTime;
 
         public CustomFormatter()
         {
@@ -34,8 +34,9 @@ namespace Zadanie2
 
             List<string> dataFromFile = new StreamReader(serializationStream).ReadToEnd().Split('\n').ToList();
 
-            for (int i = 0; i < dataFromFile.Count(); i++)
+            for (int i = 0; i < dataFromFile.Count() - 1; i++)
             {
+                Console.WriteLine(dataFromFile.Count());
                 data.Add(new Dictionary<string, string>());
                 List<string> entity = dataFromFile[i].Split(';').ToList();
                 foreach (string e in entity)
@@ -47,10 +48,13 @@ namespace Zadanie2
                     }
 
                 }
-
                 Dictionary<string, string> tmpDictionary = data[i];
+                foreach(string l in tmpDictionary.Keys)
+                {
+                    Console.WriteLine(l);
+                }
                 SerializationInfo info = new SerializationInfo(Type.GetType(tmpDictionary["objectType"]), new FormatterConverter());
-                for(int k=2; k < tmpDictionary.Count() - 1; k++)
+                for (int k = 2; k < tmpDictionary.Count() - 1; k++)
                 {
                     string e = tmpDictionary.Keys.ElementAt(k);
                     info.AddValue(e, tmpDictionary[e]);
@@ -84,28 +88,40 @@ namespace Zadanie2
 
         public override void Serialize(Stream serializationStream, object graph)
         {
-
             ISerializable data = (ISerializable)graph;
             SerializationInfo info = new SerializationInfo(graph.GetType(), new FormatterConverter());
-            info.AddValue("id", iDGenerator.GetId(graph, out FirstTime));
+            info.AddValue("id", iDGenerator.GetId(graph, out bool FirstTime));
             info.AddValue("objectType", graph.GetType().FullName);
             data.GetObjectData(info, Context);
             foreach (SerializationEntry item in info)
             {
-                if (item.Value is ISerializable && item.Value.GetType() != typeof(DateTime))
+                WriteMember(item.Name, item.Value);
+                /*if (item.Value is ISerializable /*&& item.Value.GetType() != typeof(DateTime))
                 {
                     WriteMember(item.Name, item.Value);
                     if (FirstTime == true)
                     {
-                        tmp += "\n";
-                        Serialize(serializationStream, item.Value);
+                        long num = iDGenerator.GetId(item, out FirstTime);
+                        Console.WriteLine(num);
+                        if (num != 2)
+                        {
+                            tmp += "\n";
+                            Serialize(serializationStream, item.Value);
+                        }
                     }
                 }
                 else
                 {
                     WriteMember(item.Name, item.Value);
-                }
+                }*/
             }
+            tmp += "\n";
+
+            while(m_objectQueue.Count != 0)
+            {
+                Serialize(serializationStream, m_objectQueue.Dequeue());
+            }
+
             byte[] content = Encoding.ASCII.GetBytes(tmp);
             serializationStream.Write(content, 0, content.Length);
             tmp = "";
@@ -140,7 +156,11 @@ namespace Zadanie2
             }
             else
             {
-                tmp += name + "=" + iDGenerator.GetId(obj, out FirstTime) + ";";
+                tmp += name + "=" + iDGenerator.GetId(obj, out bool FirstTime) + ";";
+                if (FirstTime)
+                {
+                    m_objectQueue.Enqueue(obj);
+                }
             }
         }
 
@@ -211,7 +231,8 @@ namespace Zadanie2
 
         protected override void WriteUInt64(ulong val, string name)
         {
-            throw new NotImplementedException();
+            tmp += name + "=" + val.ToString() + ";";
+            //throw new NotImplementedException();
         }
 
         protected override void WriteValueType(object obj, string name, Type memberType)
