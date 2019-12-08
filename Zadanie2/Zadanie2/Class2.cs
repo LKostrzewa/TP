@@ -49,7 +49,7 @@ namespace Zadanie2
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue(nameof(num), num, typeof(float));
-            info.AddValue(nameof(date), date.ToUniversalTime(), typeof(DateTime));
+            info.AddValue(nameof(date), date, typeof(DateTime));
             info.AddValue(nameof(name), name, typeof(string));
             info.AddValue(nameof(obj), obj, typeof(Class3));
         }
