@@ -19,7 +19,6 @@ namespace Zadanie2
         public ObjectIDGenerator iDGenerator;
 
         private string tmp = "";
-        //private bool FirstTime;
 
         public CustomFormatter()
         {
@@ -36,7 +35,6 @@ namespace Zadanie2
 
             for (int i = 0; i < dataFromFile.Count() - 1; i++)
             {
-                Console.WriteLine(dataFromFile.Count());
                 data.Add(new Dictionary<string, string>());
                 List<string> entity = dataFromFile[i].Split(';').ToList();
                 foreach (string e in entity)
@@ -49,17 +47,20 @@ namespace Zadanie2
 
                 }
                 Dictionary<string, string> tmpDictionary = data[i];
-                foreach(string l in tmpDictionary.Keys)
-                {
-                    Console.WriteLine(l);
-                }
                 SerializationInfo info = new SerializationInfo(Type.GetType(tmpDictionary["objectType"]), new FormatterConverter());
-                for (int k = 2; k < tmpDictionary.Count() - 1; k++)
+                for (int k = 2; k < tmpDictionary.Count(); k++)
                 {
                     string e = tmpDictionary.Keys.ElementAt(k);
-                    info.AddValue(e, tmpDictionary[e]);
+                    if (e.Substring(0,3) == "&&&")
+                    {
+                        info.AddValue(e.Substring(3), null);
+                    }
+                    else
+                    {
+                        Console.WriteLine("else" + e);
+                        info.AddValue(e, tmpDictionary[e]);
+                    }
                 }
-                info.AddValue(tmpDictionary.Keys.ElementAt(tmpDictionary.Count - 1), null);
                 deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
             }
 
@@ -96,24 +97,6 @@ namespace Zadanie2
             foreach (SerializationEntry item in info)
             {
                 WriteMember(item.Name, item.Value);
-                /*if (item.Value is ISerializable /*&& item.Value.GetType() != typeof(DateTime))
-                {
-                    WriteMember(item.Name, item.Value);
-                    if (FirstTime == true)
-                    {
-                        long num = iDGenerator.GetId(item, out FirstTime);
-                        Console.WriteLine(num);
-                        if (num != 2)
-                        {
-                            tmp += "\n";
-                            Serialize(serializationStream, item.Value);
-                        }
-                    }
-                }
-                else
-                {
-                    WriteMember(item.Name, item.Value);
-                }*/
             }
             tmp += "\n";
 
@@ -156,7 +139,7 @@ namespace Zadanie2
             }
             else
             {
-                tmp += name + "=" + iDGenerator.GetId(obj, out bool FirstTime) + ";";
+                tmp += "&&&" + name + "=" + iDGenerator.GetId(obj, out bool FirstTime) + ";";
                 if (FirstTime)
                 {
                     m_objectQueue.Enqueue(obj);
