@@ -64,23 +64,17 @@ namespace Zadanie2
                 deserializedObjects.Add(Activator.CreateInstance(Type.GetType(tmpDictionary["objectType"]), info, Context));
             }
 
-            for (int i = 0; i < deserializedObjects.Count - 1; i++)
+            for (int i = 0; i < deserializedObjects.Count; i++)
             {
-                foreach (PropertyInfo p in deserializedObjects[i].GetType().GetProperties())
+                for (int j = 0; j < deserializedObjects.Count; j++)
                 {
-                    if (p.PropertyType == deserializedObjects[i + 1].GetType())
+                    foreach (PropertyInfo p in deserializedObjects[i].GetType().GetProperties())
                     {
-                        p.SetValue(deserializedObjects[i], deserializedObjects[i + 1]);
+                        if (p.PropertyType == deserializedObjects[j].GetType())
+                        {
+                            p.SetValue(deserializedObjects[i], deserializedObjects[j]);
+                        }
                     }
-                }
-            }
-
-
-            foreach (PropertyInfo p in deserializedObjects[deserializedObjects.Count - 1].GetType().GetProperties())
-            {
-                if (p.PropertyType == deserializedObjects[0].GetType())
-                {
-                    p.SetValue(deserializedObjects[deserializedObjects.Count - 1], deserializedObjects[0]);
                 }
             }
 
