@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie3
 {
-    class LINQ_tools
+    public static class LINQ_tools
     {
         public static List<Product> GetProductsByName(string namePart)
         {
@@ -15,7 +15,7 @@ namespace Zadanie3
             {
                 Table<Product> productsTable = dc.GetTable<Product>();
                 List<Product> products = (from product in productsTable
-                                          where product.Name.Contains(namePart)
+                                          where product.Name.Equals(namePart)
                                           select product).ToList();
 
                 return products;
