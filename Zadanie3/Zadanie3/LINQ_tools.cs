@@ -21,5 +21,44 @@ namespace Zadanie3
                 return products;
             }
         }
+
+
+        public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                Table<Product> productsTable = dc.GetTable<Product>();
+                List<Product> products = (from product in productsTable
+                                          where product.ProductReviews.Count == howManyReviews
+                                          select product).ToList();
+
+                return products;
+            }
+        }
+
+        public static List<Product> GetNProductsFromCategory(string categoryName, int n)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                Table<Product> productsTable = dc.GetTable<Product>();
+                List<Product> products = (from product in productsTable
+                                          where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                                          select product).Take(n).ToList();
+
+                return products;
+            }
+        }
+
+        public static int GetTotalStandardCostByCategory(ProductCategory category)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                Table<Product> productsTable = dc.GetTable<Product>();
+                decimal sum = (from product in productsTable
+                               where product.ProductSubcategory.ProductCategory.Equals(category)
+                               select product.StandardCost).ToList().Sum();
+                return (int)sum;
+            }
+        }
     }
 }
