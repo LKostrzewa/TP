@@ -60,5 +60,17 @@ namespace Zadanie3
                 return (int)sum;
             }
         }
+
+        public static List<Product> GetProductsByVendorName(string vendorName)
+        {
+            using (CatalogDataContext dataContext = new CatalogDataContext())
+            {
+                Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
+                List<Product> answer = (from productVendor in productsVendors
+                                        where productVendor.Vendor.Name.Equals(vendorName)
+                                        select productVendor.Product).ToList();
+                return answer;
+            }
+        }
     }
 }
