@@ -25,13 +25,13 @@ namespace Zadanie3Test
             Assert.AreEqual(myProducts[0].ProductNumber, "SO-B909-M");
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void GetNMyProductsFromCategoryTest()
         {
             List<MyProduct> products = MyProduct_tools.GetNMyProductsFromCategory("Bikes", 4);
             Assert.AreEqual(products.Count, 4);
             Assert.AreEqual(products[0].ProductNumber, "BK-M82S-38");
-        }*/
+        }
 
         /*[TestMethod]
         public void GetTotalStandardCostByCategoryTest()

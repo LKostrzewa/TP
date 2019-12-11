@@ -10,7 +10,7 @@ namespace Zadanie3
     {
         public static List<MyProduct> GetMyProductsByName(string namePart)
         {
-            using(MyProductDataContext dc = new MyProductDataContext(new CatalogDataContext()))
+            using (MyProductDataContext dc = new MyProductDataContext(new CatalogDataContext()))
             {
                 List<MyProduct> myProduct = (from product in dc.myProducts
                                              where product.Name.Contains(namePart)
@@ -33,16 +33,16 @@ namespace Zadanie3
         }
 
 
-     /*  public static List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
+        public static List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
         {
             using (MyProductDataContext dc = new MyProductDataContext(new CatalogDataContext()))
             {
                 List<MyProduct> myProducts = (from product in dc.myProducts
-                                              where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                                              where product.ProductSubcategory != null && product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
                                               select product).Take(n).ToList();
 
                 return myProducts;
             }
-        }*/
+        }
     }
 }
