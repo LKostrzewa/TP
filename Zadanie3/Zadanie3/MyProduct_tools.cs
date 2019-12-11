@@ -33,7 +33,7 @@ namespace Zadanie3
         }
 
 
-       /*public static List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
+     /*  public static List<MyProduct> GetNMyProductsFromCategory(string categoryName, int n)
         {
             using (MyProductDataContext dc = new MyProductDataContext(new CatalogDataContext()))
             {
