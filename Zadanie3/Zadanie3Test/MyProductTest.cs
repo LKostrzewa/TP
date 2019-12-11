@@ -38,7 +38,6 @@ namespace Zadanie3Test
         {
             ProductCategory category = new ProductCategory();
             category.Name = "Bikes";
-
             int sum = MyProduct_tools.GetTotalStandardCostByCategory(category);
             Assert.AreEqual(sum, 92092);
         }*/
