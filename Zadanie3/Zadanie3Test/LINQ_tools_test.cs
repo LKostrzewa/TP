@@ -16,5 +16,35 @@ namespace Zadanie3Test
             Assert.AreEqual(products.Count(), 1);
             Assert.AreEqual(products[0].ProductNumber, "DT-2377");
         }
+
+        [TestMethod]
+        public void GetProductsByVendorNameTest()
+        {
+            List<Product> products = LINQ_tools.GetProductsByVendorName("Australia Bike Retailer");
+            Assert.AreEqual(products.Count(), 16);
+            Assert.AreEqual(products[0].ProductNumber, "LJ-1213");
+        }
+
+        [TestMethod]
+        public void GetProductNamesByVendorNameTest()
+        {
+            List<string> products = LINQ_tools.GetProductNamesByVendorName("Australia Bike Retailer");
+            Assert.AreEqual(products.Count(), 16);
+            Assert.AreEqual(products[0], "Thin-Jam Lock Nut 9");
+        }
+
+        [TestMethod]
+        public void GetProductVendorByProductNameTest()
+        {
+            string vendors = LINQ_tools.GetProductVendorByProductName("Decal 2");
+            Assert.AreEqual(vendors, "SUPERSALES INC.");
+        }
+
+        [TestMethod]
+        public void GetProductsWithNRecentReviewsTest()
+        {
+            List<Product> products = LINQ_tools.GetProductsWithNRecentReviews(5);
+            Assert.AreEqual(products.Count(), 0);
+        }
     }
 }
