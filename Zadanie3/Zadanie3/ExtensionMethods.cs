@@ -38,13 +38,13 @@ namespace Zadanie3
             using (CatalogDataContext dc = new CatalogDataContext())
             {
                 Table<ProductVendor> productVendors = dc.GetTable<ProductVendor>();
-                List<string> answer = (from product in products
-                                       join productVendor in productVendors on product.ProductID equals productVendor.ProductID
-                                       where productVendor.ProductID.Equals(product.ProductID)
-                                       select product.Name + "-" + productVendor.Vendor.Name).ToList();
-                foreach(string s in answer)
+                var answer = (from product in products
+                              join productVendor in productVendors on product.ProductID equals productVendor.ProductID
+                              where productVendor.ProductID.Equals(product.ProductID)
+                              select new { ProductName = product.Name, VendorName = productVendor.Vendor.Name}).ToList();
+                foreach(var s in answer)
                 {
-                    tmp += s + "\n";
+                    tmp += s.ProductName + "-" + s.VendorName + "\n";
                 }
             }
             return tmp;
@@ -56,13 +56,13 @@ namespace Zadanie3
             using (CatalogDataContext dc = new CatalogDataContext())
             {
                 Table<ProductVendor> productVendors = dc.GetTable<ProductVendor>();
-                List<string> answer = products.Join(productVendors,
+                var answer = products.Join(productVendors,
                                                     product => product.ProductID,
                                                     productVendor => productVendor.ProductID,
-                                                    (product, productVendor) => product.Name + "-" + productVendor.Vendor.Name).ToList();
-                foreach (string s in answer)
+                                                    (product, productVendor) => new { ProductName = product.Name, VendorName = productVendor.Vendor.Name }).ToList();
+                foreach (var s in answer)
                 {
-                    tmp += s + "\n";
+                    tmp += s.ProductName + "-" + s.VendorName + "\n";
                 }
             }
             return tmp;
