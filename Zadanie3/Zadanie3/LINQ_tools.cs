@@ -103,7 +103,7 @@ namespace Zadanie3
             {
                 Table<Product> productsTable = dc.GetTable<Product>();
                 decimal sum = (from product in productsTable
-                               where product.ProductSubcategory.ProductCategory.Equals(category)
+                               where product.ProductSubcategory.ProductCategory.Name.Equals(category.Name)
                                select product.StandardCost).ToList().Sum();
                 return (int)sum;
             }

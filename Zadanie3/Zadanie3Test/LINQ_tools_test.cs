@@ -43,8 +43,35 @@ namespace Zadanie3Test
         [TestMethod]
         public void GetProductsWithNRecentReviewsTest()
         {
-            List<Product> products = LINQ_tools.GetProductsWithNRecentReviews(5);
-            Assert.AreEqual(products.Count(), 0);
+            List<Product> products = LINQ_tools.GetProductsWithNRecentReviews(1);
+            Assert.AreEqual(products.Count(), 2);
+            Assert.AreEqual(products[0].ProductNumber, "SO-B909-M");
+        }
+
+        [TestMethod]
+        public void GetNRecentlyReviewedProductsTest()
+        {
+            List<Product> products = LINQ_tools.GetNRecentlyReviewedProducts(2);
+            Assert.AreEqual(products.Count(), 2);
+            Assert.AreEqual(products[0].ProductNumber, "PD-M562");
+        }
+
+        [TestMethod]
+        public void GetNProductsFromCategoryTest()
+        {
+            List<Product> products = LINQ_tools.GetNProductsFromCategory("Bikes", 4);
+            Assert.AreEqual(products.Count(), 4);
+            Assert.AreEqual(products[0].ProductNumber, "BK-M82S-38");
+        }
+
+        [TestMethod]
+        public void GetTotalStandardCostByCategoryTest()
+        {
+            ProductCategory category = new ProductCategory();
+            category.Name = "Bikes";
+
+            int sum = LINQ_tools.GetTotalStandardCostByCategory(category);
+            Assert.AreEqual(sum, 92092);
         }
     }
 }
