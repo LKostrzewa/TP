@@ -39,6 +39,7 @@ namespace Zadanie3
             {
                 List<MyProduct> myProducts = (from product in dc.myProducts
                                               where product.ProductSubcategory != null && product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                                              orderby product.ProductSubcategory.Name 
                                               select product).Take(n).ToList();
 
                 return myProducts;

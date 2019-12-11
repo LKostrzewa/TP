@@ -32,15 +32,5 @@ namespace Zadanie3Test
             Assert.AreEqual(products.Count, 4);
             Assert.AreEqual(products[0].ProductNumber, "BK-M82S-38");
         }
-
-        /*[TestMethod]
-        public void GetTotalStandardCostByCategoryTest()
-        {
-            ProductCategory category = new ProductCategory();
-            category.Name = "Bikes";
-
-            int sum = MyProduct_tools.GetTotalStandardCostByCategory(category);
-            Assert.AreEqual(sum, 92092);
-        }*/
     }
 }
