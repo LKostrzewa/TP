@@ -12,8 +12,9 @@ namespace Zadanie3Test
         [TestMethod]
         public void GetMyProductsByNameTest()
         {
-            List<MyProduct> myProducts = MyProduct_tools.GetMyProductsByName("Crankarm");
-            Assert.AreEqual(myProducts.Count, 3);
+            List<MyProduct> myProducts = MyProduct_tools.GetMyProductsByName("Decal");
+            Assert.AreEqual(myProducts.Count, 2);
+            Assert.AreEqual(myProducts[0].ProductNumber, "DC-8732");
         }
 
         [TestMethod]
@@ -27,13 +28,19 @@ namespace Zadanie3Test
         [TestMethod]
         public void GetNMyProductsFromCategoryTest()
         {
-            //List<MyProduct> products = MyProduct_tools.GetNMyProductsFromCategory("Clothing", 4);
-            //foreach(MyProduct m in products)
-            //{
-            //   Console.WriteLine(m.ProductSubcategory.Name);
-            //}
-            //Assert.AreEqual(products.Count, 4);
-           // Assert.AreEqual(products[0].ProductNumber, "BK-M82S-38");
+            List<MyProduct> products = MyProduct_tools.GetNMyProductsFromCategory("Bikes", 4);
+            Assert.AreEqual(products.Count, 4);
+            Assert.AreEqual(products[0].ProductNumber, "BK-M82S-38");
         }
+
+        /*[TestMethod]
+        public void GetTotalStandardCostByCategoryTest()
+        {
+            ProductCategory category = new ProductCategory();
+            category.Name = "Bikes";
+
+            int sum = MyProduct_tools.GetTotalStandardCostByCategory(category);
+            Assert.AreEqual(sum, 92092);
+        }*/
     }
 }
