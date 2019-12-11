@@ -25,8 +25,11 @@ namespace Zadanie3
         public static List<List<Product>> DivideProductsOnPages(this List<Product> products, int pageSize, int number)
         {
             List<List<Product>> tmp = new List<List<Product>>();
-            
-            return null;
+            for(int i = 0; i < number; i++)
+            {
+                tmp.Add(products.Skip(i * pageSize).Take(pageSize).ToList());
+            }
+            return tmp;
         }
 
         public static string GetProductVendorStringLINQ(this List<Product> products)
