@@ -15,7 +15,7 @@ namespace Zadanie3
             {
                 Table<Product> productsTable = dc.GetTable<Product>();
                 List<Product> products = (from product in productsTable
-                                          where product.Name.Equals(namePart)
+                                          where product.Name.Contains(namePart)
                                           select product).ToList();
 
                 return products;
