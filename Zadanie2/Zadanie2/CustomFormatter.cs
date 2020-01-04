@@ -57,7 +57,6 @@ namespace Zadanie2
                     }
                     else
                     {
-                        Console.WriteLine("else" + e);
                         info.AddValue(e, tmpDictionary[e]);
                     }
                 }
