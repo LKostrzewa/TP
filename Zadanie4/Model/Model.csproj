@@ -47,7 +47,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Catalog.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="LINQ_tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

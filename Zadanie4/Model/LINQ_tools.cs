@@ -108,5 +108,64 @@ namespace Model
                 return (int)sum;
             }
         }
+
+        public static void InsertNewProduct(Product product)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                dc.Products.InsertOnSubmit(product);
+                dc.SubmitChanges();
+            }
+        }
+
+        public static Product GetProductById(int id)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                return dc.GetTable<Product>().SingleOrDefault(p => p.ProductID.Equals(id));
+            }
+        }
+
+        public static void DeleteProductId(int id)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                dc.Products.DeleteOnSubmit(GetProductById(id));
+                dc.SubmitChanges();
+            }
+        }
+
+        public static void UpdateProduct(Product product)
+        {
+            using (CatalogDataContext dc = new CatalogDataContext())
+            {
+                var originalProduct = dc.GetTable<Product>().SingleOrDefault(p => p.ProductID.Equals(product.ProductID));
+                originalProduct.Name = product.Name;
+                originalProduct.ProductNumber = product.ProductNumber;
+                originalProduct.MakeFlag = product.MakeFlag;
+                originalProduct.FinishedGoodsFlag = product.FinishedGoodsFlag;
+                originalProduct.Color = product.Color;
+                originalProduct.SafetyStockLevel = product.SafetyStockLevel;
+                originalProduct.ReorderPoint = product.ReorderPoint;
+                originalProduct.StandardCost = product.StandardCost;
+                originalProduct.ListPrice = product.ListPrice;
+                originalProduct.Size = product.Size;
+                originalProduct.SizeUnitMeasureCode = product.SizeUnitMeasureCode;
+                originalProduct.WeightUnitMeasureCode = product.WeightUnitMeasureCode;
+                originalProduct.Weight = product.Weight;
+                originalProduct.DaysToManufacture = product.DaysToManufacture;
+                originalProduct.ProductLine = product.ProductLine;
+                originalProduct.Class = product.Class;
+                originalProduct.Style = product.Style;
+                originalProduct.ProductSubcategoryID = product.ProductSubcategoryID;
+                originalProduct.ProductModelID = product.ProductModelID;
+                originalProduct.SellStartDate = product.SellStartDate;
+                originalProduct.SellEndDate = product.SellEndDate;
+                originalProduct.DiscontinuedDate = product.DiscontinuedDate;
+                originalProduct.ModifiedDate = DateTime.Today;
+                dc.SubmitChanges();
+
+            }
+        }
     }
 }
