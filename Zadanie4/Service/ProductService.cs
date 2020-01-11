@@ -7,10 +7,9 @@ using Model;
 
 namespace Service
 {
-    class ProductService
+    public class ProductService
     {
         
-
         public void Create(Product product)
         {
             LINQ_tools.InsertNewProduct(product);
