@@ -113,6 +113,8 @@ namespace Model
         {
             using (CatalogDataContext dc = new CatalogDataContext())
             {
+                product.ModifiedDate = DateTime.Now;
+                product.rowguid = Guid.NewGuid();
                 dc.Products.InsertOnSubmit(product);
                 dc.SubmitChanges();
             }
@@ -130,7 +132,8 @@ namespace Model
         {
             using (CatalogDataContext dc = new CatalogDataContext())
             {
-                dc.Products.DeleteOnSubmit(GetProductById(id));
+                var answer = dc.GetTable<Product>().First(e => e.ProductID == id);
+                dc.Products.DeleteOnSubmit(answer);
                 dc.SubmitChanges();
             }
         }
