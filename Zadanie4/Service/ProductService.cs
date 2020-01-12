@@ -29,5 +29,11 @@ namespace Service
         {
             LINQ_tools.DeleteProductId(id);
         }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return LINQ_tools.GetAllProducts();
+        }
+
     }
 }
