@@ -128,6 +128,14 @@ namespace Model
             }
         }
 
+        public static IEnumerable<Product> GetAllProducts()
+        {
+            using(CatalogDataContext dc = new CatalogDataContext())
+            {
+                return dc.GetTable<Product>();
+            }
+        }
+
         public static void DeleteProductId(int id)
         {
             using (CatalogDataContext dc = new CatalogDataContext())

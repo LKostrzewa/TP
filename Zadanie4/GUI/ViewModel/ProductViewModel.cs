@@ -11,7 +11,7 @@ using GUI.Common;
 
 namespace GUI.ViewModel
 {
-    class ProductViewModel 
+    class ProductViewModel : INotifyPropertyChanged
     {
         private ProductService productService = new ProductService();
 
@@ -64,6 +64,15 @@ namespace GUI.ViewModel
             set;
         }
 
+        public ProductViewModel(Product c)
+        {
+            ProductId = c.ProductID;
+            productName = c.Name;
+            productNumber = c.ProductNumber;
+            //copy the current value so in case cancel you can undo
+            this.originalValue = (ProductViewModel)this.MemberwiseClone();
+        }
+
         public ProductListViewModel Container
         {
             get { return ProductListViewModel.Instance(); }
@@ -90,17 +99,77 @@ namespace GUI.ViewModel
             }
         }
 
-        private IEnumerable<Product> products;
-        public IEnumerable<Product> Products
+        public ICommand UpdateCommand
         {
             get
             {
-                return this.Products;
+                if (updateCommand == null)
+                {
+                    updateCommand = new CommandBase(i => this.Update(), null);
+                }
+                return updateCommand;
             }
-            set
+        }
+
+        public ICommand DeleteCommand
+        {
+            get
             {
-                this.products = value;
-                this.OnPropertyChanged("Product");
+                if (deleteCommand == null)
+                {
+                    deleteCommand = new CommandBase(i => this.Delete(), null);
+                }
+                return deleteCommand;
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get
+            {
+                if (cancelCommand == null)
+                {
+                    cancelCommand = new CommandBase(i => this.Undo(), null);
+                }
+                return cancelCommand;
+            }
+        }
+
+        private void Update()
+        {
+            if(this.Mode == Mode.Add)
+            {
+                Product product = new Product();
+                product.ProductNumber = this.ProductNumber;
+                product.Name = this.ProductName;
+                productService.Create(product);
+                //refreshTheView
+                //this.Container = this.Container.GetCustomers();
+            }
+            else if(this.Mode == Mode.Edit)
+            {
+                Product product = new Product();
+                product.ProductNumber = this.ProductNumber;
+                product.Name = this.ProductName;
+                productService.Update(product);
+                //copy the current value so in case cancel you can undo
+                this.originalValue = (ProductViewModel)this.MemberwiseClone();
+            }
+        }
+
+        private void Delete()
+        {
+            productService.Delete(this.ProductId);
+            //refresh the view
+            //this.Container.CustomerList = this.Container.GetCustomers();
+        }
+
+        private void Undo()
+        {
+            if (this.Mode == Mode.Edit)
+            {
+                this.ProductName = originalValue.ProductName;
+                this.ProductNumber = originalValue.ProductNumber;
             }
         }
 
@@ -108,7 +177,7 @@ namespace GUI.ViewModel
         {
             if (this.PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); 
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
