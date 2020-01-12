@@ -30,13 +30,13 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Product ID:"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProductID}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Product Name:"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=ProductName}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name}"/>
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Product Number:"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=ProductNumber}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Number}"/>
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="GUID Number:"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=ProductGUID}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=GUID}"/>
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Color:"/>
-                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=ProductColor}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Color}"/>
                 </Grid>
             </Border>
         </DataTemplate>
