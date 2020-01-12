@@ -43,8 +43,10 @@ namespace ServiceTest
             Assert.AreEqual(p.Name, p2.Name);
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
 
+            ps.Delete(p.ProductID);
+
             //tmpId = p.ProductID;
-           // Console.WriteLine(tmpId);
+            // Console.WriteLine(tmpId);
         }
 
         [TestMethod]
@@ -77,9 +79,14 @@ namespace ServiceTest
             p2.ReorderPoint = 1;
             p2.rowguid = Guid.NewGuid();
 
-            Assert.AreEqual(p.Name, p2.Name);
-            Assert.AreEqual(p.Name, "test1256");
-            Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
+            ps.Update(p2);
+
+            Product p3 = ps.Read(p.ProductID);
+
+            Assert.AreEqual(p3.Name, p2.Name);
+            Assert.AreEqual(p3.Name, "test1256");
+            Assert.AreEqual(p3.ProductNumber, p2.ProductNumber);
+            ps.Delete(p.ProductID);
         }
 
         [TestMethod]
@@ -99,9 +106,16 @@ namespace ServiceTest
 
             ps.Create(p);
 
-            ps.Delete(p.ProductID);
 
             Product p2 = ps.Read(p.ProductID);
+
+            Assert.AreEqual(p.Name, p2.Name);
+            Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
+
+            ps.Delete(p.ProductID);
+
+            Product p3 = ps.Read(p.ProductID);
+            Assert.ThrowsException<NullReferenceException>(() => p3.ProductID);
         }
     }
 }
