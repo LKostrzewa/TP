@@ -8,7 +8,7 @@ namespace ServiceTest
     [TestClass]
     public class CRUDTest
     {
-        private int tmpId;
+       // private int tmpId;
 
         [TestMethod]
         public void GetTest()
@@ -43,8 +43,8 @@ namespace ServiceTest
             Assert.AreEqual(p.Name, p2.Name);
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
 
-            tmpId = p.ProductID;
-            Console.WriteLine(tmpId);
+            //tmpId = p.ProductID;
+           // Console.WriteLine(tmpId);
         }
 
         [TestMethod]
@@ -53,7 +53,6 @@ namespace ServiceTest
             ProductService ps = new ProductService();
 
             Product p = new Product();
-            p.ProductID = tmpId;
             p.Name = "test125";
             p.ProductNumber = "2137420";
             p.ModifiedDate = DateTime.Now;
@@ -61,12 +60,25 @@ namespace ServiceTest
             p.SellEndDate = DateTime.Now.AddDays(20);
             p.SafetyStockLevel = 1;
             p.ReorderPoint = 1;
+            p.rowguid = Guid.NewGuid();
 
-            ps.Update(p);
+            ps.Create(p);
 
-            Product p2 = ps.Read(tmpId);
+            Console.WriteLine(p.ProductID);
+
+            Product p2 = new Product();
+            p2.ProductID = p.ProductID;
+            p2.Name = "test1256";
+            p2.ProductNumber = "2137420";
+            p2.ModifiedDate = DateTime.Now;
+            p2.SellStartDate = DateTime.Now.AddDays(-20);
+            p2.SellEndDate = DateTime.Now.AddDays(20);
+            p2.SafetyStockLevel = 1;
+            p2.ReorderPoint = 1;
+            p2.rowguid = Guid.NewGuid();
 
             Assert.AreEqual(p.Name, p2.Name);
+            Assert.AreEqual(p.Name, "test1256");
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
         }
 
@@ -75,7 +87,21 @@ namespace ServiceTest
         {
             ProductService ps = new ProductService();
 
-            ps.Delete(tmpId);
+            Product p = new Product();
+            p.Name = "test1257";
+            p.ProductNumber = "11111";
+            p.ModifiedDate = DateTime.Now;
+            p.SellStartDate = DateTime.Now.AddDays(-20);
+            p.SellEndDate = DateTime.Now.AddDays(20);
+            p.SafetyStockLevel = 1;
+            p.ReorderPoint = 1;
+            p.rowguid = Guid.NewGuid();
+
+            ps.Create(p);
+
+            ps.Delete(p.ProductID);
+
+            Product p2 = ps.Read(p.ProductID);
         }
     }
 }
