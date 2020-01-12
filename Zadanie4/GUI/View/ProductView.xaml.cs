@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductView : Window
     {
-        public MainWindow()
+        public ProductView()
         {
             InitializeComponent();
         }

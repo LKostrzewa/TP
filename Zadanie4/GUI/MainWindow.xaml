@@ -3,14 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI"
+        xmlns:v="clr-namespace:GUI.View"
+        xmlns:vm="clr-namespace:GUI.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="TP Master-Details" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="ProductListTemplate" >
+            <v:ProductListView/>
+        </DataTemplate>
+        <DataTemplate x:Key="DetailTemplate">
+            <Border Width="Auto" Height="Auto" Margin="20"
+          BorderBrush="Aqua" BorderThickness="1" Padding="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Product ID:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=ProductID}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Product Name:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Product Number:"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Number}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="GUID Number:"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=GUID}"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Color:"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Color}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    
+
     <Grid>
-        <StackPanel>
-            <TextBox Height="23"   Name="FirstName" Text="{Binding FirstName}" Width="120" />
-            <TextBox Height="23"   Name="LastName" Text="{Binding LastName}" Width="120" />
-            <Button Command="{Binding SaveCmd}" Height="23" Width="80">Zapisz</Button>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Content="{Binding}" ContentTemplate="{StaticResource ProductListTemplate}" Grid.Column="1" Grid.Row="0" />
+        <TextBlock FontFamily="Verdana" FontSize="11"
+               Margin="5,15,0,5" FontWeight="Bold"  Grid.Column="1" Grid.Row="1">Information:</TextBlock>
+        <ContentControl Content="{Binding SelectedProduct}" ContentTemplate="{StaticResource DetailTemplate}" Grid.Column="1" Grid.Row="2" />
+
     </Grid>
 </Window>
