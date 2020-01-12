@@ -33,5 +33,16 @@ namespace Model.Properties {
                 return ((string)(this["AdventureWorks2017ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-IA4S3R65;Initial Catalog=AdventureWorks2017;Integrated Securit" +
+            "y=True")]
+        public string AdventureWorks2017ConnectionString1 {
+            get {
+                return ((string)(this["AdventureWorks2017ConnectionString1"]));
+            }
+        }
     }
 }
