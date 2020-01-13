@@ -17,6 +17,10 @@ namespace GUI.ViewModel
 
         private string productName;
         private string productNumber;
+        private DateTime productSellStartDate;
+        private DateTime productSellEndDate;
+        private short productSafetyStockLevel;
+        private short productReorderPoint;
 
         //for opening up the Edit Customer window
         private ICommand showEditCommand;
@@ -88,6 +92,18 @@ namespace GUI.ViewModel
             set;
         }
 
+        public Guid ProductGUID
+        {
+            get;
+            set;
+        }
+
+        public string ProductColor
+        {
+            get;
+            set;
+        }
+
         public Mode Mode
         {
             get;
@@ -104,6 +120,8 @@ namespace GUI.ViewModel
             ProductSellEndDate = c.SellEndDate;
             ProductSafetyStockLevel = c.SafetyStockLevel;
             ProductReorderPoint = c.ReorderPoint;
+            ProductGUID = c.rowguid;
+            ProductColor = c.Color;
             //copy the current value so in case cancel you can undo
             this.originalValue = (ProductViewModel)this.MemberwiseClone();
         }
@@ -182,6 +200,8 @@ namespace GUI.ViewModel
                 product.SellEndDate = this.ProductSellEndDate;
                 product.SafetyStockLevel = this.ProductSafetyStockLevel;
                 product.ReorderPoint = this.ProductReorderPoint;
+                product.Color = this.ProductColor;
+                product.rowguid = this.ProductGUID;
                 productService.Create(product);
                 //refreshTheView
                 //this.Container = this.Container.GetCustomers();
@@ -196,6 +216,8 @@ namespace GUI.ViewModel
                 product.SellEndDate = this.ProductSellEndDate;
                 product.SafetyStockLevel = this.ProductSafetyStockLevel;
                 product.ReorderPoint = this.ProductReorderPoint;
+                product.Color = this.ProductColor;
+                product.rowguid = this.ProductGUID;
                 productService.Update(product);
                 //copy the current value so in case cancel you can undo
                 this.originalValue = (ProductViewModel)this.MemberwiseClone();
@@ -220,6 +242,8 @@ namespace GUI.ViewModel
                 this.ProductSellEndDate = originalValue.ProductSellEndDate;
                 this.ProductSafetyStockLevel = originalValue.ProductSafetyStockLevel;
                 this.ProductReorderPoint = originalValue.ProductReorderPoint;
+                this.ProductColor = originalValue.ProductColor;
+                this.ProductGUID = originalValue.ProductGUID;
             }
         }
 
