@@ -92,13 +92,13 @@ namespace GUI.ViewModel
         private void ShowAddDialog()
         {
             //nie mam pojecia
-            /*
-            CustomerViewModel customer = new CustomerViewModel();
-            customer.Mode = Mode.Add;
+            
+            ProductViewModel product = new ProductViewModel();
+            product.Mode = Mode.Add;
 
-            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
-            dialog.BindViewModel(customer);
-            dialog.ShowDialog();*/
+            IModalDialog dialog = product.ModalDialog;
+            dialog.BindViewModel(product);
+            dialog.ShowDialog();
         }
 
         private void OnPropertyChanged(string propertyName)

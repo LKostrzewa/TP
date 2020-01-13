@@ -36,6 +36,12 @@ namespace GUI.ViewModel
 
         private ProductViewModel originalValue;
 
+        public IModalDialog ModalDialog
+        {
+            get;
+            set;
+        }
+
         public int ProductID
         {
             get;
@@ -126,6 +132,8 @@ namespace GUI.ViewModel
             this.originalValue = (ProductViewModel)this.MemberwiseClone();
         }
 
+        internal ProductViewModel() { }
+
         public ProductListViewModel Container
         {
             get { return ProductListViewModel.Instance(); }
@@ -135,9 +143,8 @@ namespace GUI.ViewModel
         {
             this.Mode = ViewModel.Mode.Edit;
             //nwm co tu :(
-            /*IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
-            dialog.BindViewModel(this); //bind to this viewModel
-            dialog.ShowDialog();*/
+            ModalDialog.BindViewModel(this); //bind to this viewModel
+            ModalDialog.ShowDialog();
         }
 
         public ICommand ShowEditCommand
@@ -228,7 +235,7 @@ namespace GUI.ViewModel
         {
             productService.Delete(this.ProductID);
             //refresh the view
-            //this.Container.CustomerList = this.Container.GetCustomers();
+            this.Container.ProductList = this.Container.GetProducts();
         }
 
         private void Undo()
