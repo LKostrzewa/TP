@@ -84,6 +84,9 @@
             </TextBox>
             <StackPanel Grid.Column="1" Grid.Row="3" Margin="10" Orientation="Horizontal">
                 <Button x:Name="btnUpdate" Command="{Binding UpdateCommand}" Width="100" Margin="10">
+                    <Button.Resources>
+                        <local:isEmpty x:Key="isEmpty"/>
+                    </Button.Resources>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="IsEnabled" Value="False"/>
@@ -102,13 +105,13 @@
                                 </DataTrigger>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding ElementName=ProductName, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
+                                        <Condition Binding="{Binding ElementName=ProductName, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
                                         <Condition Binding="{Binding ElementName=ProductName, Path=(Validation.HasError)}" Value="False"/>
 
-                                        <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
+                                        <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
                                         <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=(Validation.HasError)}" Value="False"/>
 
-                                        <Condition Binding="{Binding ElementName=ReorderPoint, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
+                                        <Condition Binding="{Binding ElementName=ReorderPoint, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
                                         <Condition Binding="{Binding ElementName=ReorderPoint, Path=(Validation.HasError)}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="IsEnabled" Value="True"/>
