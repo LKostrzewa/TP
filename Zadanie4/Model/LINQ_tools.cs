@@ -132,7 +132,10 @@ namespace Model
         {
             using(CatalogDataContext dc = new CatalogDataContext())
             {
-                return dc.GetTable<Product>();
+                Table<Product> products = dc.GetTable<Product>();
+                IQueryable<Product> answer = (from product in products
+                                              select product);
+                return answer.ToList();
             }
         }
 
