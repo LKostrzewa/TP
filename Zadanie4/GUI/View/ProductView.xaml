@@ -14,8 +14,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -82,7 +84,7 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <StackPanel Grid.Column="1" Grid.Row="3" Margin="10" Orientation="Horizontal">
+            <StackPanel Grid.Column="2" Grid.Row="8" Margin="10" Orientation="Horizontal">
                 <Button x:Name="btnUpdate" Command="{Binding UpdateCommand}" Width="100" Margin="10">
                     <Button.Resources>
                         <local:isEmpty x:Key="isEmpty"/>

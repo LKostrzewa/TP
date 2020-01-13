@@ -19,7 +19,7 @@
 
     <StackPanel>
         <Button x:Name="btnAddProduct" Content="Add product" Width="90" HorizontalAlignment="Right" Margin="10 10 0 10" Command="{Binding ShowAddCommand}"/>
-        <ListView x:Name="lsvProductList" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}">
+        <ListView x:Name="lsvProductList" ItemsSource="{Binding ProductList}" SelectedItem="{Binding SelectedProduct}" Height="200">
             <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <GridView>
