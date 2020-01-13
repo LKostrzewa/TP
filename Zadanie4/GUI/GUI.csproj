@@ -72,7 +72,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\isEmpty.cs" />
+    <Compile Include="View\Converters\isNullConverter.cs" />
+    <Compile Include="View\Converters\isEmptyConverter.cs" />
     <Compile Include="View\ProductListView.xaml.cs">
       <DependentUpon>ProductListView.xaml</DependentUpon>
     </Compile>

@@ -37,7 +37,9 @@ namespace GUI.ViewModel
 
         private ProductViewModel originalValue;
 
-        //public IWindowResolver WindowResolver { get; set; }
+        private ICommand showEditCommand;
+
+        public IWindowResolver WindowResolver { get; set; }
 
         public int ProductID
         {
@@ -139,6 +141,26 @@ namespace GUI.ViewModel
         public ProductListViewModel Container
         {
             get { return ProductListViewModel.Instance(); }
+        }
+
+        private void ShowEditDialog()
+        {
+            this.Mode = ViewModel.Mode.Edit;
+            IOperationWindow dialog = WindowResolver.GetWindow();
+            dialog.BindViewModel(this);
+            dialog.Show();
+        }
+
+        public ICommand ShowEditCommand
+        {
+            get
+            {
+                if (showEditCommand == null)
+                {
+                    showEditCommand = new CommandBase(i => this.ShowEditDialog(), null);
+                }
+                return showEditCommand;
+            }
         }
 
         public ICommand UpdateCommand

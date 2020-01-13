@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:GUI.ViewModel"
         xmlns:validators="clr-namespace:GUI.View.Validators"
+        xmlns:converters="clr-namespace:GUI.View.Converters"
         xmlns:local="clr-namespace:GUI.View"
         mc:Ignorable="d"
         Title="ProductView" Height="450" Width="800">
@@ -98,7 +99,7 @@
             <StackPanel Grid.Column="2" Grid.Row="8" Margin="10" Orientation="Horizontal">
                 <Button x:Name="btnUpdate" Command="{Binding UpdateCommand}" Width="100" Margin="10">
                     <Button.Resources>
-                        <local:isEmpty x:Key="isEmpty"/>
+                        <converters:isEmptyConverter x:Key="isEmpty"/>
                     </Button.Resources>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">

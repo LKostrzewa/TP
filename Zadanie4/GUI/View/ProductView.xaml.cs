@@ -26,12 +26,12 @@ namespace GUI.View
             InitializeComponent();
         }
 
-        /*protected override void OnInitialized(EventArgs e)
+        protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
             ProductViewModel mc = (ProductViewModel)DataContext;
             //mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            mc.WindowResolver = new ProductDetailsResolver();
-        }*/
+            mc.WindowResolver = mc.Container.WindowResolver;
+        }
     }
 }
