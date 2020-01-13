@@ -8,7 +8,7 @@
         xmlns:converters="clr-namespace:GUI.View.Converters"
         xmlns:local="clr-namespace:GUI.View"
         mc:Ignorable="d"
-        Title="ProductView" Height="450" Width="800">
+        Title="ProductView" Height="550" Width="800">
 
     <StackPanel>
         <Grid>

@@ -31,7 +31,7 @@ namespace GUI.View
             base.OnInitialized(e);
             ProductViewModel mc = (ProductViewModel)DataContext;
             //mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            mc.WindowResolver = mc.Container.WindowResolver;
+           // mc.WindowResolver = mc.Container.WindowResolver;
         }
     }
 }

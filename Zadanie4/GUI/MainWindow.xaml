@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:GUI.ViewModel"
         xmlns:converters="clr-namespace:GUI.View.Converters"
         mc:Ignorable="d"
-        Title="TP Master-Details" Height="450" Width="800">
+        Title="TP Master-Details" Height="550" Width="800">
 
     <Window.DataContext>
         <vm:ProductListViewModel/>
@@ -86,7 +86,21 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Delete" Command="{Binding DeleteCommand}"/>
+            <Button Content="Delete" Command="{Binding SelectedProduct.DeleteCommand}">
+                <Button.Resources>
+                    <converters:IsNullConverter x:Key="isNullConverter"/>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedProduct, Converter={StaticResource isNullConverter}}" Value="False">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
     </Grid>
