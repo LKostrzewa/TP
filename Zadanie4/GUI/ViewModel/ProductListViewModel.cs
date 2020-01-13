@@ -1,4 +1,5 @@
 ﻿using GUI.Common;
+using GUI.Interface;
 using Model;
 using Service;
 using System;
@@ -24,6 +25,9 @@ namespace GUI.ViewModel
 
         //for opening up the Add Customer window
         private ICommand showAddCommand;
+        private ICommand showEditCommand;
+
+        public IWindowResolver WindowResolver { get; set; }
 
         public static ProductListViewModel Instance()
         {
@@ -70,9 +74,22 @@ namespace GUI.ViewModel
             }
         }
 
-        private ProductListViewModel()
+        public ICommand ShowEditCommand
+        {
+            get
+            {
+                if (showEditCommand == null)
+                {
+                    showEditCommand = new CommandBase(i => this.ShowEditDialog(), null);
+                }
+                return showEditCommand;
+            }
+        }
+
+        public ProductListViewModel()
         {
             this.ProductList = GetProducts();
+            //this.openDialogCommand = new RelayCommand(OnOpenDialog);
         }
 
         //czym tu jest internal tylko Bozia wie
@@ -88,17 +105,25 @@ namespace GUI.ViewModel
             }
             return productList;
         }
-
+        
         private void ShowAddDialog()
         {
-            //nie mam pojecia
-            /*
-            CustomerViewModel customer = new CustomerViewModel();
-            customer.Mode = Mode.Add;
+            ProductViewModel product = new ProductViewModel();
+            product.Mode = Mode.Add;
 
-            IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
-            dialog.BindViewModel(customer);
-            dialog.ShowDialog();*/
+            IOperationWindow dialog = WindowResolver.GetWindow();
+            dialog.BindViewModel(product);
+            dialog.Show();
+        }
+
+        private void ShowEditDialog()
+        {
+            //ProductViewModel product = new ProductViewModel(SelectedProduct);
+            SelectedProduct.Mode = Mode.Edit;
+
+            IOperationWindow dialog = WindowResolver.GetWindow();
+            dialog.BindViewModel(SelectedProduct);
+            dialog.Show();
         }
 
         private void OnPropertyChanged(string propertyName)

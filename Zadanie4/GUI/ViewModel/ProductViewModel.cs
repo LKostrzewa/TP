@@ -8,10 +8,11 @@ using Service;
 using Model;
 using System.Windows.Input;
 using GUI.Common;
+using GUI.Interface;
 
 namespace GUI.ViewModel
 {
-    class ProductViewModel : INotifyPropertyChanged
+    class ProductViewModel : INotifyPropertyChanged, IViewModel
     {
         private ProductService productService = new ProductService();
 
@@ -23,7 +24,7 @@ namespace GUI.ViewModel
         private short productReorderPoint;
 
         //for opening up the Edit Customer window
-        private ICommand showEditCommand;
+        //private ICommand showEditCommand;
 
         //for adding/saving customer information
         private ICommand updateCommand;
@@ -35,6 +36,8 @@ namespace GUI.ViewModel
         private ICommand cancelCommand;
 
         private ProductViewModel originalValue;
+
+        //public IWindowResolver WindowResolver { get; set; }
 
         public int ProductID
         {
@@ -126,21 +129,27 @@ namespace GUI.ViewModel
             this.originalValue = (ProductViewModel)this.MemberwiseClone();
         }
 
+        internal ProductViewModel()
+        {
+
+        }
+
+        
+
         public ProductListViewModel Container
         {
             get { return ProductListViewModel.Instance(); }
         }
 
-        private void ShowEditDialog()
+        /*private void ShowEditDialog()
         {
             this.Mode = ViewModel.Mode.Edit;
-            //nwm co tu :(
-            /*IModalDialog dialog = ServiceProvider.Instance.Get<IModalDialog>();
-            dialog.BindViewModel(this); //bind to this viewModel
-            dialog.ShowDialog();*/
-        }
+            IOperationWindow dialog = WindowResolver.GetWindow();
+            dialog.BindViewModel(this);
+            dialog.Show();
+        }*/
 
-        public ICommand ShowEditCommand
+        /*public ICommand ShowEditCommand
         {
             get
             {
@@ -150,7 +159,7 @@ namespace GUI.ViewModel
                 }
                 return showEditCommand;
             }
-        }
+        }*/
 
         public ICommand UpdateCommand
         {
@@ -188,6 +197,8 @@ namespace GUI.ViewModel
             }
         }
 
+        public Action CloseWindow { get; set; }
+
         private void Update()
         {
             if(this.Mode == Mode.Add)
@@ -222,6 +233,7 @@ namespace GUI.ViewModel
                 //copy the current value so in case cancel you can undo
                 this.originalValue = (ProductViewModel)this.MemberwiseClone();
             }
+            CloseWindow();
         }
 
         private void Delete()
@@ -245,6 +257,7 @@ namespace GUI.ViewModel
                 this.ProductColor = originalValue.ProductColor;
                 this.ProductGUID = originalValue.ProductGUID;
             }
+            CloseWindow();
         }
 
         private void OnPropertyChanged(string propertyName)

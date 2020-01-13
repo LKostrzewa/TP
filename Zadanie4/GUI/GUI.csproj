@@ -56,9 +56,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="DI\ProductDetailsResolver.cs" />
+    <Compile Include="DI\ProductDetailsWindow.cs" />
+    <Compile Include="Interface\IOperationWindow.cs" />
+    <Compile Include="Interface\IViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IModalDialog.cs" />
+    <Compile Include="Interface\IWindowResolver.cs" />
     <Compile Include="ViewModel\Mode.cs" />
     <Compile Include="ViewModel\ProductListViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
@@ -73,6 +79,7 @@
     <Compile Include="View\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProductViewDialog.cs" />
     <Compile Include="View\Validators\ValidateProductName.cs" />
     <Compile Include="View\Validators\ValidateSafetyStockLevel.cs" />
   </ItemGroup>
