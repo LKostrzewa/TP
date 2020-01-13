@@ -215,7 +215,7 @@ namespace GUI.ViewModel
                 product.rowguid = this.ProductGUID;
                 productService.Create(product);
                 //refreshTheView
-                //this.Container = this.Container.GetCustomers();
+                this.Container.ProductList = this.Container.GetProducts();
             }
             else if(this.Mode == Mode.Edit)
             {
@@ -240,7 +240,7 @@ namespace GUI.ViewModel
         {
             productService.Delete(this.ProductID);
             //refresh the view
-            //this.Container.CustomerList = this.Container.GetCustomers();
+            this.Container.ProductList = this.Container.GetProducts();
         }
 
         private void Undo()

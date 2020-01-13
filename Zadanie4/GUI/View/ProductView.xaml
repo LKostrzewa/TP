@@ -24,6 +24,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label Margin="10" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="Blue" FontSize="15">
                 <Label.Style>
@@ -47,11 +48,12 @@
             </Label>
             <!--<Label Name="lblProductID" Content="ProductID" Margin="10,4,10,20" Grid.Row="1" />-->
             <Label Name="lblProductName" Content="Product Name"  Margin="10,20" Grid.Row="1"/>
-            <Label Name="lblProductModifiedDate" Content="Modified Date" Margin="10,20" Grid.Row="2" />
-            <Label Name="lblProductSellStartDate" Content="Sell Start Date"  Margin="10,20" Grid.Row="3"/>
-            <Label Name="lblProductSellEndDate" Content="Sell End Date"  Margin="10,20" Grid.Row="4"/>
-            <Label Name="lblProductSafetyStockLevel" Content="Safety Stock Level" Margin="10,20" Grid.Row="5" />
-            <Label Name="lblProductReorderPoint" Content="Reorder Point"  Margin="10,20" Grid.Row="6"/>
+            <Label Name="lblProductNumber" Content="Product Number"  Margin="10,20" Grid.Row="2"/>
+            <Label Name="lblProductModifiedDate" Content="Modified Date" Margin="10,20" Grid.Row="3" />
+            <Label Name="lblProductSellStartDate" Content="Sell Start Date"  Margin="10,20" Grid.Row="4"/>
+            <Label Name="lblProductSellEndDate" Content="Sell End Date"  Margin="10,20" Grid.Row="5"/>
+            <Label Name="lblProductSafetyStockLevel" Content="Safety Stock Level" Margin="10,20" Grid.Row="6" />
+            <Label Name="lblProductReorderPoint" Content="Reorder Point"  Margin="10,20" Grid.Row="7"/>
             <!-- Tu trzeba dodać validatory -->
             <!--<TextBox Name="txtProductID" Text="{Binding ProductID}" Margin="10,4,10,20" Width="200" Grid.Column="1" Grid.Row="1" />-->
             <TextBox Name="txtProductName" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="1">
@@ -63,10 +65,19 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <Label Name="txtProductModifiedDate" Content="{Binding ProductModifiedDate}" Margin="10,4,10,20" Width="200" Grid.Column="1" Grid.Row="2" />
-            <DatePicker Name="txtProductSellStartDate" SelectedDate="{Binding ProductSellStartDate}" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="3"/>
-            <DatePicker Name="txtProductSellEndDate" SelectedDate="{Binding ProductSellEndDate}" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="4"/>
-            <TextBox Name="txtProductSafetyStockLevel" Margin="10,4,10,20" Width="200" Grid.Column="1" Grid.Row="5">
+            <TextBox Name="txtProductNumber" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="2">
+                <TextBox.Text>
+                    <Binding Path="ProductNumber">
+                        <Binding.ValidationRules>
+                            <validators:ValidateSafetyStockLevel ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Name="txtProductModifiedDate" Content="{Binding ProductModifiedDate}" Margin="10,4,10,20" Width="200" Grid.Column="1" Grid.Row="3" />
+            <DatePicker Name="txtProductSellStartDate" SelectedDate="{Binding ProductSellStartDate}" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="4"/>
+            <DatePicker Name="txtProductSellEndDate" SelectedDate="{Binding ProductSellEndDate}" Margin="10,20" Width="200" Grid.Column="1" Grid.Row="5"/>
+            <TextBox Name="txtProductSafetyStockLevel" Margin="10,4,10,20" Width="200" Grid.Column="1" Grid.Row="6">
                 <TextBox.Text>
                     <Binding Path="ProductSafetyStockLevel">
                         <Binding.ValidationRules>
@@ -75,7 +86,7 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <TextBox Name="txtProductReorderPoint"  Margin="10,20" Width="200" Grid.Column="1" Grid.Row="6">
+            <TextBox Name="txtProductReorderPoint"  Margin="10,20" Width="200" Grid.Column="1" Grid.Row="7">
                 <TextBox.Text>
                     <Binding Path="ProductReorderPoint" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -91,7 +102,7 @@
                     </Button.Resources>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="IsEnabled" Value="False"/>
+                            <!--<Setter Property="IsEnabled" Value="False"/>-->
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Mode}">
                                     <DataTrigger.Value>
@@ -105,19 +116,19 @@
                                     </DataTrigger.Value>
                                     <Setter Property="Content" Value="Save"/>
                                 </DataTrigger>
-                                <MultiDataTrigger>
+                                <!--<MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding ElementName=ProductName, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
                                         <Condition Binding="{Binding ElementName=ProductName, Path=(Validation.HasError)}" Value="False"/>
 
-                                        <!--<Condition Binding="{Binding ElementName=SafetyStockLevel, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
+                                        <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
                                         <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=(Validation.HasError)}" Value="False"/>
 
                                         <Condition Binding="{Binding ElementName=ReorderPoint, Path=Text, Converter={StaticResource isEmpty}}" Value="True"/>
-                                        <Condition Binding="{Binding ElementName=ReorderPoint, Path=(Validation.HasError)}" Value="False"/>-->
+                                        <Condition Binding="{Binding ElementName=ReorderPoint, Path=(Validation.HasError)}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="IsEnabled" Value="True"/>
-                                </MultiDataTrigger>
+                                </MultiDataTrigger>-->
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
