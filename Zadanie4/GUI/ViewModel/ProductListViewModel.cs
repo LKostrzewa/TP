@@ -45,7 +45,7 @@ namespace GUI.ViewModel
             }
         }
 
-        public ProductViewModel SelectedCustomer
+        public ProductViewModel SelectedProduct
         {
             get
             {
