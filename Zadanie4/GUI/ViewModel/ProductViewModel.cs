@@ -141,26 +141,6 @@ namespace GUI.ViewModel
             get { return ProductListViewModel.Instance(); }
         }
 
-        /*private void ShowEditDialog()
-        {
-            this.Mode = ViewModel.Mode.Edit;
-            IOperationWindow dialog = WindowResolver.GetWindow();
-            dialog.BindViewModel(this);
-            dialog.Show();
-        }*/
-
-        /*public ICommand ShowEditCommand
-        {
-            get
-            {
-                if (showEditCommand == null)
-                {
-                    showEditCommand = new CommandBase(i => this.ShowEditDialog(), null);
-                }
-                return showEditCommand;
-            }
-        }*/
-
         public ICommand UpdateCommand
         {
             get
@@ -220,6 +200,7 @@ namespace GUI.ViewModel
             else if(this.Mode == Mode.Edit)
             {
                 Product product = new Product();
+                product.ProductID = this.ProductID;
                 product.ProductNumber = this.ProductNumber;
                 product.Name = this.ProductName;
                 product.ModifiedDate = this.ProductModifiedDate;

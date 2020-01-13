@@ -92,7 +92,6 @@ namespace GUI.ViewModel
             //this.openDialogCommand = new RelayCommand(OnOpenDialog);
         }
 
-        //czym tu jest internal tylko Bozia wie
         internal ObservableCollection<ProductViewModel> GetProducts()
         {
             if (productList == null)
@@ -114,6 +113,7 @@ namespace GUI.ViewModel
             IOperationWindow dialog = WindowResolver.GetWindow();
             dialog.BindViewModel(product);
             dialog.Show();
+            product.Container.ProductList = GetProducts();
         }
 
         private void ShowEditDialog()
