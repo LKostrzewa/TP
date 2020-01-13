@@ -32,7 +32,7 @@ namespace GUI.ViewModel
 
         private ProductViewModel originalValue;
 
-        public int ProductId
+        public int ProductID
         {
             get;
             set;
@@ -58,6 +58,36 @@ namespace GUI.ViewModel
             }
         }
 
+        public DateTime ProductModifiedDate
+        {
+            get;
+            set;
+        }
+
+        public DateTime ProductSellStartDate
+        {
+            get;
+            set;
+        }
+
+        public DateTime? ProductSellEndDate
+        {
+            get;
+            set;
+        }
+
+        public short ProductSafetyStockLevel
+        {
+            get;
+            set;
+        }
+
+        public short ProductReorderPoint
+        {
+            get;
+            set;
+        }
+
         public Mode Mode
         {
             get;
@@ -66,9 +96,14 @@ namespace GUI.ViewModel
 
         public ProductViewModel(Product c)
         {
-            ProductId = c.ProductID;
+            ProductID = c.ProductID;
             productName = c.Name;
             productNumber = c.ProductNumber;
+            ProductModifiedDate = c.ModifiedDate;
+            ProductSellStartDate = c.SellStartDate;
+            ProductSellEndDate = c.SellEndDate;
+            ProductSafetyStockLevel = c.SafetyStockLevel;
+            ProductReorderPoint = c.ReorderPoint;
             //copy the current value so in case cancel you can undo
             this.originalValue = (ProductViewModel)this.MemberwiseClone();
         }
@@ -142,6 +177,11 @@ namespace GUI.ViewModel
                 Product product = new Product();
                 product.ProductNumber = this.ProductNumber;
                 product.Name = this.ProductName;
+                product.ModifiedDate = this.ProductModifiedDate;
+                product.SellStartDate = this.ProductSellStartDate;
+                product.SellEndDate = this.ProductSellEndDate;
+                product.SafetyStockLevel = this.ProductSafetyStockLevel;
+                product.ReorderPoint = this.ProductReorderPoint;
                 productService.Create(product);
                 //refreshTheView
                 //this.Container = this.Container.GetCustomers();
@@ -151,6 +191,11 @@ namespace GUI.ViewModel
                 Product product = new Product();
                 product.ProductNumber = this.ProductNumber;
                 product.Name = this.ProductName;
+                product.ModifiedDate = this.ProductModifiedDate;
+                product.SellStartDate = this.ProductSellStartDate;
+                product.SellEndDate = this.ProductSellEndDate;
+                product.SafetyStockLevel = this.ProductSafetyStockLevel;
+                product.ReorderPoint = this.ProductReorderPoint;
                 productService.Update(product);
                 //copy the current value so in case cancel you can undo
                 this.originalValue = (ProductViewModel)this.MemberwiseClone();
@@ -159,7 +204,7 @@ namespace GUI.ViewModel
 
         private void Delete()
         {
-            productService.Delete(this.ProductId);
+            productService.Delete(this.ProductID);
             //refresh the view
             //this.Container.CustomerList = this.Container.GetCustomers();
         }
@@ -170,6 +215,11 @@ namespace GUI.ViewModel
             {
                 this.ProductName = originalValue.ProductName;
                 this.ProductNumber = originalValue.ProductNumber;
+                this.ProductModifiedDate = originalValue.ProductModifiedDate;
+                this.ProductSellStartDate = originalValue.ProductSellStartDate;
+                this.ProductSellEndDate = originalValue.ProductSellEndDate;
+                this.ProductSafetyStockLevel = originalValue.ProductSafetyStockLevel;
+                this.ProductReorderPoint = originalValue.ProductReorderPoint;
             }
         }
 
