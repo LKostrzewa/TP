@@ -11,13 +11,13 @@
         Title="ProductView" Height="550" Width="800">
 
     <Window.Resources>
-        <Style x:Key="GeneralErrorStyle">
+        <Style x:Key="GeneralErrorStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel>
                             <TextBlock DockPanel.Dock="Bottom" Foreground="Red" FontSize="10pt" Text="{Binding ElementName=placeholder, 
-                                       Path= AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                                       Path= AdornedElement.(Validation.Errors)/ErrorContent}"/>
                             <AdornedElementPlaceholder x:Name="placeholder" />
                         </DockPanel>
                     </ControlTemplate>
