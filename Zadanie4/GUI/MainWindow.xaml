@@ -15,9 +15,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <!--<DataTemplate DataType="{x:Type vm:ProductViewModel}">
-            <v:ProductView/>
-        </DataTemplate>-->
+        
         <DataTemplate x:Key="ProductListTemplate" >
             <v:ProductListView/>
         </DataTemplate>

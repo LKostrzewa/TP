@@ -35,7 +35,7 @@
                     <GridViewColumn Header="Product ID" DisplayMemberBinding="{Binding ProductID}" Width="200"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ProductName}" Width="200"/>
                     <GridViewColumn Header="Number" DisplayMemberBinding="{Binding ProductNumber}" Width="200"/>
-                    <GridViewColumn CellTemplate="{StaticResource RowButtons}"/>
+                    <!--<GridViewColumn CellTemplate="{StaticResource RowButtons}"/>-->
                 </GridView>
             </ListView.View>
         </ListView>

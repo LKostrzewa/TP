@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="View\ProductViewDialog.cs" />
     <Compile Include="View\Validators\ValidateProductName.cs" />
+    <Compile Include="View\Validators\ValidateReorderPoint.cs" />
     <Compile Include="View\Validators\ValidateSafetyStockLevel.cs" />
   </ItemGroup>
   <ItemGroup>
