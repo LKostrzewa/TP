@@ -16,6 +16,8 @@ namespace GUI.ViewModel
     class ProductListViewModel
     {
         private static ProductListViewModel instance = null;
+        private ProductService productService = null;
+        public List<Product> products;
 
         //the selected customer (for showing orders for that customer)
         private ProductViewModel selectedProduct = null;
@@ -45,6 +47,16 @@ namespace GUI.ViewModel
             set
             {
                 productList = value;
+                //OnPropertyChanged("ProductList");
+            }
+        }
+
+        public List<Product> Products
+        {
+            get { return products; }
+            set
+            {
+                products = value;
                 OnPropertyChanged("ProductList");
             }
         }
@@ -86,10 +98,22 @@ namespace GUI.ViewModel
             }
         }
 
-        public ProductListViewModel()
+        public ProductListViewModel() : this(new ProductService())
         {
-            this.ProductList = GetProducts();
+            //this.ProductList = GetProducts();
             //this.openDialogCommand = new RelayCommand(OnOpenDialog);
+        }
+
+        public ProductListViewModel(ProductService productService)
+        {
+            this.productService = productService;
+            this.Products = (List<Product>)productService.GetAllProducts();
+            productService.CollectionChanged += OnProductsChanged;
+        }
+
+        private void OnProductsChanged()
+        {
+            this.Products = (List<Product>)productService.GetAllProducts();
         }
 
         internal ObservableCollection<ProductViewModel> GetProducts()
@@ -97,9 +121,9 @@ namespace GUI.ViewModel
             if (productList == null)
                 productList = new ObservableCollection<ProductViewModel>();
             productList.Clear();
-            foreach (Product p in new ProductService().GetAllProducts())
+            foreach (Product p in Products)
             {
-                ProductViewModel c = new ProductViewModel(p);
+                ProductViewModel c = new ProductViewModel(p, productService);
                 productList.Add(c);
             }
             return productList;
