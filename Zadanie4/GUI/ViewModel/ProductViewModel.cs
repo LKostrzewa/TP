@@ -12,7 +12,7 @@ using GUI.Interface;
 
 namespace GUI.ViewModel
 {
-    class ProductViewModel : INotifyPropertyChanged, IViewModel
+    public class ProductViewModel : INotifyPropertyChanged, IViewModel
     {
         public IProductService productService;// = new ProductService();
 
@@ -153,7 +153,7 @@ namespace GUI.ViewModel
             this.productService = service;
         }
 
-        internal ProductViewModel() : this(new ProductService())
+        public ProductViewModel() : this(new ProductService())
         {
 
         }

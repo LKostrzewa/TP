@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace GUI.ViewModel
 {
-    class ProductListViewModel
+    public class ProductListViewModel
     {
         private static ProductListViewModel instance = null;
         //private ProductService productService = null;
