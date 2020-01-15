@@ -9,13 +9,20 @@ namespace GuiTest
     public class ViewTest
     {
         [TestMethod]
-        public void ProductDetailsViewModelCtorTest()
+        public void ProductViewModelCtorTest()
         {
             ProductViewModel productViewModel = new ProductViewModel();
             Assert.IsNotNull(productViewModel.ProductGUID);
             Assert.IsNotNull(productViewModel.ProductID);
             Assert.IsNotNull(productViewModel.ProductReorderPoint);
             Assert.IsNotNull(productViewModel.ProductSafetyStockLevel);
+        }
+
+        [TestMethod]
+        public void ProductListViewModelCtorTest()
+        {
+            ProductListViewModel productListViewModel = new ProductListViewModel();
+            Assert.IsNotNull(productListViewModel.ProductList);
         }
 
         [TestMethod]
