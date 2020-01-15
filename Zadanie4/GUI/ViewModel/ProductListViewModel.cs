@@ -17,7 +17,7 @@ namespace GUI.ViewModel
     {
         private static ProductListViewModel instance = null;
         //private ProductService productService = null;
-        public List<Product> products;
+        //public List<Product> products;
 
         IProductService productService = null;
 
@@ -49,11 +49,11 @@ namespace GUI.ViewModel
             set
             {
                 productList = value;
-                //OnPropertyChanged("ProductList");
+                OnPropertyChanged("ProductList");
             }
         }
 
-        public List<Product> Products
+        /*public List<Product> Products
         {
             get { return products; }
             set
@@ -61,7 +61,7 @@ namespace GUI.ViewModel
                 products = value;
                 OnPropertyChanged("ProductList");
             }
-        }
+        }*/
 
         public ProductViewModel SelectedProduct
         {
