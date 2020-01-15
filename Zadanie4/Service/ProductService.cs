@@ -9,10 +9,16 @@ namespace Service
 {
     public class ProductService : IProductService
     {
-        
+        public event VoidHandler CollectionChanged;
+        public delegate void VoidHandler();
+
         public void Create(Product product)
         {
-            LINQ_tools.InsertNewProduct(product);
+            //Task.Run(() =>
+            //{
+                LINQ_tools.InsertNewProduct(product);
+               // CollectionChanged?.Invoke();
+           // });
         }
 
         public Product Read(int id)
@@ -22,12 +28,20 @@ namespace Service
 
         public void Update(Product product)
         {
-            LINQ_tools.UpdateProduct(product);
+           // Task.Run(() =>
+           // {
+                LINQ_tools.UpdateProduct(product);
+               // CollectionChanged?.Invoke();
+           // });
         }
 
         public void Delete(int id)
         {
-            LINQ_tools.DeleteProductId(id);
+            //Task.Run(() =>
+            //{
+                LINQ_tools.DeleteProductId(id);
+               // CollectionChanged?.Invoke();
+           // });
         }
 
         public IEnumerable<Product> GetAllProducts()

@@ -14,7 +14,7 @@ namespace GUI.ViewModel
 {
     class ProductViewModel : INotifyPropertyChanged, IViewModel
     {
-        private IProductService productService;// = new ProductService();
+        public IProductService productService;// = new ProductService();
 
         private string productName;
         private string productNumber;
@@ -286,10 +286,11 @@ namespace GUI.ViewModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            //if (this.PropertyChanged != null)
+            //{
+            // this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            // }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

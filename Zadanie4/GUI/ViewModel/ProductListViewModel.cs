@@ -17,6 +17,8 @@ namespace GUI.ViewModel
     {
         private static ProductListViewModel instance = null;
 
+        IProductService productService = null;
+
         //the selected customer (for showing orders for that customer)
         private ProductViewModel selectedProduct = null;
 
@@ -87,7 +89,12 @@ namespace GUI.ViewModel
             }
         }
 
-        public ProductListViewModel()
+        public ProductListViewModel(IProductService productService)
+        {
+            this.productService = productService;
+        }
+
+        public ProductListViewModel() : this(new ProductService())
         {
             this.ProductList = GetProducts();
             //this.openDialogCommand = new RelayCommand(OnOpenDialog);
@@ -98,7 +105,7 @@ namespace GUI.ViewModel
             if (productList == null)
                 productList = new ObservableCollection<ProductViewModel>();
             productList.Clear();
-            foreach (Product p in new ProductService().GetAllProducts())
+            foreach (Product p in productService.GetAllProducts())
             {
                 ProductViewModel c = new ProductViewModel(p);
                 productList.Add(c);
@@ -129,10 +136,11 @@ namespace GUI.ViewModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            // if (this.PropertyChanged != null)
+            //{
+            //   this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            // }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
