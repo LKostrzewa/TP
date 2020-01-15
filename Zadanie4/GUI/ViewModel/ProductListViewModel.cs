@@ -109,21 +109,7 @@ namespace GUI.ViewModel
 
         public ProductListViewModel() : this(new ProductService())
         {
-            //this.ProductList = GetProducts();
-            //this.openDialogCommand = new RelayCommand(OnOpenDialog);
         }
-
-        /*public ProductListViewModel(ProductService productService)
-        {
-            this.productService = productService;
-            this.Products = (List<Product>)productService.GetAllProducts();
-            productService.CollectionChanged += OnProductsChanged;
-        }
-
-        private void OnProductsChanged()
-        {
-            this.Products = (List<Product>)productService.GetAllProducts();
-        }*/
 
         internal ObservableCollection<ProductViewModel> GetProducts()
         {
@@ -161,10 +147,6 @@ namespace GUI.ViewModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            // if (this.PropertyChanged != null)
-            //{
-            //   this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            // }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 

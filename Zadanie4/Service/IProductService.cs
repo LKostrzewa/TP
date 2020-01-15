@@ -9,7 +9,6 @@ namespace Service
 {
     public interface IProductService
     {
-        //event VoidHandler CollectionChanged;
 
         void Create(Product product);
 
@@ -21,6 +20,4 @@ namespace Service
 
         IEnumerable<Product> GetAllProducts();
     }
-
-   // public delegate void VoidHandler();
 }
