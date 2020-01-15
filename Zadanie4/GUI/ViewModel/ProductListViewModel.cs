@@ -16,6 +16,8 @@ namespace GUI.ViewModel
     class ProductListViewModel
     {
         private static ProductListViewModel instance = null;
+        //private ProductService productService = null;
+        public List<Product> products;
 
         IProductService productService = null;
 
@@ -47,6 +49,16 @@ namespace GUI.ViewModel
             set
             {
                 productList = value;
+                //OnPropertyChanged("ProductList");
+            }
+        }
+
+        public List<Product> Products
+        {
+            get { return products; }
+            set
+            {
+                products = value;
                 OnPropertyChanged("ProductList");
             }
         }
@@ -88,17 +100,30 @@ namespace GUI.ViewModel
                 return showEditCommand;
             }
         }
-
+        
         public ProductListViewModel(IProductService productService)
         {
             this.productService = productService;
         }
 
+
         public ProductListViewModel() : this(new ProductService())
         {
-            this.ProductList = GetProducts();
+            //this.ProductList = GetProducts();
             //this.openDialogCommand = new RelayCommand(OnOpenDialog);
         }
+
+        /*public ProductListViewModel(ProductService productService)
+        {
+            this.productService = productService;
+            this.Products = (List<Product>)productService.GetAllProducts();
+            productService.CollectionChanged += OnProductsChanged;
+        }
+
+        private void OnProductsChanged()
+        {
+            this.Products = (List<Product>)productService.GetAllProducts();
+        }*/
 
         internal ObservableCollection<ProductViewModel> GetProducts()
         {

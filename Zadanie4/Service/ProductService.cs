@@ -14,6 +14,7 @@ namespace Service
 
         public void Create(Product product)
         {
+
             //Task.Run(() =>
             //{
                 LINQ_tools.InsertNewProduct(product);

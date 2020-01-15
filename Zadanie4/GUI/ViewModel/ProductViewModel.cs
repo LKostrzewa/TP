@@ -16,6 +16,7 @@ namespace GUI.ViewModel
     {
         public IProductService productService;// = new ProductService();
 
+
         private string productName;
         private string productNumber;
         private DateTime productSellStartDate;
