@@ -55,19 +55,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\MaintenanceFormViewModel.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="Common\CommandBase.cs" />
+    <Compile Include="DI\ProductDetailsResolver.cs" />
+    <Compile Include="DI\ProductDetailsWindow.cs" />
+    <Compile Include="Interface\IOperationWindow.cs" />
+    <Compile Include="Interface\IViewModel.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IModalDialog.cs" />
+    <Compile Include="Interface\IWindowResolver.cs" />
+    <Compile Include="ViewModel\Mode.cs" />
+    <Compile Include="ViewModel\ProductListViewModel.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="View\Converters\isNullConverter.cs" />
+    <Compile Include="View\Converters\isEmptyConverter.cs" />
+    <Compile Include="View\ProductListView.xaml.cs">
+      <DependentUpon>ProductListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductViewDialog.cs" />
+    <Compile Include="View\Validators\ValidateProductName.cs" />
+    <Compile Include="View\Validators\ValidateReorderPoint.cs" />
+    <Compile Include="View\Validators\ValidateSafetyStockLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -95,7 +111,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
@@ -108,6 +123,20 @@
       <Project>{52891039-28bc-4a31-bc9e-2c8404c16adb}</Project>
       <Name>Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

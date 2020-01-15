@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GUI.DI;
+using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,29 +13,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GUI.ViewModel;
-using GUI.DI;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductView : Window
     {
-        public MainWindow()
+        public ProductView()
         {
             InitializeComponent();
-            //this.DataContext = ProductListViewModel.Instance();
-            
         }
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            ProductListViewModel mc = (ProductListViewModel)DataContext;
+            ProductViewModel mc = (ProductViewModel)DataContext;
             //mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            mc.WindowResolver = new ProductDetailsResolver();
+           // mc.WindowResolver = mc.Container.WindowResolver;
         }
     }
 }

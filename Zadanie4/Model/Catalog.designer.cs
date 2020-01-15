@@ -30,36 +30,39 @@ namespace Model
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBillOfMaterial(BillOfMaterial instance);
-    partial void UpdateBillOfMaterial(BillOfMaterial instance);
-    partial void DeleteBillOfMaterial(BillOfMaterial instance);
     partial void InsertCulture(Culture instance);
     partial void UpdateCulture(Culture instance);
     partial void DeleteCulture(Culture instance);
-    partial void InsertIllustration(Illustration instance);
-    partial void UpdateIllustration(Illustration instance);
-    partial void DeleteIllustration(Illustration instance);
+    partial void InsertBillOfMaterial(BillOfMaterial instance);
+    partial void UpdateBillOfMaterial(BillOfMaterial instance);
+    partial void DeleteBillOfMaterial(BillOfMaterial instance);
     partial void InsertLocation(Location instance);
     partial void UpdateLocation(Location instance);
     partial void DeleteLocation(Location instance);
-    partial void InsertProduct(Product instance);
-    partial void UpdateProduct(Product instance);
-    partial void DeleteProduct(Product instance);
-    partial void InsertProductCategory(ProductCategory instance);
-    partial void UpdateProductCategory(ProductCategory instance);
-    partial void DeleteProductCategory(ProductCategory instance);
+    partial void InsertIllustration(Illustration instance);
+    partial void UpdateIllustration(Illustration instance);
+    partial void DeleteIllustration(Illustration instance);
     partial void InsertProductCostHistory(ProductCostHistory instance);
     partial void UpdateProductCostHistory(ProductCostHistory instance);
     partial void DeleteProductCostHistory(ProductCostHistory instance);
+    partial void InsertProductCategory(ProductCategory instance);
+    partial void UpdateProductCategory(ProductCategory instance);
+    partial void DeleteProductCategory(ProductCategory instance);
+    partial void InsertProduct(Product instance);
+    partial void UpdateProduct(Product instance);
+    partial void DeleteProduct(Product instance);
     partial void InsertProductDescription(ProductDescription instance);
     partial void UpdateProductDescription(ProductDescription instance);
     partial void DeleteProductDescription(ProductDescription instance);
+    partial void InsertProductCostHistory1(ProductCostHistory1 instance);
+    partial void UpdateProductCostHistory1(ProductCostHistory1 instance);
+    partial void DeleteProductCostHistory1(ProductCostHistory1 instance);
     partial void InsertProductInventory(ProductInventory instance);
     partial void UpdateProductInventory(ProductInventory instance);
     partial void DeleteProductInventory(ProductInventory instance);
-    partial void InsertProductVendor(ProductVendor instance);
-    partial void UpdateProductVendor(ProductVendor instance);
-    partial void DeleteProductVendor(ProductVendor instance);
+    partial void InsertWorkOrderRouting(WorkOrderRouting instance);
+    partial void UpdateWorkOrderRouting(WorkOrderRouting instance);
+    partial void DeleteWorkOrderRouting(WorkOrderRouting instance);
     partial void InsertProductListPriceHistory(ProductListPriceHistory instance);
     partial void UpdateProductListPriceHistory(ProductListPriceHistory instance);
     partial void DeleteProductListPriceHistory(ProductListPriceHistory instance);
@@ -99,16 +102,16 @@ namespace Model
     partial void InsertWorkOrder(WorkOrder instance);
     partial void UpdateWorkOrder(WorkOrder instance);
     partial void DeleteWorkOrder(WorkOrder instance);
-    partial void InsertWorkOrderRouting(WorkOrderRouting instance);
-    partial void UpdateWorkOrderRouting(WorkOrderRouting instance);
-    partial void DeleteWorkOrderRouting(WorkOrderRouting instance);
+    partial void InsertProductVendor(ProductVendor instance);
+    partial void UpdateProductVendor(ProductVendor instance);
+    partial void DeleteProductVendor(ProductVendor instance);
     partial void InsertVendor(Vendor instance);
     partial void UpdateVendor(Vendor instance);
     partial void DeleteVendor(Vendor instance);
     #endregion
 		
 		public CatalogDataContext() : 
-				base(global::Model.Properties.Settings.Default.AdventureWorks2017ConnectionString, mappingSource)
+				base(global::Model.Properties.Settings.Default.AdventureWorks2017ConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -137,14 +140,6 @@ namespace Model
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<BillOfMaterial> BillOfMaterials
-		{
-			get
-			{
-				return this.GetTable<BillOfMaterial>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Culture> Cultures
 		{
 			get
@@ -153,11 +148,11 @@ namespace Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Illustration> Illustrations
+		public System.Data.Linq.Table<BillOfMaterial> BillOfMaterials
 		{
 			get
 			{
-				return this.GetTable<Illustration>();
+				return this.GetTable<BillOfMaterial>();
 			}
 		}
 		
@@ -169,19 +164,11 @@ namespace Model
 			}
 		}
 		
-		public System.Data.Linq.Table<Product> Products
+		public System.Data.Linq.Table<Illustration> Illustrations
 		{
 			get
 			{
-				return this.GetTable<Product>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ProductCategory> ProductCategories
-		{
-			get
-			{
-				return this.GetTable<ProductCategory>();
+				return this.GetTable<Illustration>();
 			}
 		}
 		
@@ -193,11 +180,35 @@ namespace Model
 			}
 		}
 		
+		public System.Data.Linq.Table<ProductCategory> ProductCategories
+		{
+			get
+			{
+				return this.GetTable<ProductCategory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Product> Products
+		{
+			get
+			{
+				return this.GetTable<Product>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ProductDescription> ProductDescriptions
 		{
 			get
 			{
 				return this.GetTable<ProductDescription>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ProductCostHistory1> ProductCostHistory1s
+		{
+			get
+			{
+				return this.GetTable<ProductCostHistory1>();
 			}
 		}
 		
@@ -209,11 +220,11 @@ namespace Model
 			}
 		}
 		
-		public System.Data.Linq.Table<ProductVendor> ProductVendors
+		public System.Data.Linq.Table<WorkOrderRouting> WorkOrderRoutings
 		{
 			get
 			{
-				return this.GetTable<ProductVendor>();
+				return this.GetTable<WorkOrderRouting>();
 			}
 		}
 		
@@ -321,11 +332,11 @@ namespace Model
 			}
 		}
 		
-		public System.Data.Linq.Table<WorkOrderRouting> WorkOrderRoutings
+		public System.Data.Linq.Table<ProductVendor> ProductVendors
 		{
 			get
 			{
-				return this.GetTable<WorkOrderRouting>();
+				return this.GetTable<ProductVendor>();
 			}
 		}
 		
@@ -335,6 +346,144 @@ namespace Model
 			{
 				return this.GetTable<Vendor>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Culture")]
+	public partial class Culture : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CultureID;
+		
+		private string _Name;
+		
+		private System.DateTime _ModifiedDate;
+		
+		private EntitySet<ProductModelProductDescriptionCulture> _ProductModelProductDescriptionCultures;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCultureIDChanging(string value);
+    partial void OnCultureIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnModifiedDateChanging(System.DateTime value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public Culture()
+		{
+			this._ProductModelProductDescriptionCultures = new EntitySet<ProductModelProductDescriptionCulture>(new Action<ProductModelProductDescriptionCulture>(this.attach_ProductModelProductDescriptionCultures), new Action<ProductModelProductDescriptionCulture>(this.detach_ProductModelProductDescriptionCultures));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CultureID", DbType="NChar(6) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CultureID
+		{
+			get
+			{
+				return this._CultureID;
+			}
+			set
+			{
+				if ((this._CultureID != value))
+				{
+					this.OnCultureIDChanging(value);
+					this.SendPropertyChanging();
+					this._CultureID = value;
+					this.SendPropertyChanged("CultureID");
+					this.OnCultureIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Culture_ProductModelProductDescriptionCulture", Storage="_ProductModelProductDescriptionCultures", ThisKey="CultureID", OtherKey="CultureID")]
+		public EntitySet<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCultures
+		{
+			get
+			{
+				return this._ProductModelProductDescriptionCultures;
+			}
+			set
+			{
+				this._ProductModelProductDescriptionCultures.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProductModelProductDescriptionCultures(ProductModelProductDescriptionCulture entity)
+		{
+			this.SendPropertyChanging();
+			entity.Culture = this;
+		}
+		
+		private void detach_ProductModelProductDescriptionCultures(ProductModelProductDescriptionCulture entity)
+		{
+			this.SendPropertyChanging();
+			entity.Culture = null;
 		}
 	}
 	
@@ -715,282 +864,6 @@ namespace Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Culture")]
-	public partial class Culture : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _CultureID;
-		
-		private string _Name;
-		
-		private System.DateTime _ModifiedDate;
-		
-		private EntitySet<ProductModelProductDescriptionCulture> _ProductModelProductDescriptionCultures;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCultureIDChanging(string value);
-    partial void OnCultureIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnModifiedDateChanging(System.DateTime value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public Culture()
-		{
-			this._ProductModelProductDescriptionCultures = new EntitySet<ProductModelProductDescriptionCulture>(new Action<ProductModelProductDescriptionCulture>(this.attach_ProductModelProductDescriptionCultures), new Action<ProductModelProductDescriptionCulture>(this.detach_ProductModelProductDescriptionCultures));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CultureID", DbType="NChar(6) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CultureID
-		{
-			get
-			{
-				return this._CultureID;
-			}
-			set
-			{
-				if ((this._CultureID != value))
-				{
-					this.OnCultureIDChanging(value);
-					this.SendPropertyChanging();
-					this._CultureID = value;
-					this.SendPropertyChanged("CultureID");
-					this.OnCultureIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Culture_ProductModelProductDescriptionCulture", Storage="_ProductModelProductDescriptionCultures", ThisKey="CultureID", OtherKey="CultureID")]
-		public EntitySet<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCultures
-		{
-			get
-			{
-				return this._ProductModelProductDescriptionCultures;
-			}
-			set
-			{
-				this._ProductModelProductDescriptionCultures.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ProductModelProductDescriptionCultures(ProductModelProductDescriptionCulture entity)
-		{
-			this.SendPropertyChanging();
-			entity.Culture = this;
-		}
-		
-		private void detach_ProductModelProductDescriptionCultures(ProductModelProductDescriptionCulture entity)
-		{
-			this.SendPropertyChanging();
-			entity.Culture = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Illustration")]
-	public partial class Illustration : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IllustrationID;
-		
-		private System.Xml.Linq.XElement _Diagram;
-		
-		private System.DateTime _ModifiedDate;
-		
-		private EntitySet<ProductModelIllustration> _ProductModelIllustrations;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIllustrationIDChanging(int value);
-    partial void OnIllustrationIDChanged();
-    partial void OnDiagramChanging(System.Xml.Linq.XElement value);
-    partial void OnDiagramChanged();
-    partial void OnModifiedDateChanging(System.DateTime value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public Illustration()
-		{
-			this._ProductModelIllustrations = new EntitySet<ProductModelIllustration>(new Action<ProductModelIllustration>(this.attach_ProductModelIllustrations), new Action<ProductModelIllustration>(this.detach_ProductModelIllustrations));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IllustrationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IllustrationID
-		{
-			get
-			{
-				return this._IllustrationID;
-			}
-			set
-			{
-				if ((this._IllustrationID != value))
-				{
-					this.OnIllustrationIDChanging(value);
-					this.SendPropertyChanging();
-					this._IllustrationID = value;
-					this.SendPropertyChanged("IllustrationID");
-					this.OnIllustrationIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Diagram", DbType="Xml", UpdateCheck=UpdateCheck.Never)]
-		public System.Xml.Linq.XElement Diagram
-		{
-			get
-			{
-				return this._Diagram;
-			}
-			set
-			{
-				if ((this._Diagram != value))
-				{
-					this.OnDiagramChanging(value);
-					this.SendPropertyChanging();
-					this._Diagram = value;
-					this.SendPropertyChanged("Diagram");
-					this.OnDiagramChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Illustration_ProductModelIllustration", Storage="_ProductModelIllustrations", ThisKey="IllustrationID", OtherKey="IllustrationID")]
-		public EntitySet<ProductModelIllustration> ProductModelIllustrations
-		{
-			get
-			{
-				return this._ProductModelIllustrations;
-			}
-			set
-			{
-				this._ProductModelIllustrations.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ProductModelIllustrations(ProductModelIllustration entity)
-		{
-			this.SendPropertyChanging();
-			entity.Illustration = this;
-		}
-		
-		private void detach_ProductModelIllustrations(ProductModelIllustration entity)
-		{
-			this.SendPropertyChanging();
-			entity.Illustration = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Location")]
 	public partial class Location : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1205,6 +1078,505 @@ namespace Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Illustration")]
+	public partial class Illustration : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IllustrationID;
+		
+		private System.Xml.Linq.XElement _Diagram;
+		
+		private System.DateTime _ModifiedDate;
+		
+		private EntitySet<ProductModelIllustration> _ProductModelIllustrations;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIllustrationIDChanging(int value);
+    partial void OnIllustrationIDChanged();
+    partial void OnDiagramChanging(System.Xml.Linq.XElement value);
+    partial void OnDiagramChanged();
+    partial void OnModifiedDateChanging(System.DateTime value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public Illustration()
+		{
+			this._ProductModelIllustrations = new EntitySet<ProductModelIllustration>(new Action<ProductModelIllustration>(this.attach_ProductModelIllustrations), new Action<ProductModelIllustration>(this.detach_ProductModelIllustrations));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IllustrationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IllustrationID
+		{
+			get
+			{
+				return this._IllustrationID;
+			}
+			set
+			{
+				if ((this._IllustrationID != value))
+				{
+					this.OnIllustrationIDChanging(value);
+					this.SendPropertyChanging();
+					this._IllustrationID = value;
+					this.SendPropertyChanged("IllustrationID");
+					this.OnIllustrationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Diagram", DbType="Xml", UpdateCheck=UpdateCheck.Never)]
+		public System.Xml.Linq.XElement Diagram
+		{
+			get
+			{
+				return this._Diagram;
+			}
+			set
+			{
+				if ((this._Diagram != value))
+				{
+					this.OnDiagramChanging(value);
+					this.SendPropertyChanging();
+					this._Diagram = value;
+					this.SendPropertyChanged("Diagram");
+					this.OnDiagramChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Illustration_ProductModelIllustration", Storage="_ProductModelIllustrations", ThisKey="IllustrationID", OtherKey="IllustrationID")]
+		public EntitySet<ProductModelIllustration> ProductModelIllustrations
+		{
+			get
+			{
+				return this._ProductModelIllustrations;
+			}
+			set
+			{
+				this._ProductModelIllustrations.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProductModelIllustrations(ProductModelIllustration entity)
+		{
+			this.SendPropertyChanging();
+			entity.Illustration = this;
+		}
+		
+		private void detach_ProductModelIllustrations(ProductModelIllustration entity)
+		{
+			this.SendPropertyChanging();
+			entity.Illustration = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.ProductCostHistory")]
+	public partial class ProductCostHistory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ProductID;
+		
+		private System.DateTime _StartDate;
+		
+		private System.Nullable<System.DateTime> _EndDate;
+		
+		private decimal _StandardCost;
+		
+		private System.DateTime _ModifiedDate;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProductIDChanging(int value);
+    partial void OnProductIDChanged();
+    partial void OnStartDateChanging(System.DateTime value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnStandardCostChanging(decimal value);
+    partial void OnStandardCostChanged();
+    partial void OnModifiedDateChanging(System.DateTime value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public ProductCostHistory()
+		{
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIDChanging(value);
+					this.SendPropertyChanging();
+					this._ProductID = value;
+					this.SendPropertyChanged("ProductID");
+					this.OnProductIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Money NOT NULL")]
+		public decimal StandardCost
+		{
+			get
+			{
+				return this._StandardCost;
+			}
+			set
+			{
+				if ((this._StandardCost != value))
+				{
+					this.OnStandardCostChanging(value);
+					this.SendPropertyChanging();
+					this._StandardCost = value;
+					this.SendPropertyChanged("StandardCost");
+					this.OnStandardCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductCostHistory", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.ProductCostHistories.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.ProductCostHistories.Add(this);
+						this._ProductID = value.ProductID;
+					}
+					else
+					{
+						this._ProductID = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.ProductCategory")]
+	public partial class ProductCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ProductCategoryID;
+		
+		private string _Name;
+		
+		private System.Guid _rowguid;
+		
+		private System.DateTime _ModifiedDate;
+		
+		private EntitySet<ProductSubcategory> _ProductSubcategories;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProductCategoryIDChanging(int value);
+    partial void OnProductCategoryIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnrowguidChanging(System.Guid value);
+    partial void OnrowguidChanged();
+    partial void OnModifiedDateChanging(System.DateTime value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public ProductCategory()
+		{
+			this._ProductSubcategories = new EntitySet<ProductSubcategory>(new Action<ProductSubcategory>(this.attach_ProductSubcategories), new Action<ProductSubcategory>(this.detach_ProductSubcategories));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductCategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ProductCategoryID
+		{
+			get
+			{
+				return this._ProductCategoryID;
+			}
+			set
+			{
+				if ((this._ProductCategoryID != value))
+				{
+					this.OnProductCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._ProductCategoryID = value;
+					this.SendPropertyChanged("ProductCategoryID");
+					this.OnProductCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowguid", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid rowguid
+		{
+			get
+			{
+				return this._rowguid;
+			}
+			set
+			{
+				if ((this._rowguid != value))
+				{
+					this.OnrowguidChanging(value);
+					this.SendPropertyChanging();
+					this._rowguid = value;
+					this.SendPropertyChanged("rowguid");
+					this.OnrowguidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProductCategory_ProductSubcategory", Storage="_ProductSubcategories", ThisKey="ProductCategoryID", OtherKey="ProductCategoryID")]
+		public EntitySet<ProductSubcategory> ProductSubcategories
+		{
+			get
+			{
+				return this._ProductSubcategories;
+			}
+			set
+			{
+				this._ProductSubcategories.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProductSubcategories(ProductSubcategory entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProductCategory = this;
+		}
+		
+		private void detach_ProductSubcategories(ProductSubcategory entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProductCategory = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.Product")]
 	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1267,9 +1639,9 @@ namespace Model
 		
 		private EntitySet<ProductCostHistory> _ProductCostHistories;
 		
-		private EntitySet<ProductInventory> _ProductInventories;
+		private EntitySet<ProductCostHistory1> _ProductCostHistory1s;
 		
-		private EntitySet<ProductVendor> _ProductVendors;
+		private EntitySet<ProductInventory> _ProductInventories;
 		
 		private EntitySet<ProductListPriceHistory> _ProductListPriceHistories;
 		
@@ -1280,6 +1652,8 @@ namespace Model
 		private EntitySet<TransactionHistory> _TransactionHistories;
 		
 		private EntitySet<WorkOrder> _WorkOrders;
+		
+		private EntitySet<ProductVendor> _ProductVendors;
 		
 		private EntityRef<ProductModel> _ProductModel;
 		
@@ -1350,13 +1724,14 @@ namespace Model
 			this._BillOfMaterials = new EntitySet<BillOfMaterial>(new Action<BillOfMaterial>(this.attach_BillOfMaterials), new Action<BillOfMaterial>(this.detach_BillOfMaterials));
 			this._BillOfMaterials1 = new EntitySet<BillOfMaterial>(new Action<BillOfMaterial>(this.attach_BillOfMaterials1), new Action<BillOfMaterial>(this.detach_BillOfMaterials1));
 			this._ProductCostHistories = new EntitySet<ProductCostHistory>(new Action<ProductCostHistory>(this.attach_ProductCostHistories), new Action<ProductCostHistory>(this.detach_ProductCostHistories));
+			this._ProductCostHistory1s = new EntitySet<ProductCostHistory1>(new Action<ProductCostHistory1>(this.attach_ProductCostHistory1s), new Action<ProductCostHistory1>(this.detach_ProductCostHistory1s));
 			this._ProductInventories = new EntitySet<ProductInventory>(new Action<ProductInventory>(this.attach_ProductInventories), new Action<ProductInventory>(this.detach_ProductInventories));
-			this._ProductVendors = new EntitySet<ProductVendor>(new Action<ProductVendor>(this.attach_ProductVendors), new Action<ProductVendor>(this.detach_ProductVendors));
 			this._ProductListPriceHistories = new EntitySet<ProductListPriceHistory>(new Action<ProductListPriceHistory>(this.attach_ProductListPriceHistories), new Action<ProductListPriceHistory>(this.detach_ProductListPriceHistories));
 			this._ProductProductPhotos = new EntitySet<ProductProductPhoto>(new Action<ProductProductPhoto>(this.attach_ProductProductPhotos), new Action<ProductProductPhoto>(this.detach_ProductProductPhotos));
 			this._ProductReviews = new EntitySet<ProductReview>(new Action<ProductReview>(this.attach_ProductReviews), new Action<ProductReview>(this.detach_ProductReviews));
 			this._TransactionHistories = new EntitySet<TransactionHistory>(new Action<TransactionHistory>(this.attach_TransactionHistories), new Action<TransactionHistory>(this.detach_TransactionHistories));
 			this._WorkOrders = new EntitySet<WorkOrder>(new Action<WorkOrder>(this.attach_WorkOrders), new Action<WorkOrder>(this.detach_WorkOrders));
+			this._ProductVendors = new EntitySet<ProductVendor>(new Action<ProductVendor>(this.attach_ProductVendors), new Action<ProductVendor>(this.detach_ProductVendors));
 			this._ProductModel = default(EntityRef<ProductModel>);
 			this._ProductSubcategory = default(EntityRef<ProductSubcategory>);
 			this._UnitMeasure = default(EntityRef<UnitMeasure>);
@@ -1919,6 +2294,19 @@ namespace Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductCostHistory1", Storage="_ProductCostHistory1s", ThisKey="ProductID", OtherKey="ProductID")]
+		public EntitySet<ProductCostHistory1> ProductCostHistory1s
+		{
+			get
+			{
+				return this._ProductCostHistory1s;
+			}
+			set
+			{
+				this._ProductCostHistory1s.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductInventory", Storage="_ProductInventories", ThisKey="ProductID", OtherKey="ProductID")]
 		public EntitySet<ProductInventory> ProductInventories
 		{
@@ -1929,19 +2317,6 @@ namespace Model
 			set
 			{
 				this._ProductInventories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductVendor", Storage="_ProductVendors", ThisKey="ProductID", OtherKey="ProductID")]
-		public EntitySet<ProductVendor> ProductVendors
-		{
-			get
-			{
-				return this._ProductVendors;
-			}
-			set
-			{
-				this._ProductVendors.Assign(value);
 			}
 		}
 		
@@ -2007,6 +2382,19 @@ namespace Model
 			set
 			{
 				this._WorkOrders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductVendor", Storage="_ProductVendors", ThisKey="ProductID", OtherKey="ProductID")]
+		public EntitySet<ProductVendor> ProductVendors
+		{
+			get
+			{
+				return this._ProductVendors;
+			}
+			set
+			{
+				this._ProductVendors.Assign(value);
 			}
 		}
 		
@@ -2202,6 +2590,18 @@ namespace Model
 			entity.Product = null;
 		}
 		
+		private void attach_ProductCostHistory1s(ProductCostHistory1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_ProductCostHistory1s(ProductCostHistory1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+		
 		private void attach_ProductInventories(ProductInventory entity)
 		{
 			this.SendPropertyChanging();
@@ -2209,18 +2609,6 @@ namespace Model
 		}
 		
 		private void detach_ProductInventories(ProductInventory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = null;
-		}
-		
-		private void attach_ProductVendors(ProductVendor entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = this;
-		}
-		
-		private void detach_ProductVendors(ProductVendor entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
@@ -2285,366 +2673,17 @@ namespace Model
 			this.SendPropertyChanging();
 			entity.Product = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.ProductCategory")]
-	public partial class ProductCategory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ProductCategoryID;
-		
-		private string _Name;
-		
-		private System.Guid _rowguid;
-		
-		private System.DateTime _ModifiedDate;
-		
-		private EntitySet<ProductSubcategory> _ProductSubcategories;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnProductCategoryIDChanging(int value);
-    partial void OnProductCategoryIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnrowguidChanging(System.Guid value);
-    partial void OnrowguidChanged();
-    partial void OnModifiedDateChanging(System.DateTime value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public ProductCategory()
-		{
-			this._ProductSubcategories = new EntitySet<ProductSubcategory>(new Action<ProductSubcategory>(this.attach_ProductSubcategories), new Action<ProductSubcategory>(this.detach_ProductSubcategories));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductCategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ProductCategoryID
-		{
-			get
-			{
-				return this._ProductCategoryID;
-			}
-			set
-			{
-				if ((this._ProductCategoryID != value))
-				{
-					this.OnProductCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._ProductCategoryID = value;
-					this.SendPropertyChanged("ProductCategoryID");
-					this.OnProductCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowguid", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid rowguid
-		{
-			get
-			{
-				return this._rowguid;
-			}
-			set
-			{
-				if ((this._rowguid != value))
-				{
-					this.OnrowguidChanging(value);
-					this.SendPropertyChanging();
-					this._rowguid = value;
-					this.SendPropertyChanged("rowguid");
-					this.OnrowguidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ProductCategory_ProductSubcategory", Storage="_ProductSubcategories", ThisKey="ProductCategoryID", OtherKey="ProductCategoryID")]
-		public EntitySet<ProductSubcategory> ProductSubcategories
-		{
-			get
-			{
-				return this._ProductSubcategories;
-			}
-			set
-			{
-				this._ProductSubcategories.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ProductSubcategories(ProductSubcategory entity)
+		private void attach_ProductVendors(ProductVendor entity)
 		{
 			this.SendPropertyChanging();
-			entity.ProductCategory = this;
+			entity.Product = this;
 		}
 		
-		private void detach_ProductSubcategories(ProductSubcategory entity)
+		private void detach_ProductVendors(ProductVendor entity)
 		{
 			this.SendPropertyChanging();
-			entity.ProductCategory = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.ProductCostHistory")]
-	public partial class ProductCostHistory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ProductID;
-		
-		private System.DateTime _StartDate;
-		
-		private System.Nullable<System.DateTime> _EndDate;
-		
-		private decimal _StandardCost;
-		
-		private System.DateTime _ModifiedDate;
-		
-		private EntityRef<Product> _Product;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnProductIDChanging(int value);
-    partial void OnProductIDChanged();
-    partial void OnStartDateChanging(System.DateTime value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEndDateChanged();
-    partial void OnStandardCostChanging(decimal value);
-    partial void OnStandardCostChanged();
-    partial void OnModifiedDateChanging(System.DateTime value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public ProductCostHistory()
-		{
-			this._Product = default(EntityRef<Product>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ProductID
-		{
-			get
-			{
-				return this._ProductID;
-			}
-			set
-			{
-				if ((this._ProductID != value))
-				{
-					if (this._Product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnProductIDChanging(value);
-					this.SendPropertyChanging();
-					this._ProductID = value;
-					this.SendPropertyChanged("ProductID");
-					this.OnProductIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
-		public System.DateTime StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Money NOT NULL")]
-		public decimal StandardCost
-		{
-			get
-			{
-				return this._StandardCost;
-			}
-			set
-			{
-				if ((this._StandardCost != value))
-				{
-					this.OnStandardCostChanging(value);
-					this.SendPropertyChanging();
-					this._StandardCost = value;
-					this.SendPropertyChanged("StandardCost");
-					this.OnStandardCostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductCostHistory", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
-		public Product Product
-		{
-			get
-			{
-				return this._Product.Entity;
-			}
-			set
-			{
-				Product previousValue = this._Product.Entity;
-				if (((previousValue != value) 
-							|| (this._Product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Product.Entity = null;
-						previousValue.ProductCostHistories.Remove(this);
-					}
-					this._Product.Entity = value;
-					if ((value != null))
-					{
-						value.ProductCostHistories.Add(this);
-						this._ProductID = value.ProductID;
-					}
-					else
-					{
-						this._ProductID = default(int);
-					}
-					this.SendPropertyChanged("Product");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			entity.Product = null;
 		}
 	}
 	
@@ -2807,6 +2846,205 @@ namespace Model
 		{
 			this.SendPropertyChanging();
 			entity.ProductDescription = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.ProductCostHistory")]
+	public partial class ProductCostHistory1 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ProductID;
+		
+		private System.DateTime _StartDate;
+		
+		private System.Nullable<System.DateTime> _EndDate;
+		
+		private decimal _StandardCost;
+		
+		private System.DateTime _ModifiedDate;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProductIDChanging(int value);
+    partial void OnProductIDChanged();
+    partial void OnStartDateChanging(System.DateTime value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnStandardCostChanging(decimal value);
+    partial void OnStandardCostChanged();
+    partial void OnModifiedDateChanging(System.DateTime value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public ProductCostHistory1()
+		{
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIDChanging(value);
+					this.SendPropertyChanging();
+					this._ProductID = value;
+					this.SendPropertyChanged("ProductID");
+					this.OnProductIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
+		public System.DateTime StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardCost", DbType="Money NOT NULL")]
+		public decimal StandardCost
+		{
+			get
+			{
+				return this._StandardCost;
+			}
+			set
+			{
+				if ((this._StandardCost != value))
+				{
+					this.OnStandardCostChanging(value);
+					this.SendPropertyChanging();
+					this._StandardCost = value;
+					this.SendPropertyChanged("StandardCost");
+					this.OnStandardCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductCostHistory1", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.ProductCostHistory1s.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.ProductCostHistory1s.Add(this);
+						this._ProductID = value.ProductID;
+					}
+					else
+					{
+						this._ProductID = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -3098,74 +3336,99 @@ namespace Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Purchasing.ProductVendor")]
-	public partial class ProductVendor : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.WorkOrderRouting")]
+	public partial class WorkOrderRouting : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _WorkOrderID;
+		
 		private int _ProductID;
 		
-		private int _BusinessEntityID;
+		private short _OperationSequence;
 		
-		private int _AverageLeadTime;
+		private short _LocationID;
 		
-		private decimal _StandardPrice;
+		private System.DateTime _ScheduledStartDate;
 		
-		private System.Nullable<decimal> _LastReceiptCost;
+		private System.DateTime _ScheduledEndDate;
 		
-		private System.Nullable<System.DateTime> _LastReceiptDate;
+		private System.Nullable<System.DateTime> _ActualStartDate;
 		
-		private int _MinOrderQty;
+		private System.Nullable<System.DateTime> _ActualEndDate;
 		
-		private int _MaxOrderQty;
+		private System.Nullable<decimal> _ActualResourceHrs;
 		
-		private System.Nullable<int> _OnOrderQty;
+		private decimal _PlannedCost;
 		
-		private string _UnitMeasureCode;
+		private System.Nullable<decimal> _ActualCost;
 		
 		private System.DateTime _ModifiedDate;
 		
-		private EntityRef<Product> _Product;
+		private EntityRef<Location> _Location;
 		
-		private EntityRef<UnitMeasure> _UnitMeasure;
-		
-		private EntityRef<Vendor> _Vendor;
+		private EntityRef<WorkOrder> _WorkOrder;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnWorkOrderIDChanging(int value);
+    partial void OnWorkOrderIDChanged();
     partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
-    partial void OnBusinessEntityIDChanging(int value);
-    partial void OnBusinessEntityIDChanged();
-    partial void OnAverageLeadTimeChanging(int value);
-    partial void OnAverageLeadTimeChanged();
-    partial void OnStandardPriceChanging(decimal value);
-    partial void OnStandardPriceChanged();
-    partial void OnLastReceiptCostChanging(System.Nullable<decimal> value);
-    partial void OnLastReceiptCostChanged();
-    partial void OnLastReceiptDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLastReceiptDateChanged();
-    partial void OnMinOrderQtyChanging(int value);
-    partial void OnMinOrderQtyChanged();
-    partial void OnMaxOrderQtyChanging(int value);
-    partial void OnMaxOrderQtyChanged();
-    partial void OnOnOrderQtyChanging(System.Nullable<int> value);
-    partial void OnOnOrderQtyChanged();
-    partial void OnUnitMeasureCodeChanging(string value);
-    partial void OnUnitMeasureCodeChanged();
+    partial void OnOperationSequenceChanging(short value);
+    partial void OnOperationSequenceChanged();
+    partial void OnLocationIDChanging(short value);
+    partial void OnLocationIDChanged();
+    partial void OnScheduledStartDateChanging(System.DateTime value);
+    partial void OnScheduledStartDateChanged();
+    partial void OnScheduledEndDateChanging(System.DateTime value);
+    partial void OnScheduledEndDateChanged();
+    partial void OnActualStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnActualStartDateChanged();
+    partial void OnActualEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnActualEndDateChanged();
+    partial void OnActualResourceHrsChanging(System.Nullable<decimal> value);
+    partial void OnActualResourceHrsChanged();
+    partial void OnPlannedCostChanging(decimal value);
+    partial void OnPlannedCostChanged();
+    partial void OnActualCostChanging(System.Nullable<decimal> value);
+    partial void OnActualCostChanged();
     partial void OnModifiedDateChanging(System.DateTime value);
     partial void OnModifiedDateChanged();
     #endregion
 		
-		public ProductVendor()
+		public WorkOrderRouting()
 		{
-			this._Product = default(EntityRef<Product>);
-			this._UnitMeasure = default(EntityRef<UnitMeasure>);
-			this._Vendor = default(EntityRef<Vendor>);
+			this._Location = default(EntityRef<Location>);
+			this._WorkOrder = default(EntityRef<WorkOrder>);
 			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorkOrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int WorkOrderID
+		{
+			get
+			{
+				return this._WorkOrderID;
+			}
+			set
+			{
+				if ((this._WorkOrderID != value))
+				{
+					if (this._WorkOrder.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnWorkOrderIDChanging(value);
+					this.SendPropertyChanging();
+					this._WorkOrderID = value;
+					this.SendPropertyChanged("WorkOrderID");
+					this.OnWorkOrderIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
@@ -3179,10 +3442,6 @@ namespace Model
 			{
 				if ((this._ProductID != value))
 				{
-					if (this._Product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnProductIDChanging(value);
 					this.SendPropertyChanging();
 					this._ProductID = value;
@@ -3192,190 +3451,186 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BusinessEntityID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int BusinessEntityID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationSequence", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
+		public short OperationSequence
 		{
 			get
 			{
-				return this._BusinessEntityID;
+				return this._OperationSequence;
 			}
 			set
 			{
-				if ((this._BusinessEntityID != value))
+				if ((this._OperationSequence != value))
 				{
-					if (this._Vendor.HasLoadedOrAssignedValue)
+					this.OnOperationSequenceChanging(value);
+					this.SendPropertyChanging();
+					this._OperationSequence = value;
+					this.SendPropertyChanged("OperationSequence");
+					this.OnOperationSequenceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationID", DbType="SmallInt NOT NULL")]
+		public short LocationID
+		{
+			get
+			{
+				return this._LocationID;
+			}
+			set
+			{
+				if ((this._LocationID != value))
+				{
+					if (this._Location.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnBusinessEntityIDChanging(value);
+					this.OnLocationIDChanging(value);
 					this.SendPropertyChanging();
-					this._BusinessEntityID = value;
-					this.SendPropertyChanged("BusinessEntityID");
-					this.OnBusinessEntityIDChanged();
+					this._LocationID = value;
+					this.SendPropertyChanged("LocationID");
+					this.OnLocationIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageLeadTime", DbType="Int NOT NULL")]
-		public int AverageLeadTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScheduledStartDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ScheduledStartDate
 		{
 			get
 			{
-				return this._AverageLeadTime;
+				return this._ScheduledStartDate;
 			}
 			set
 			{
-				if ((this._AverageLeadTime != value))
+				if ((this._ScheduledStartDate != value))
 				{
-					this.OnAverageLeadTimeChanging(value);
+					this.OnScheduledStartDateChanging(value);
 					this.SendPropertyChanging();
-					this._AverageLeadTime = value;
-					this.SendPropertyChanged("AverageLeadTime");
-					this.OnAverageLeadTimeChanged();
+					this._ScheduledStartDate = value;
+					this.SendPropertyChanged("ScheduledStartDate");
+					this.OnScheduledStartDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardPrice", DbType="Money NOT NULL")]
-		public decimal StandardPrice
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScheduledEndDate", DbType="DateTime NOT NULL")]
+		public System.DateTime ScheduledEndDate
 		{
 			get
 			{
-				return this._StandardPrice;
+				return this._ScheduledEndDate;
 			}
 			set
 			{
-				if ((this._StandardPrice != value))
+				if ((this._ScheduledEndDate != value))
 				{
-					this.OnStandardPriceChanging(value);
+					this.OnScheduledEndDateChanging(value);
 					this.SendPropertyChanging();
-					this._StandardPrice = value;
-					this.SendPropertyChanged("StandardPrice");
-					this.OnStandardPriceChanged();
+					this._ScheduledEndDate = value;
+					this.SendPropertyChanged("ScheduledEndDate");
+					this.OnScheduledEndDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastReceiptCost", DbType="Money")]
-		public System.Nullable<decimal> LastReceiptCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualStartDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ActualStartDate
 		{
 			get
 			{
-				return this._LastReceiptCost;
+				return this._ActualStartDate;
 			}
 			set
 			{
-				if ((this._LastReceiptCost != value))
+				if ((this._ActualStartDate != value))
 				{
-					this.OnLastReceiptCostChanging(value);
+					this.OnActualStartDateChanging(value);
 					this.SendPropertyChanging();
-					this._LastReceiptCost = value;
-					this.SendPropertyChanged("LastReceiptCost");
-					this.OnLastReceiptCostChanged();
+					this._ActualStartDate = value;
+					this.SendPropertyChanged("ActualStartDate");
+					this.OnActualStartDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastReceiptDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LastReceiptDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualEndDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ActualEndDate
 		{
 			get
 			{
-				return this._LastReceiptDate;
+				return this._ActualEndDate;
 			}
 			set
 			{
-				if ((this._LastReceiptDate != value))
+				if ((this._ActualEndDate != value))
 				{
-					this.OnLastReceiptDateChanging(value);
+					this.OnActualEndDateChanging(value);
 					this.SendPropertyChanging();
-					this._LastReceiptDate = value;
-					this.SendPropertyChanged("LastReceiptDate");
-					this.OnLastReceiptDateChanged();
+					this._ActualEndDate = value;
+					this.SendPropertyChanged("ActualEndDate");
+					this.OnActualEndDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinOrderQty", DbType="Int NOT NULL")]
-		public int MinOrderQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualResourceHrs", DbType="Decimal(9,4)")]
+		public System.Nullable<decimal> ActualResourceHrs
 		{
 			get
 			{
-				return this._MinOrderQty;
+				return this._ActualResourceHrs;
 			}
 			set
 			{
-				if ((this._MinOrderQty != value))
+				if ((this._ActualResourceHrs != value))
 				{
-					this.OnMinOrderQtyChanging(value);
+					this.OnActualResourceHrsChanging(value);
 					this.SendPropertyChanging();
-					this._MinOrderQty = value;
-					this.SendPropertyChanged("MinOrderQty");
-					this.OnMinOrderQtyChanged();
+					this._ActualResourceHrs = value;
+					this.SendPropertyChanged("ActualResourceHrs");
+					this.OnActualResourceHrsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxOrderQty", DbType="Int NOT NULL")]
-		public int MaxOrderQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlannedCost", DbType="Money NOT NULL")]
+		public decimal PlannedCost
 		{
 			get
 			{
-				return this._MaxOrderQty;
+				return this._PlannedCost;
 			}
 			set
 			{
-				if ((this._MaxOrderQty != value))
+				if ((this._PlannedCost != value))
 				{
-					this.OnMaxOrderQtyChanging(value);
+					this.OnPlannedCostChanging(value);
 					this.SendPropertyChanging();
-					this._MaxOrderQty = value;
-					this.SendPropertyChanged("MaxOrderQty");
-					this.OnMaxOrderQtyChanged();
+					this._PlannedCost = value;
+					this.SendPropertyChanged("PlannedCost");
+					this.OnPlannedCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnOrderQty", DbType="Int")]
-		public System.Nullable<int> OnOrderQty
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualCost", DbType="Money")]
+		public System.Nullable<decimal> ActualCost
 		{
 			get
 			{
-				return this._OnOrderQty;
+				return this._ActualCost;
 			}
 			set
 			{
-				if ((this._OnOrderQty != value))
+				if ((this._ActualCost != value))
 				{
-					this.OnOnOrderQtyChanging(value);
+					this.OnActualCostChanging(value);
 					this.SendPropertyChanging();
-					this._OnOrderQty = value;
-					this.SendPropertyChanged("OnOrderQty");
-					this.OnOnOrderQtyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitMeasureCode", DbType="NChar(3) NOT NULL", CanBeNull=false)]
-		public string UnitMeasureCode
-		{
-			get
-			{
-				return this._UnitMeasureCode;
-			}
-			set
-			{
-				if ((this._UnitMeasureCode != value))
-				{
-					if (this._UnitMeasure.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUnitMeasureCodeChanging(value);
-					this.SendPropertyChanging();
-					this._UnitMeasureCode = value;
-					this.SendPropertyChanged("UnitMeasureCode");
-					this.OnUnitMeasureCodeChanged();
+					this._ActualCost = value;
+					this.SendPropertyChanged("ActualCost");
+					this.OnActualCostChanged();
 				}
 			}
 		}
@@ -3400,104 +3655,70 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductVendor", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
-		public Product Product
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Location_WorkOrderRouting", Storage="_Location", ThisKey="LocationID", OtherKey="LocationID", IsForeignKey=true)]
+		public Location Location
 		{
 			get
 			{
-				return this._Product.Entity;
+				return this._Location.Entity;
 			}
 			set
 			{
-				Product previousValue = this._Product.Entity;
+				Location previousValue = this._Location.Entity;
 				if (((previousValue != value) 
-							|| (this._Product.HasLoadedOrAssignedValue == false)))
+							|| (this._Location.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Product.Entity = null;
-						previousValue.ProductVendors.Remove(this);
+						this._Location.Entity = null;
+						previousValue.WorkOrderRoutings.Remove(this);
 					}
-					this._Product.Entity = value;
+					this._Location.Entity = value;
 					if ((value != null))
 					{
-						value.ProductVendors.Add(this);
-						this._ProductID = value.ProductID;
+						value.WorkOrderRoutings.Add(this);
+						this._LocationID = value.LocationID;
 					}
 					else
 					{
-						this._ProductID = default(int);
+						this._LocationID = default(short);
 					}
-					this.SendPropertyChanged("Product");
+					this.SendPropertyChanged("Location");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnitMeasure_ProductVendor", Storage="_UnitMeasure", ThisKey="UnitMeasureCode", OtherKey="UnitMeasureCode", IsForeignKey=true)]
-		public UnitMeasure UnitMeasure
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkOrder_WorkOrderRouting", Storage="_WorkOrder", ThisKey="WorkOrderID", OtherKey="WorkOrderID", IsForeignKey=true)]
+		public WorkOrder WorkOrder
 		{
 			get
 			{
-				return this._UnitMeasure.Entity;
+				return this._WorkOrder.Entity;
 			}
 			set
 			{
-				UnitMeasure previousValue = this._UnitMeasure.Entity;
+				WorkOrder previousValue = this._WorkOrder.Entity;
 				if (((previousValue != value) 
-							|| (this._UnitMeasure.HasLoadedOrAssignedValue == false)))
+							|| (this._WorkOrder.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._UnitMeasure.Entity = null;
-						previousValue.ProductVendors.Remove(this);
+						this._WorkOrder.Entity = null;
+						previousValue.WorkOrderRoutings.Remove(this);
 					}
-					this._UnitMeasure.Entity = value;
+					this._WorkOrder.Entity = value;
 					if ((value != null))
 					{
-						value.ProductVendors.Add(this);
-						this._UnitMeasureCode = value.UnitMeasureCode;
+						value.WorkOrderRoutings.Add(this);
+						this._WorkOrderID = value.WorkOrderID;
 					}
 					else
 					{
-						this._UnitMeasureCode = default(string);
+						this._WorkOrderID = default(int);
 					}
-					this.SendPropertyChanged("UnitMeasure");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vendor_ProductVendor", Storage="_Vendor", ThisKey="BusinessEntityID", OtherKey="BusinessEntityID", IsForeignKey=true)]
-		public Vendor Vendor
-		{
-			get
-			{
-				return this._Vendor.Entity;
-			}
-			set
-			{
-				Vendor previousValue = this._Vendor.Entity;
-				if (((previousValue != value) 
-							|| (this._Vendor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Vendor.Entity = null;
-						previousValue.ProductVendors.Remove(this);
-					}
-					this._Vendor.Entity = value;
-					if ((value != null))
-					{
-						value.ProductVendors.Add(this);
-						this._BusinessEntityID = value.BusinessEntityID;
-					}
-					else
-					{
-						this._BusinessEntityID = default(int);
-					}
-					this.SendPropertyChanged("Vendor");
+					this.SendPropertyChanged("WorkOrder");
 				}
 			}
 		}
@@ -4501,7 +4722,7 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThumbNailPhoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThumbNailPhoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary ThumbNailPhoto
 		{
 			get
@@ -4541,7 +4762,7 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LargePhoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LargePhoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary LargePhoto
 		{
 			get
@@ -6658,99 +6879,74 @@ namespace Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="Production.WorkOrderRouting")]
-	public partial class WorkOrderRouting : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="Purchasing.ProductVendor")]
+	public partial class ProductVendor : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _WorkOrderID;
-		
 		private int _ProductID;
 		
-		private short _OperationSequence;
+		private int _BusinessEntityID;
 		
-		private short _LocationID;
+		private int _AverageLeadTime;
 		
-		private System.DateTime _ScheduledStartDate;
+		private decimal _StandardPrice;
 		
-		private System.DateTime _ScheduledEndDate;
+		private System.Nullable<decimal> _LastReceiptCost;
 		
-		private System.Nullable<System.DateTime> _ActualStartDate;
+		private System.Nullable<System.DateTime> _LastReceiptDate;
 		
-		private System.Nullable<System.DateTime> _ActualEndDate;
+		private int _MinOrderQty;
 		
-		private System.Nullable<decimal> _ActualResourceHrs;
+		private int _MaxOrderQty;
 		
-		private decimal _PlannedCost;
+		private System.Nullable<int> _OnOrderQty;
 		
-		private System.Nullable<decimal> _ActualCost;
+		private string _UnitMeasureCode;
 		
 		private System.DateTime _ModifiedDate;
 		
-		private EntityRef<Location> _Location;
+		private EntityRef<Product> _Product;
 		
-		private EntityRef<WorkOrder> _WorkOrder;
+		private EntityRef<UnitMeasure> _UnitMeasure;
+		
+		private EntityRef<Vendor> _Vendor;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnWorkOrderIDChanging(int value);
-    partial void OnWorkOrderIDChanged();
     partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
-    partial void OnOperationSequenceChanging(short value);
-    partial void OnOperationSequenceChanged();
-    partial void OnLocationIDChanging(short value);
-    partial void OnLocationIDChanged();
-    partial void OnScheduledStartDateChanging(System.DateTime value);
-    partial void OnScheduledStartDateChanged();
-    partial void OnScheduledEndDateChanging(System.DateTime value);
-    partial void OnScheduledEndDateChanged();
-    partial void OnActualStartDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnActualStartDateChanged();
-    partial void OnActualEndDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnActualEndDateChanged();
-    partial void OnActualResourceHrsChanging(System.Nullable<decimal> value);
-    partial void OnActualResourceHrsChanged();
-    partial void OnPlannedCostChanging(decimal value);
-    partial void OnPlannedCostChanged();
-    partial void OnActualCostChanging(System.Nullable<decimal> value);
-    partial void OnActualCostChanged();
+    partial void OnBusinessEntityIDChanging(int value);
+    partial void OnBusinessEntityIDChanged();
+    partial void OnAverageLeadTimeChanging(int value);
+    partial void OnAverageLeadTimeChanged();
+    partial void OnStandardPriceChanging(decimal value);
+    partial void OnStandardPriceChanged();
+    partial void OnLastReceiptCostChanging(System.Nullable<decimal> value);
+    partial void OnLastReceiptCostChanged();
+    partial void OnLastReceiptDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastReceiptDateChanged();
+    partial void OnMinOrderQtyChanging(int value);
+    partial void OnMinOrderQtyChanged();
+    partial void OnMaxOrderQtyChanging(int value);
+    partial void OnMaxOrderQtyChanged();
+    partial void OnOnOrderQtyChanging(System.Nullable<int> value);
+    partial void OnOnOrderQtyChanged();
+    partial void OnUnitMeasureCodeChanging(string value);
+    partial void OnUnitMeasureCodeChanged();
     partial void OnModifiedDateChanging(System.DateTime value);
     partial void OnModifiedDateChanged();
     #endregion
 		
-		public WorkOrderRouting()
+		public ProductVendor()
 		{
-			this._Location = default(EntityRef<Location>);
-			this._WorkOrder = default(EntityRef<WorkOrder>);
+			this._Product = default(EntityRef<Product>);
+			this._UnitMeasure = default(EntityRef<UnitMeasure>);
+			this._Vendor = default(EntityRef<Vendor>);
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WorkOrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int WorkOrderID
-		{
-			get
-			{
-				return this._WorkOrderID;
-			}
-			set
-			{
-				if ((this._WorkOrderID != value))
-				{
-					if (this._WorkOrder.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnWorkOrderIDChanging(value);
-					this.SendPropertyChanging();
-					this._WorkOrderID = value;
-					this.SendPropertyChanged("WorkOrderID");
-					this.OnWorkOrderIDChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
@@ -6764,6 +6960,10 @@ namespace Model
 			{
 				if ((this._ProductID != value))
 				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnProductIDChanging(value);
 					this.SendPropertyChanging();
 					this._ProductID = value;
@@ -6773,186 +6973,190 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationSequence", DbType="SmallInt NOT NULL", IsPrimaryKey=true)]
-		public short OperationSequence
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BusinessEntityID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int BusinessEntityID
 		{
 			get
 			{
-				return this._OperationSequence;
+				return this._BusinessEntityID;
 			}
 			set
 			{
-				if ((this._OperationSequence != value))
+				if ((this._BusinessEntityID != value))
 				{
-					this.OnOperationSequenceChanging(value);
-					this.SendPropertyChanging();
-					this._OperationSequence = value;
-					this.SendPropertyChanged("OperationSequence");
-					this.OnOperationSequenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationID", DbType="SmallInt NOT NULL")]
-		public short LocationID
-		{
-			get
-			{
-				return this._LocationID;
-			}
-			set
-			{
-				if ((this._LocationID != value))
-				{
-					if (this._Location.HasLoadedOrAssignedValue)
+					if (this._Vendor.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnLocationIDChanging(value);
+					this.OnBusinessEntityIDChanging(value);
 					this.SendPropertyChanging();
-					this._LocationID = value;
-					this.SendPropertyChanged("LocationID");
-					this.OnLocationIDChanged();
+					this._BusinessEntityID = value;
+					this.SendPropertyChanged("BusinessEntityID");
+					this.OnBusinessEntityIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScheduledStartDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ScheduledStartDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageLeadTime", DbType="Int NOT NULL")]
+		public int AverageLeadTime
 		{
 			get
 			{
-				return this._ScheduledStartDate;
+				return this._AverageLeadTime;
 			}
 			set
 			{
-				if ((this._ScheduledStartDate != value))
+				if ((this._AverageLeadTime != value))
 				{
-					this.OnScheduledStartDateChanging(value);
+					this.OnAverageLeadTimeChanging(value);
 					this.SendPropertyChanging();
-					this._ScheduledStartDate = value;
-					this.SendPropertyChanged("ScheduledStartDate");
-					this.OnScheduledStartDateChanged();
+					this._AverageLeadTime = value;
+					this.SendPropertyChanged("AverageLeadTime");
+					this.OnAverageLeadTimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScheduledEndDate", DbType="DateTime NOT NULL")]
-		public System.DateTime ScheduledEndDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StandardPrice", DbType="Money NOT NULL")]
+		public decimal StandardPrice
 		{
 			get
 			{
-				return this._ScheduledEndDate;
+				return this._StandardPrice;
 			}
 			set
 			{
-				if ((this._ScheduledEndDate != value))
+				if ((this._StandardPrice != value))
 				{
-					this.OnScheduledEndDateChanging(value);
+					this.OnStandardPriceChanging(value);
 					this.SendPropertyChanging();
-					this._ScheduledEndDate = value;
-					this.SendPropertyChanged("ScheduledEndDate");
-					this.OnScheduledEndDateChanged();
+					this._StandardPrice = value;
+					this.SendPropertyChanged("StandardPrice");
+					this.OnStandardPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualStartDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ActualStartDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastReceiptCost", DbType="Money")]
+		public System.Nullable<decimal> LastReceiptCost
 		{
 			get
 			{
-				return this._ActualStartDate;
+				return this._LastReceiptCost;
 			}
 			set
 			{
-				if ((this._ActualStartDate != value))
+				if ((this._LastReceiptCost != value))
 				{
-					this.OnActualStartDateChanging(value);
+					this.OnLastReceiptCostChanging(value);
 					this.SendPropertyChanging();
-					this._ActualStartDate = value;
-					this.SendPropertyChanged("ActualStartDate");
-					this.OnActualStartDateChanged();
+					this._LastReceiptCost = value;
+					this.SendPropertyChanged("LastReceiptCost");
+					this.OnLastReceiptCostChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualEndDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ActualEndDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastReceiptDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastReceiptDate
 		{
 			get
 			{
-				return this._ActualEndDate;
+				return this._LastReceiptDate;
 			}
 			set
 			{
-				if ((this._ActualEndDate != value))
+				if ((this._LastReceiptDate != value))
 				{
-					this.OnActualEndDateChanging(value);
+					this.OnLastReceiptDateChanging(value);
 					this.SendPropertyChanging();
-					this._ActualEndDate = value;
-					this.SendPropertyChanged("ActualEndDate");
-					this.OnActualEndDateChanged();
+					this._LastReceiptDate = value;
+					this.SendPropertyChanged("LastReceiptDate");
+					this.OnLastReceiptDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualResourceHrs", DbType="Decimal(9,4)")]
-		public System.Nullable<decimal> ActualResourceHrs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinOrderQty", DbType="Int NOT NULL")]
+		public int MinOrderQty
 		{
 			get
 			{
-				return this._ActualResourceHrs;
+				return this._MinOrderQty;
 			}
 			set
 			{
-				if ((this._ActualResourceHrs != value))
+				if ((this._MinOrderQty != value))
 				{
-					this.OnActualResourceHrsChanging(value);
+					this.OnMinOrderQtyChanging(value);
 					this.SendPropertyChanging();
-					this._ActualResourceHrs = value;
-					this.SendPropertyChanged("ActualResourceHrs");
-					this.OnActualResourceHrsChanged();
+					this._MinOrderQty = value;
+					this.SendPropertyChanged("MinOrderQty");
+					this.OnMinOrderQtyChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlannedCost", DbType="Money NOT NULL")]
-		public decimal PlannedCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxOrderQty", DbType="Int NOT NULL")]
+		public int MaxOrderQty
 		{
 			get
 			{
-				return this._PlannedCost;
+				return this._MaxOrderQty;
 			}
 			set
 			{
-				if ((this._PlannedCost != value))
+				if ((this._MaxOrderQty != value))
 				{
-					this.OnPlannedCostChanging(value);
+					this.OnMaxOrderQtyChanging(value);
 					this.SendPropertyChanging();
-					this._PlannedCost = value;
-					this.SendPropertyChanged("PlannedCost");
-					this.OnPlannedCostChanged();
+					this._MaxOrderQty = value;
+					this.SendPropertyChanged("MaxOrderQty");
+					this.OnMaxOrderQtyChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualCost", DbType="Money")]
-		public System.Nullable<decimal> ActualCost
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnOrderQty", DbType="Int")]
+		public System.Nullable<int> OnOrderQty
 		{
 			get
 			{
-				return this._ActualCost;
+				return this._OnOrderQty;
 			}
 			set
 			{
-				if ((this._ActualCost != value))
+				if ((this._OnOrderQty != value))
 				{
-					this.OnActualCostChanging(value);
+					this.OnOnOrderQtyChanging(value);
 					this.SendPropertyChanging();
-					this._ActualCost = value;
-					this.SendPropertyChanged("ActualCost");
-					this.OnActualCostChanged();
+					this._OnOrderQty = value;
+					this.SendPropertyChanged("OnOrderQty");
+					this.OnOnOrderQtyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitMeasureCode", DbType="NChar(3) NOT NULL", CanBeNull=false)]
+		public string UnitMeasureCode
+		{
+			get
+			{
+				return this._UnitMeasureCode;
+			}
+			set
+			{
+				if ((this._UnitMeasureCode != value))
+				{
+					if (this._UnitMeasure.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUnitMeasureCodeChanging(value);
+					this.SendPropertyChanging();
+					this._UnitMeasureCode = value;
+					this.SendPropertyChanged("UnitMeasureCode");
+					this.OnUnitMeasureCodeChanged();
 				}
 			}
 		}
@@ -6977,70 +7181,104 @@ namespace Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Location_WorkOrderRouting", Storage="_Location", ThisKey="LocationID", OtherKey="LocationID", IsForeignKey=true)]
-		public Location Location
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_ProductVendor", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
+		public Product Product
 		{
 			get
 			{
-				return this._Location.Entity;
+				return this._Product.Entity;
 			}
 			set
 			{
-				Location previousValue = this._Location.Entity;
+				Product previousValue = this._Product.Entity;
 				if (((previousValue != value) 
-							|| (this._Location.HasLoadedOrAssignedValue == false)))
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Location.Entity = null;
-						previousValue.WorkOrderRoutings.Remove(this);
+						this._Product.Entity = null;
+						previousValue.ProductVendors.Remove(this);
 					}
-					this._Location.Entity = value;
+					this._Product.Entity = value;
 					if ((value != null))
 					{
-						value.WorkOrderRoutings.Add(this);
-						this._LocationID = value.LocationID;
+						value.ProductVendors.Add(this);
+						this._ProductID = value.ProductID;
 					}
 					else
 					{
-						this._LocationID = default(short);
+						this._ProductID = default(int);
 					}
-					this.SendPropertyChanged("Location");
+					this.SendPropertyChanged("Product");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="WorkOrder_WorkOrderRouting", Storage="_WorkOrder", ThisKey="WorkOrderID", OtherKey="WorkOrderID", IsForeignKey=true)]
-		public WorkOrder WorkOrder
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnitMeasure_ProductVendor", Storage="_UnitMeasure", ThisKey="UnitMeasureCode", OtherKey="UnitMeasureCode", IsForeignKey=true)]
+		public UnitMeasure UnitMeasure
 		{
 			get
 			{
-				return this._WorkOrder.Entity;
+				return this._UnitMeasure.Entity;
 			}
 			set
 			{
-				WorkOrder previousValue = this._WorkOrder.Entity;
+				UnitMeasure previousValue = this._UnitMeasure.Entity;
 				if (((previousValue != value) 
-							|| (this._WorkOrder.HasLoadedOrAssignedValue == false)))
+							|| (this._UnitMeasure.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._WorkOrder.Entity = null;
-						previousValue.WorkOrderRoutings.Remove(this);
+						this._UnitMeasure.Entity = null;
+						previousValue.ProductVendors.Remove(this);
 					}
-					this._WorkOrder.Entity = value;
+					this._UnitMeasure.Entity = value;
 					if ((value != null))
 					{
-						value.WorkOrderRoutings.Add(this);
-						this._WorkOrderID = value.WorkOrderID;
+						value.ProductVendors.Add(this);
+						this._UnitMeasureCode = value.UnitMeasureCode;
 					}
 					else
 					{
-						this._WorkOrderID = default(int);
+						this._UnitMeasureCode = default(string);
 					}
-					this.SendPropertyChanged("WorkOrder");
+					this.SendPropertyChanged("UnitMeasure");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Vendor_ProductVendor", Storage="_Vendor", ThisKey="BusinessEntityID", OtherKey="BusinessEntityID", IsForeignKey=true)]
+		public Vendor Vendor
+		{
+			get
+			{
+				return this._Vendor.Entity;
+			}
+			set
+			{
+				Vendor previousValue = this._Vendor.Entity;
+				if (((previousValue != value) 
+							|| (this._Vendor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Vendor.Entity = null;
+						previousValue.ProductVendors.Remove(this);
+					}
+					this._Vendor.Entity = value;
+					if ((value != null))
+					{
+						value.ProductVendors.Add(this);
+						this._BusinessEntityID = value.BusinessEntityID;
+					}
+					else
+					{
+						this._BusinessEntityID = default(int);
+					}
+					this.SendPropertyChanged("Vendor");
 				}
 			}
 		}
