@@ -134,7 +134,6 @@ namespace GUI.ViewModel
 
         public ProductViewModel(Product c) : this(new ProductService())
         {
-            this.productService = ps;
             ProductID = c.ProductID;
             productName = c.Name;
             productNumber = c.ProductNumber;

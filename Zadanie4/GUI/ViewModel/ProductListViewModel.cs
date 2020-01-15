@@ -124,7 +124,7 @@ namespace GUI.ViewModel
             productList.Clear();
             foreach (Product p in Products)
             {
-                ProductViewModel c = new ProductViewModel(p, productService);
+                ProductViewModel c = new ProductViewModel(p);
                 productList.Add(c);
             }
             return productList;
