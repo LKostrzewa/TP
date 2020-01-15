@@ -16,6 +16,7 @@ namespace GUI.ViewModel
     {
         private IProductService productService;// = new ProductService();
 
+
         private string productName;
         private string productNumber;
         private DateTime productSellStartDate;
@@ -133,6 +134,7 @@ namespace GUI.ViewModel
 
         public ProductViewModel(Product c) : this(new ProductService())
         {
+            this.productService = ps;
             ProductID = c.ProductID;
             productName = c.Name;
             productNumber = c.ProductNumber;
@@ -286,10 +288,11 @@ namespace GUI.ViewModel
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            //if (this.PropertyChanged != null)
+            //{
+            //this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            //}
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
