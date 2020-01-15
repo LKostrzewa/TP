@@ -14,12 +14,13 @@ namespace GUI.ViewModel
 {
     class ProductViewModel : INotifyPropertyChanged, IViewModel
     {
-        private ProductService productService;
+        private IProductService productService;// = new ProductService();
+
 
         private string productName;
         private string productNumber;
         private DateTime productSellStartDate;
-        private DateTime productSellEndDate;
+        private DateTime? productSellEndDate;
         private short productSafetyStockLevel;
         private short productReorderPoint;
 
@@ -75,26 +76,42 @@ namespace GUI.ViewModel
 
         public DateTime ProductSellStartDate
         {
-            get;
-            set;
+            get { return productSellStartDate; }
+            set
+            {
+                productSellStartDate = value;
+                OnPropertyChanged("ProductSellStartDate");
+            }
         }
 
         public DateTime? ProductSellEndDate
         {
-            get;
-            set;
+            get { return productSellEndDate; }
+            set
+            {
+                productSellEndDate = value;
+                OnPropertyChanged("ProductSellEndDate");
+            }
         }
 
         public short ProductSafetyStockLevel
         {
-            get;
-            set;
+            get { return productSafetyStockLevel; }
+            set
+            {
+                productSafetyStockLevel = value;
+                OnPropertyChanged("ProductSafetyStockLevel");
+            }
         }
 
         public short ProductReorderPoint
         {
-            get;
-            set;
+            get { return productSafetyStockLevel; }
+            set
+            {
+                productSafetyStockLevel = value;
+                OnPropertyChanged("ProductSafetyStockLevel");
+            }
         }
 
         public Guid ProductGUID
@@ -115,24 +132,29 @@ namespace GUI.ViewModel
             set;
         }
 
-        public ProductViewModel(Product c, ProductService ps)
+        public ProductViewModel(Product c) : this(new ProductService())
         {
             this.productService = ps;
             ProductID = c.ProductID;
             productName = c.Name;
             productNumber = c.ProductNumber;
             ProductModifiedDate = c.ModifiedDate;
-            ProductSellStartDate = c.SellStartDate;
-            ProductSellEndDate = c.SellEndDate;
-            ProductSafetyStockLevel = c.SafetyStockLevel;
-            ProductReorderPoint = c.ReorderPoint;
+            productSellStartDate = c.SellStartDate;
+            productSellEndDate = c.SellEndDate;
+            productSafetyStockLevel = c.SafetyStockLevel;
+            productReorderPoint = c.ReorderPoint;
             ProductGUID = c.rowguid;
             ProductColor = c.Color;
             //copy the current value so in case cancel you can undo
             this.originalValue = (ProductViewModel)this.MemberwiseClone();
         }
 
-        internal ProductViewModel()
+        public ProductViewModel(IProductService service)
+        {
+            this.productService = service;
+        }
+
+        internal ProductViewModel() : this(new ProductService())
         {
 
         }

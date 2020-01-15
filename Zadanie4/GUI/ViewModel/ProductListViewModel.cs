@@ -71,6 +71,7 @@ namespace GUI.ViewModel
             {
                 selectedProduct = value;
                 OnPropertyChanged("SelectedProduct");
+                //selectedProduct.
             }
         }
 
