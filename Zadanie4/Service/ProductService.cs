@@ -7,7 +7,7 @@ using Model;
 
 namespace Service
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         
         public void Create(Product product)
