@@ -9,17 +9,15 @@ namespace Service
 {
     public class ProductService : IProductService
     {
-        public event VoidHandler CollectionChanged;
-        public delegate void VoidHandler();
+        //public event VoidHandler CollectionChanged;
 
         public void Create(Product product)
         {
-
             //Task.Run(() =>
             //{
                 LINQ_tools.InsertNewProduct(product);
-               // CollectionChanged?.Invoke();
-           // });
+                //CollectionChanged?.Invoke();
+            //});
         }
 
         public Product Read(int id)
