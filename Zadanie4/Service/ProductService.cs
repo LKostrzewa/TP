@@ -21,9 +21,10 @@ namespace Service
             p.SellEndDate = product.SellEndDate;
             p.SafetyStockLevel = product.SafetyStockLevel;
             p.ReorderPoint = product.ReorderPoint;
-            product.Color = product.Color;
+            p.Color = product.Color;
             p.rowguid = product.rowguid;
             LINQ_tools.InsertNewProduct(p);
+            product.ProductID = p.ProductID;
         }
 
         public MyProduct Read(int id)
@@ -43,9 +44,10 @@ namespace Service
             p.SellEndDate = product.SellEndDate;
             p.SafetyStockLevel = product.SafetyStockLevel;
             p.ReorderPoint = product.ReorderPoint;
-            product.Color = product.Color;
+            p.Color = product.Color;
             p.rowguid = product.rowguid;
             LINQ_tools.UpdateProduct(p);
+            product.ProductID = p.ProductID;
         }
 
         public void Delete(int id)

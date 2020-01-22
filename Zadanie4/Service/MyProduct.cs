@@ -25,7 +25,6 @@ namespace Service
         }
         public MyProduct(Product p)
         {
-            this.ProductID = p.ProductID;
             this.Name = p.Name;
             this.ProductNumber = p.ProductNumber;
             this.ModifiedDate = p.ModifiedDate;

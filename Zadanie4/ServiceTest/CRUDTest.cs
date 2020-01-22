@@ -113,9 +113,8 @@ namespace ServiceTest
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
 
             ps.Delete(p.ProductID);
-
-            MyProduct p3 = ps.Read(p.ProductID);
-            Assert.ThrowsException<NullReferenceException>(() => p3.ProductID);
+            
+            Assert.ThrowsException<NullReferenceException>(() => ps.Read(p.ProductID));
         }
     }
 }
