@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Service;
-using Model;
 using System.Windows.Input;
 using GUI.Common;
 using GUI.Interface;
@@ -132,7 +131,7 @@ namespace GUI.ViewModel
             set;
         }
 
-        public ProductViewModel(Product c) : this(new ProductService())
+        public ProductViewModel(MyProduct c) : this(new ProductService())
         {
             ProductID = c.ProductID;
             productName = c.Name;
@@ -227,7 +226,7 @@ namespace GUI.ViewModel
         {
             if(this.Mode == Mode.Add)
             {
-                Product product = new Product();
+                MyProduct product = new MyProduct();
                 product.ProductNumber = this.ProductNumber;
                 product.Name = this.ProductName;
                 product.ModifiedDate = this.ProductModifiedDate;
@@ -243,7 +242,7 @@ namespace GUI.ViewModel
             }
             else if(this.Mode == Mode.Edit)
             {
-                Product product = new Product();
+                MyProduct product = new MyProduct();
                 product.ProductID = this.ProductID;
                 product.ProductNumber = this.ProductNumber;
                 product.Name = this.ProductName;

@@ -1,6 +1,5 @@
 ﻿using GUI.Common;
 using GUI.Interface;
-using Model;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -116,7 +115,7 @@ namespace GUI.ViewModel
             if (productList == null)
                 productList = new ObservableCollection<ProductViewModel>();
             productList.Clear();
-            foreach (Product p in productService.GetAllProducts())
+            foreach (MyProduct p in productService.GetAllProducts())
             {
                 ProductViewModel c = new ProductViewModel(p);
                 productList.Add(c);

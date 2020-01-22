@@ -27,7 +27,7 @@ namespace ServiceTest
             ProductService ps = new ProductService();
 
 
-            Product p = new Product();
+            MyProduct p = new MyProduct();
             p.Name = "test12";
             p.ProductNumber = "4202137";
             p.ModifiedDate = DateTime.Now;
@@ -54,7 +54,7 @@ namespace ServiceTest
         {
             ProductService ps = new ProductService();
 
-            Product p = new Product();
+            MyProduct p = new MyProduct();
             p.Name = "test125";
             p.ProductNumber = "2137420";
             p.ModifiedDate = DateTime.Now;
@@ -68,7 +68,7 @@ namespace ServiceTest
 
             Console.WriteLine(p.ProductID);
 
-            Product p2 = new Product();
+            MyProduct p2 = new MyProduct();
             p2.ProductID = p.ProductID;
             p2.Name = "test1256";
             p2.ProductNumber = "2137420";
@@ -94,7 +94,7 @@ namespace ServiceTest
         {
             ProductService ps = new ProductService();
 
-            Product p = new Product();
+            MyProduct p = new MyProduct();
             p.Name = "test1257";
             p.ProductNumber = "11111";
             p.ModifiedDate = DateTime.Now;

@@ -10,14 +10,14 @@ namespace Service
     public interface IProductService
     {
 
-        void Create(Product product);
+        void Create(MyProduct product);
 
         Product Read(int id);
 
-        void Update(Product product);
+        void Update(MyProduct product);
 
         void Delete(int id);
 
-        IEnumerable<Product> GetAllProducts();
+        IEnumerable<MyProduct> GetAllProducts();
     }
 }
