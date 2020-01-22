@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI.Interface
+namespace ViewModel
 {
-    public interface IWindowResolver
-    {
-        IOperationWindow GetWindow();
-    }
+    public enum Mode { Add, Edit };
 }

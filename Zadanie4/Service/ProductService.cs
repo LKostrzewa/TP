@@ -10,19 +10,44 @@ namespace Service
     public class ProductService : IProductService
     {
 
-        public void Create(Product product)
+        public void Create(MyProduct product)
         {
-            LINQ_tools.InsertNewProduct(product);
+            Product p = new Product();
+            p.ProductID = product.ProductID;
+            p.ProductNumber = product.ProductNumber;
+            p.Name = product.Name;
+            p.ModifiedDate = product.ModifiedDate;
+            p.SellStartDate = product.SellStartDate;
+            p.SellEndDate = product.SellEndDate;
+            p.SafetyStockLevel = product.SafetyStockLevel;
+            p.ReorderPoint = product.ReorderPoint;
+            p.Color = product.Color;
+            p.rowguid = product.rowguid;
+            LINQ_tools.InsertNewProduct(p);
+            product.ProductID = p.ProductID;
         }
 
-        public Product Read(int id)
+        public MyProduct Read(int id)
         {
-            return LINQ_tools.GetProductById(id);
+            Product p = LINQ_tools.GetProductById(id);
+            return new MyProduct(p);
         }
 
-        public void Update(Product product)
+        public void Update(MyProduct product)
         {
-            LINQ_tools.UpdateProduct(product);
+            Product p = new Product();
+            p.ProductID = product.ProductID;
+            p.ProductNumber = product.ProductNumber;
+            p.Name = product.Name;
+            p.ModifiedDate = product.ModifiedDate;
+            p.SellStartDate = product.SellStartDate;
+            p.SellEndDate = product.SellEndDate;
+            p.SafetyStockLevel = product.SafetyStockLevel;
+            p.ReorderPoint = product.ReorderPoint;
+            p.Color = product.Color;
+            p.rowguid = product.rowguid;
+            LINQ_tools.UpdateProduct(p);
+            product.ProductID = p.ProductID;
         }
 
         public void Delete(int id)
@@ -30,9 +55,15 @@ namespace Service
             LINQ_tools.DeleteProductId(id);
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<MyProduct> GetAllProducts()
         {
-            return LINQ_tools.GetAllProducts();
+            List<MyProduct> myProducts = new List<MyProduct>();
+            foreach(Product p in LINQ_tools.GetAllProducts())
+            {
+                myProducts.Add(new MyProduct(p));
+            }
+            return myProducts;
+            //return (IEnumerable<MyProduct>)LINQ_tools.GetAllProducts();
         }
 
     }

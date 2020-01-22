@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI.ViewModel
+namespace ViewModel.Interface
 {
-    public enum Mode { Add, Edit };
+    public interface IViewModel
+    {
+        Action CloseWindow { get; set; }
+    }
 }

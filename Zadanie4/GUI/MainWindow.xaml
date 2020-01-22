@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         xmlns:v="clr-namespace:GUI.View"
-        xmlns:vm="clr-namespace:GUI.ViewModel"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:converters="clr-namespace:GUI.View.Converters"
         mc:Ignorable="d"
         Title="TP Master-Details" Height="550" Width="800">

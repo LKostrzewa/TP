@@ -1,4 +1,4 @@
-﻿using GUI.Interface;
+﻿using ViewModel.Interface;
 using GUI.View;
 using System;
 using System.Collections.Generic;

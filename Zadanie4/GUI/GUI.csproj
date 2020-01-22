@@ -55,19 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\CommandBase.cs" />
     <Compile Include="DI\ProductDetailsResolver.cs" />
     <Compile Include="DI\ProductDetailsWindow.cs" />
-    <Compile Include="Interface\IOperationWindow.cs" />
-    <Compile Include="Interface\IViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interface\IModalDialog.cs" />
-    <Compile Include="Interface\IWindowResolver.cs" />
-    <Compile Include="ViewModel\Mode.cs" />
-    <Compile Include="ViewModel\ProductListViewModel.cs" />
-    <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -115,16 +108,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{e9a46ca2-9890-40c0-bb10-d635537fad83}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Service\Service.csproj">
-      <Project>{52891039-28bc-4a31-bc9e-2c8404c16adb}</Project>
-      <Name>Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +120,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{44761404-0af4-4bdb-adba-791c5aec0b94}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

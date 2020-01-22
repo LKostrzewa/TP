@@ -1,5 +1,5 @@
 ﻿using GUI.DI;
-using GUI.ViewModel;
+using ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

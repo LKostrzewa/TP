@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI.Interface
+namespace ViewModel.Interface
 {
-    public interface IViewModel
+    public interface IWindowResolver
     {
-        Action CloseWindow { get; set; }
+        IOperationWindow GetWindow();
     }
 }
