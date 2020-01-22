@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{315F747C-498E-4935-84F9-99E5AABBCC94}</ProjectGuid>
+    <ProjectGuid>{D6640077-B92A-43D7-81D7-4BD462650DF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GuiTest</RootNamespace>
-    <AssemblyName>GuiTest</AssemblyName>
+    <RootNamespace>ViewModelTest</RootNamespace>
+    <AssemblyName>ViewModelTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewTest.cs" />
+    <Compile Include="ViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GUI\GUI.csproj">
-      <Project>{c666982b-a3a1-4994-aa2e-8ee09dc59717}</Project>
-      <Name>GUI</Name>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{44761404-0af4-4bdb-adba-791c5aec0b94}</Project>
+      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
