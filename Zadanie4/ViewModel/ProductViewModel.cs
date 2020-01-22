@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Service;
 using System.Windows.Input;
-using GUI.Common;
-using GUI.Interface;
+using ViewModel.Common;
+using ViewModel.Interface;
 
-namespace GUI.ViewModel
+namespace ViewModel
 {
     public class ProductViewModel : INotifyPropertyChanged, IViewModel
     {

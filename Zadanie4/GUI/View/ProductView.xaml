@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:GUI.ViewModel"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         xmlns:validators="clr-namespace:GUI.View.Validators"
         xmlns:converters="clr-namespace:GUI.View.Converters"
         xmlns:local="clr-namespace:GUI.View"

@@ -111,7 +111,7 @@ namespace Model
     #endregion
 		
 		public CatalogDataContext() : 
-				base(global::Model.Properties.Settings.Default.AdventureWorks2017ConnectionString1, mappingSource)
+				base(global::Model.Properties.Settings.Default.AdventureWorks2017ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

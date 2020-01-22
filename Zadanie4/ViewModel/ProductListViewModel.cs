@@ -1,5 +1,5 @@
-﻿using GUI.Common;
-using GUI.Interface;
+﻿using ViewModel.Common;
+using ViewModel.Interface;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GUI.ViewModel
+namespace ViewModel
 {
-    public class ProductListViewModel
+    public class ProductListViewModel : IViewModel
     {
         private static ProductListViewModel instance = null;
         //private ProductService productService = null;
@@ -99,7 +99,9 @@ namespace GUI.ViewModel
                 return showEditCommand;
             }
         }
-        
+
+        public Action CloseWindow { get; set; }
+
         public ProductListViewModel(IProductService productService)
         {
             this.productService = productService;

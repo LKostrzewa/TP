@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class Class1
-    {
-    }
+    public enum Mode { Add, Edit };
 }
