@@ -14,7 +14,7 @@ namespace ServiceTest
         public void GetTest()
         {
             ProductService ps = new ProductService();
-            Product p = ps.Read(1);
+            MyProduct p = ps.Read(1);
 
             Assert.AreEqual(p.Name, "Adjustable Race");
             Assert.AreEqual(p.ProductNumber, "AR-5381");
@@ -38,7 +38,7 @@ namespace ServiceTest
 
             ps.Create(p);
 
-            Product p2 = ps.Read(p.ProductID);
+            MyProduct p2 = ps.Read(p.ProductID);
 
             Assert.AreEqual(p.Name, p2.Name);
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
@@ -81,7 +81,7 @@ namespace ServiceTest
 
             ps.Update(p2);
 
-            Product p3 = ps.Read(p.ProductID);
+            MyProduct p3 = ps.Read(p.ProductID);
 
             Assert.AreEqual(p3.Name, p2.Name);
             Assert.AreEqual(p3.Name, "test1256");
@@ -107,14 +107,14 @@ namespace ServiceTest
             ps.Create(p);
 
 
-            Product p2 = ps.Read(p.ProductID);
+            MyProduct p2 = ps.Read(p.ProductID);
 
             Assert.AreEqual(p.Name, p2.Name);
             Assert.AreEqual(p.ProductNumber, p2.ProductNumber);
 
             ps.Delete(p.ProductID);
 
-            Product p3 = ps.Read(p.ProductID);
+            MyProduct p3 = ps.Read(p.ProductID);
             Assert.ThrowsException<NullReferenceException>(() => p3.ProductID);
         }
     }

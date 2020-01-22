@@ -26,9 +26,10 @@ namespace Service
             LINQ_tools.InsertNewProduct(p);
         }
 
-        public Product Read(int id)
+        public MyProduct Read(int id)
         {
-            return LINQ_tools.GetProductById(id);
+            Product p = LINQ_tools.GetProductById(id);
+            return new MyProduct(p);
         }
 
         public void Update(MyProduct product)

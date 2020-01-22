@@ -12,7 +12,7 @@ namespace Service
 
         void Create(MyProduct product);
 
-        Product Read(int id);
+        MyProduct Read(int id);
 
         void Update(MyProduct product);
 
