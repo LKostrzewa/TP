@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace ViewModel
 {
-    public class ProductListViewModel : IViewModel
+    public class ProductListViewModel : IViewModel, INotifyPropertyChanged
     {
         private static ProductListViewModel instance = null;
         //private ProductService productService = null;
