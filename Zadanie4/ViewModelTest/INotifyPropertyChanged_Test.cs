@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,25 @@ namespace ViewModelTest
 
             // Verify outcome
             Assert.IsTrue(eventWasRaised, "Event was raised");
+        }
+
+        [TestMethod]
+        public void ViewModelBaseTest()
+        {
+            ProductListViewModelFixture _toTest = new ProductListViewModelFixture();
+            int _PropertyChangedCount = 0;
+            string _lastPropertyName = String.Empty;
+            _toTest.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { _PropertyChangedCount++; _lastPropertyName = e.PropertyName; };
+            _toTest.TestRaisePropertyChanged("PropertyName");
+            Assert.AreEqual<string>("PropertyName", _lastPropertyName);
+            Assert.AreEqual<int>(1, _PropertyChangedCount);
+        }
+        private class ProductListViewModelFixture : ProductListViewModel
+        {
+            internal void TestRaisePropertyChanged(string propertyName)
+            {
+                base.OnPropertyChanged(propertyName);
+            }
         }
     }
 }
