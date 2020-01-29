@@ -15,8 +15,6 @@ namespace ViewModel
     public class ProductListViewModel : IViewModel, INotifyPropertyChanged
     {
         private static ProductListViewModel instance = null;
-        //private ProductService productService = null;
-        //public List<Product> products;
 
         IProductService productService = null;
 
@@ -72,7 +70,6 @@ namespace ViewModel
             {
                 selectedProduct = value;
                 OnPropertyChanged("SelectedProduct");
-                //selectedProduct.
             }
         }
 
@@ -138,7 +135,6 @@ namespace ViewModel
 
         private void ShowEditDialog()
         {
-            //ProductViewModel product = new ProductViewModel(SelectedProduct);
             SelectedProduct.Mode = Mode.Edit;
 
             IOperationWindow dialog = WindowResolver.GetWindow();

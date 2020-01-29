@@ -15,7 +15,7 @@ namespace ViewModelTest
         [TestMethod]
         public void ChangingMyPropertyWillRaiseNotifyEvent_Classic()
         {
-            // Fixture setup
+            // Ustawienie wartosci
             bool eventWasRaised = false;
             ProductListViewModel test = new ProductListViewModel();
             test.PropertyChanged += (sender, e) =>
@@ -26,10 +26,10 @@ namespace ViewModelTest
                 }
             };
 
-            // Exercise system
+            // Wykonanie testu
             test.SelectedProduct = new ProductViewModel();
 
-            // Verify outcome
+            // Sprawdzenie wyniku
             Assert.IsTrue(eventWasRaised, "Event was raised");
         }
 
@@ -40,8 +40,8 @@ namespace ViewModelTest
             int _PropertyChangedCount = 0;
             string _lastPropertyName = String.Empty;
             _toTest.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { _PropertyChangedCount++; _lastPropertyName = e.PropertyName; };
-            _toTest.TestRaisePropertyChanged("PropertyName");
-            Assert.AreEqual<string>("PropertyName", _lastPropertyName);
+            _toTest.TestRaisePropertyChanged("SelectedProduct");
+            Assert.AreEqual<string>("SelectedProduct", _lastPropertyName);
             Assert.AreEqual<int>(1, _PropertyChangedCount);
         }
         private class ProductListViewModelFixture : ProductListViewModel
